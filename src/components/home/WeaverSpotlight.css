@@ -1,0 +1,116 @@
+.weaver-spotlight__card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-12);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.weaver-spotlight__image-col {
+  position: relative;
+}
+
+.weaver-spotlight__image {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  object-fit: cover;
+}
+
+.weaver-spotlight__content {
+  padding: var(--space-10) var(--space-10) var(--space-10) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.weaver-spotlight__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.weaver-spotlight__name {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.weaver-spotlight__craft {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+.weaver-spotlight__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.weaver-spotlight__detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.weaver-spotlight__detail svg {
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.weaver-spotlight__bio {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-5);
+}
+
+.weaver-spotlight__specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.weaver-spotlight__awards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+  background-color: var(--color-saffron-light);
+  border-radius: var(--radius-md);
+}
+
+.weaver-spotlight__award {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-saffron);
+  font-weight: var(--weight-medium);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .weaver-spotlight__card {
+    grid-template-columns: 1fr;
+  }
+
+  .weaver-spotlight__image {
+    min-height: 300px;
+    max-height: 360px;
+  }
+
+  .weaver-spotlight__content {
+    padding: var(--space-6);
+  }
+}

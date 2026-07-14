@@ -1,0 +1,47 @@
+[
+  {
+    "id": "w_001",
+    "name": "Ramesh Vishwakarma",
+    "region": "Varanasi, Uttar Pradesh",
+    "craft": "Banarasi Silk Weaving",
+    "experience": "35 years",
+    "generation": "6th generation",
+    "avatar": "weaver-portrait.png",
+    "verified": true,
+    "productsCount": 48,
+    "rating": 4.9,
+    "bio": "Master weaver Ramesh Vishwakarma continues a 200-year family tradition of Banarasi silk weaving in the narrow lanes of Varanasi. His workshop produces some of the finest zari work in India, blending Mughal-era motifs with contemporary design sensibilities. Ramesh learned the craft at age 8 from his grandfather and has since trained over 30 apprentices.",
+    "specialties": ["Zari Brocade", "Kadhua Weave", "Jangla Pattern"],
+    "awards": ["National Handloom Award 2019", "Shilp Guru 2022"]
+  },
+  {
+    "id": "w_002",
+    "name": "Lakshmi Sundaram",
+    "region": "Kanchipuram, Tamil Nadu",
+    "craft": "Kanjivaram Silk Weaving",
+    "experience": "28 years",
+    "generation": "4th generation",
+    "avatar": "weaver-portrait.png",
+    "verified": true,
+    "productsCount": 36,
+    "rating": 4.9,
+    "bio": "Lakshmi Sundaram is one of the few women master weavers in Kanchipuram. She specializes in temple border designs and has pioneered new color combinations that appeal to modern brides while honoring traditional motifs. Her family's workshop uses only pure mulberry silk and real gold-dipped zari.",
+    "specialties": ["Temple Border", "Korvai Technique", "Bridal Sarees"],
+    "awards": ["State Award for Handloom Excellence 2020"]
+  },
+  {
+    "id": "w_005",
+    "name": "Mohammad Dar",
+    "region": "Srinagar, Kashmir",
+    "craft": "Pashmina & Sozni Embroidery",
+    "experience": "45 years",
+    "generation": "5th generation",
+    "avatar": "weaver-portrait.png",
+    "verified": true,
+    "productsCount": 22,
+    "rating": 5.0,
+    "bio": "Ustad Mohammad Dar is a living legend of Kashmiri Sozni embroidery. His Pashmina shawls are collector's items, each taking 6 to 18 months to complete. Working from his atelier in Srinagar's old city, he maintains the ancient Kani weaving technique alongside Sozni needlework that can feature over 50 different colors in a single piece.",
+    "specialties": ["Sozni Embroidery", "Kani Weave", "Jamawar Shawls"],
+    "awards": ["Padma Shri (nominated)", "National Award 2017", "UNESCO Master Craftsperson"]
+  }
+]
