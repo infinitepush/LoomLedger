@@ -1,0 +1,243 @@
+"use client";
+
+import React, { useMemo, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useParams } from 'next/navigation';
+import { MapPin, Clock, Star, Award, Heart, ShieldCheck, Mail, Phone, Calendar, Check } from 'lucide-react';
+import { useApp } from '@/context/AppContext';
+import Badge from '@/components/ui/Badge';
+import VerificationBadge from '@/components/ui/VerificationBadge';
+
+function formatPrice(price: number) {
+  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price);
+}
+
+export default function ArtisanProfilePage() {
+  const { id } = useParams();
+  const { artisans, products, addToCart, toggleWishlist, isWishlisted, toggleSaveArtisan, isArtisanSaved } = useApp();
+
+  const artisan = useMemo(() => {
+    return artisans.find(a => a.id === id) || artisans[0];
+  }, [artisans, id]);
+
+  const [following, setFollowing] = useState(false);
+
+  const artisanProducts = useMemo(() => {
+    return products.filter(p => p.weaver.id === artisan.id && p.verified);
+  }, [products, artisan]);
+
+  if (!artisan) {
+    return (
+      <div className="py-20 text-center space-y-4">
+        <h2>Artisan not found</h2>
+        <Link href="/stories" className="text-primary font-bold">Back to Weavers</Link>
+      </div>
+    );
+  }
+
+  const isSaved = isArtisanSaved(artisan.id);
+
+  return (
+    <div className="py-8 bg-background flex-grow">
+      
+      {/* Profile Header Hero */}
+      <div className="bg-[#F5F3EF]/50 py-12 border-b border-border mb-10">
+        <div className="container flex flex-col md:flex-row items-center md:items-start gap-8">
+          <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary/20 shadow-md bg-secondary flex-shrink-0">
+            <Image
+              src="/assets/images/weaver-portrait.png"
+              alt={artisan.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          <div className="text-center md:text-left space-y-4 flex-grow">
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+                <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-foreground">{artisan.name}</h1>
+                {artisan.verified && <VerificationBadge size="md" />}
+                {artisan.giCertified && <Badge variant="saffron" size="sm" icon={Award}>GI Artisan</Badge>}
+              </div>
+              <p className="text-sm text-primary font-semibold">{artisan.craft}</p>
+              <p className="text-xs text-muted-foreground">{artisan.generation}</p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1"><MapPin size={13} className="text-primary" /> {artisan.region}</span>
+              <span className="flex items-center gap-1"><Clock size={13} className="text-primary" /> {artisan.experience} Experience</span>
+              <span className="flex items-center gap-1"><Star size={13} className="text-accent fill-accent/15" /> {artisan.rating} Rating</span>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+              <button
+                onClick={() => setFollowing(prev => !prev)}
+                className={`px-5 py-2 text-xs font-semibold rounded transition-all shadow-sm ${
+                  following 
+                    ? 'bg-success text-white' 
+                    : 'bg-primary text-white hover:bg-primary-hover'
+                }`}
+              >
+                {following ? (
+                  <span className="flex items-center gap-1">
+                    <Check size={12} />
+                    <span>Following</span>
+                  </span>
+                ) : 'Follow Artisan'}
+              </button>
+              <button
+                onClick={() => toggleSaveArtisan(artisan)}
+                className={`px-4 py-2 text-xs font-semibold rounded border transition-all ${
+                  isSaved
+                    ? 'bg-error-light/35 border-error text-error'
+                    : 'bg-white border-border text-muted-foreground hover:bg-secondary'
+                }`}
+              >
+                {isSaved ? 'Artisan Saved' : 'Save Artisan'}
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-white border border-border rounded-lg p-5 flex gap-8 shadow-sm flex-shrink-0 text-center text-xs">
+            <div>
+              <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider block">Followers</span>
+              <span className="text-lg font-bold text-foreground mt-1 block">
+                {artisan.followersCount + (following ? 1 : 0)}
+              </span>
+            </div>
+            <div className="border-l border-border pr-2" />
+            <div>
+              <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider block">Products</span>
+              <span className="text-lg font-bold text-foreground mt-1 block">{artisanProducts.length}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          
+          {/* Sidebar Bio Info */}
+          <aside className="lg:col-span-4 space-y-8">
+            <div className="bg-white border border-border rounded-lg p-6 space-y-6 shadow-sm">
+              <h3 className="font-serif font-semibold text-lg text-foreground border-b border-border pb-3">Artisan Biography</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{artisan.bio}</p>
+              
+              <div className="space-y-3 pt-2">
+                <h4 className="text-xs font-bold text-foreground uppercase tracking-wide">Craft Specialties</h4>
+                <div className="flex flex-wrap gap-2">
+                  {artisan.specialties.map(spec => (
+                    <Badge key={spec} variant="default" size="sm">{spec}</Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Awards & Achievements */}
+            {((artisan.awards && artisan.awards.length > 0) || (artisan.achievements && artisan.achievements.length > 0)) && (
+              <div className="bg-white border border-border rounded-lg p-6 space-y-6 shadow-sm">
+                <h3 className="font-serif font-semibold text-lg text-foreground border-b border-border pb-3">Awards & Recognition</h3>
+                
+                {artisan.awards && artisan.awards.length > 0 && (
+                  <div className="space-y-3">
+                    <h4 className="text-xs font-bold text-foreground uppercase tracking-wide flex items-center gap-1.5">
+                      <Award size={14} className="text-accent" />
+                      <span>Artisan Awards</span>
+                    </h4>
+                    <ul className="space-y-2 text-xs text-muted-foreground">
+                      {artisan.awards.map(aw => (
+                        <li key={aw} className="flex gap-2 items-start">
+                          <Check size={12} className="text-success mt-0.5 flex-shrink-0" />
+                          <span>{aw}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {artisan.achievements && artisan.achievements.length > 0 && (
+                  <div className="space-y-3 pt-2">
+                    <h4 className="text-xs font-bold text-foreground uppercase tracking-wide flex items-center gap-1.5">
+                      <Calendar size={14} className="text-accent" />
+                      <span>Workshop Milestones</span>
+                    </h4>
+                    <ul className="space-y-2 text-xs text-muted-foreground">
+                      {artisan.achievements.map(ach => (
+                        <li key={ach} className="flex gap-2 items-start">
+                          <Check size={12} className="text-success mt-0.5 flex-shrink-0" />
+                          <span>{ach}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+          </aside>
+
+          {/* Main Products Grid */}
+          <main className="lg:col-span-8 space-y-8">
+            <div className="border-b border-border pb-4 flex justify-between items-baseline">
+              <h2 className="font-serif font-semibold text-xl text-foreground">Artisan's Handlooms</h2>
+              <span className="text-xs text-muted-foreground font-semibold">{artisanProducts.length} items listed</span>
+            </div>
+
+            {artisanProducts.length === 0 ? (
+              <div className="bg-white border border-border rounded-lg p-16 text-center space-y-3">
+                <span className="text-2xl">🧶</span>
+                <h4 className="font-semibold text-foreground">No Active Listings</h4>
+                <p className="text-xs text-muted-foreground max-w-xs mx-auto">This weaver's workshop doesn't have any public marketplace products listed currently.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {artisanProducts.map(product => (
+                  <article key={product.id} className="group bg-white border border-border rounded-lg overflow-hidden hover:shadow transition-all flex flex-col h-full">
+                    <div className="relative aspect-[3/4] bg-secondary overflow-hidden">
+                      <Image
+                        src={`/assets/images/${product.image}`}
+                        alt={product.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                      />
+                      <button
+                        onClick={() => toggleWishlist(product)}
+                        className={`absolute top-3 right-3 w-8.5 h-8.5 rounded-full bg-white/90 shadow flex items-center justify-center text-muted-foreground hover:text-error transition-all ${
+                          isWishlisted(product.id) ? 'text-error' : ''
+                        }`}
+                      >
+                        <Heart size={16} fill={isWishlisted(product.id) ? 'currentColor' : 'none'} />
+                      </button>
+                    </div>
+
+                    <div className="p-4 flex-grow flex flex-col justify-between space-y-4">
+                      <div className="space-y-1">
+                        <Link href={`/marketplace/${product.slug}`} className="block">
+                          <h3 className="font-semibold text-sm text-foreground line-clamp-1 group-hover:text-primary transition-colors">
+                            {product.name}
+                          </h3>
+                        </Link>
+                        <p className="text-xs text-muted-foreground">Fabric: {product.fabric}</p>
+                      </div>
+
+                      <div className="pt-4 border-t border-border flex items-center justify-between mt-auto">
+                        <span className="font-bold text-foreground">{formatPrice(product.price)}</span>
+                        <button
+                          onClick={() => addToCart(product)}
+                          className="text-xs bg-primary-light text-primary hover:bg-primary hover:text-white px-3 py-1.5 rounded-md font-semibold transition-all"
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+}
