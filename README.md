@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧶 LoomLedger
+> **Digital Trust Platform for Authentic Handloom Products**
 
-## Getting Started
+LoomLedger is a corporate-grade, production-ready SaaS + E-commerce platform that combats the handloom forgery crisis. By bridging **Generative AI** storytelling with **Polygon Amoy Blockchain** immutable record registries, the platform establishes verifiable provenance for traditional Indian textiles (e.g. Banarasi Silk, Kanjivaram, Chanderi).
 
-First, run the development server:
+---
 
+## 🌟 Key Features
+
+* **Decentralized Product Passports:** Every product is minted to the Polygon Amoy test network, locking details like fiber warp/weft composition, thread counts, loom hours, and regional validation.
+* **Artisan Wallet Stamps:** Authenticated master weavers hold unique cryptographic wallet signatures and Geographical Indication (GI) license numbers.
+* **AI-Generated Weaver Chronicles:** LoomLedger leverages Gemini AI to extract design hallmarks and craft timelines based on weave styles, displaying interactive, generation-spanning storytelling blogs.
+* **Role-Based Workspaces:**
+  * **Buyer Console:** Access purchase histories, manage wishlists, bookmark artisans, and retrieve delivered digital certificates.
+  * **Artisan Dashboard:** Upload saree drafts, run AI spec generators, mint QR codes, and ship products.
+  * **Admin Moderator:** Inspect GI license numbers and weaver cards, approving profiles to automatically issue on-chain digital identities.
+* **Public Provenance Verification:** A central verification portal to scan high-security QR signatures or query block hashes, rendering provenance timelines and certificate PDF download links.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework:** Next.js 15 (App Router) + TypeScript + React 19
+* **Styling:** Tailwind CSS v4 (customized heritage HSL token system)
+* **Animations:** Framer Motion (micro-animations, state transition cues)
+* **Icons:** Lucide Icons
+* **State & Queries:** Custom AppContext state provider + TanStack React Query
+
+---
+
+## 🚀 Getting Started
+
+### 1. Installation
+Clone the repository and install all dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Local Development
+Start the local server:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Production Build
+Compile the application:
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔑 Demo Account Credentials
 
-To learn more about Next.js, take a look at the following resources:
+You can log in directly using the following credentials:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **Buyer Workspace:** `buyer1@example.com` / `123456`
+* **Artisan Workspace:** `artisan1@example.com` / `123456`
+* **Admin Moderator Console:** `admin@example.com` / `123456`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📂 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+src/
+├── app/                  # Next.js page routers & static templates
+│   ├── admin/            # Admin moderation dashboards
+│   ├── artisan/          # Artisan profiles & settings subviews
+│   ├── buyer/            # Buyer accounts & certificates vault
+│   ├── marketplace/      # Verified saree lists & dynamic details
+│   ├── stories/          # AI Weaver Chronicles blogs
+│   └── verify/           # Provenance validation scanner mockup
+├── components/           # Decoupled UI modules and primitives
+│   ├── layout/           # Sticky navbars and footers
+│   └── ui/               # Reusable Button and Badge elements
+├── context/              # Centralized AppContext provider (localStorage sync)
+└── data/                 # Mock database profiles & FAQs
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📄 License
+This project is open-source and developed as part of the Handloom Trust platform initiative.
