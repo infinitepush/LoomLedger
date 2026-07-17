@@ -18,7 +18,19 @@ const app = (0, express_1.default)();
 app.use((0, helmet_1.default)());
 // CORS config
 app.use((0, cors_1.default)({
-    origin: [env_1.env.FRONTEND_URL, 'http://localhost:3000'],
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like server-to-server, curl, postman)
+        if (!origin)
+            return callback(null, true);
+        // Allow any Vercel domain (*.vercel.app), localhost, or configured FRONTEND_URL
+        if (origin.endsWith('.vercel.app') ||
+            origin.includes('localhost') ||
+            (env_1.env.FRONTEND_URL && origin === env_1.env.FRONTEND_URL)) {
+            return callback(null, true);
+        }
+        // Fallback: allow all origins in production
+        return callback(null, true);
+    },
     credentials: true,
 }));
 // Compression

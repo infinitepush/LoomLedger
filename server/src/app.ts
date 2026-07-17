@@ -17,7 +17,22 @@ app.use(helmet());
 // CORS config
 app.use(
   cors({
-    origin: [env.FRONTEND_URL, 'http://localhost:3000'],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like server-to-server, curl, postman)
+      if (!origin) return callback(null, true);
+
+      // Allow any Vercel domain (*.vercel.app), localhost, or configured FRONTEND_URL
+      if (
+        origin.endsWith('.vercel.app') ||
+        origin.includes('localhost') ||
+        (env.FRONTEND_URL && origin === env.FRONTEND_URL)
+      ) {
+        return callback(null, true);
+      }
+
+      // Fallback: allow all origins in production
+      return callback(null, true);
+    },
     credentials: true,
   })
 );
