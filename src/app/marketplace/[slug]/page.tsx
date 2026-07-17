@@ -84,7 +84,7 @@ export default function ProductDetailPage() {
           <div className="lg:col-span-6 space-y-4">
             <div className="relative aspect-[3/4] rounded-lg overflow-hidden border border-border bg-secondary">
               <Image
-                src={`/assets/images/${activeImage}`}
+                src={activeImage.startsWith('http') || activeImage.startsWith('/') || activeImage.startsWith('data:') ? activeImage : `/assets/images/${activeImage}`}
                 alt={product.name}
                 fill
                 className="object-cover object-center"
@@ -111,7 +111,7 @@ export default function ProductDetailPage() {
                     }`}
                   >
                     <Image
-                      src={`/assets/images/${img}`}
+                      src={img.startsWith('http') || img.startsWith('/') || img.startsWith('data:') ? img : `/assets/images/${img}`}
                       alt={`${product.name} gallery image ${i + 1}`}
                       fill
                       className="object-cover"
@@ -285,7 +285,7 @@ export default function ProductDetailPage() {
                 <article key={rel.id} className="group border border-border rounded-lg bg-white overflow-hidden transition-all hover:shadow flex flex-col h-full">
                   <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
                     <Image
-                      src={`/assets/images/${rel.image}`}
+                      src={rel.image.startsWith('http') || rel.image.startsWith('/') || rel.image.startsWith('data:') ? rel.image : `/assets/images/${rel.image}`}
                       alt={rel.name}
                       fill
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-500"

@@ -12,27 +12,30 @@ interface AppContextType {
   wishlist: Product[];
   savedArtisans: Artisan[];
   notifications: { id: string; message: string; date: string; read: boolean }[];
-  login: (email: string, role: 'buyer' | 'artisan' | 'admin') => boolean;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  signUpBuyer: (name: string, email: string, phone: string) => void;
-  signUpArtisan: (artisanData: Partial<Artisan>) => string;
-  addProduct: (product: Partial<Product>) => void;
-  approveArtisan: (artisanId: string) => void;
-  rejectArtisan: (artisanId: string) => void;
-  addToCart: (product: Product) => void;
-  removeFromCart: (productId: string) => void;
-  updateCartQuantity: (productId: string, quantity: number) => void;
-  clearCart: () => void;
-  toggleWishlist: (product: Product) => void;
+  signUpBuyer: (name: string, email: string, phone: string, password?: string) => Promise<void>;
+  signUpArtisan: (artisanData: Partial<Artisan> & { password?: string }) => Promise<any>;
+  addProduct: (product: Partial<Product>) => Promise<any>;
+  approveArtisan: (artisanId: string) => Promise<void>;
+  rejectArtisan: (artisanId: string) => Promise<void>;
+  addToCart: (product: Product) => Promise<void>;
+  removeFromCart: (productId: string) => Promise<void>;
+  updateCartQuantity: (productId: string, quantity: number) => Promise<void>;
+  clearCart: () => Promise<void>;
+  toggleWishlist: (product: Product) => Promise<void>;
   isWishlisted: (productId: string) => boolean;
-  toggleSaveArtisan: (artisan: Artisan) => void;
+  toggleSaveArtisan: (artisan: Artisan) => Promise<void>;
   isArtisanSaved: (artisanId: string) => boolean;
   addNotification: (message: string) => void;
-  markNotificationsRead: () => void;
-  placeOrder: () => void;
+  markNotificationsRead: () => Promise<void>;
+  placeOrder: (shippingDetails?: any) => Promise<void>;
+  loadGlobalData: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
+
+export const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any | null>(null);
@@ -44,263 +47,399 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [savedArtisans, setSavedArtisans] = useState<Artisan[]>([]);
   const [notifications, setNotifications] = useState<{ id: string; message: string; date: string; read: boolean }[]>([]);
 
-  // Load from local storage or defaults on mount
+
+  // Helper function for API requests with auto-refresh token
+  const apiRequest = async (url: string, options: RequestInit = {}): Promise<any> => {
+    const accessToken = typeof window !== 'undefined' ? localStorage.getItem('ll_access_token') : null;
+    
+    const headers = new Headers(options.headers || {});
+    headers.set('Content-Type', 'application/json');
+    if (accessToken) {
+      headers.set('Authorization', `Bearer ${accessToken}`);
+    }
+
+    const response = await fetch(`${API_BASE}${url}`, {
+      ...options,
+      headers,
+    });
+
+    if (response.status === 401) {
+      // Token expired, attempt refresh
+      const refreshToken = typeof window !== 'undefined' ? localStorage.getItem('ll_refresh_token') : null;
+      if (refreshToken) {
+        try {
+          const refreshRes = await fetch(`${API_BASE}/auth/refresh`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ refreshToken }),
+          });
+          const refreshData = await refreshRes.json();
+          if (refreshData.success) {
+            localStorage.setItem('ll_access_token', refreshData.data.accessToken);
+            localStorage.setItem('ll_refresh_token', refreshData.data.refreshToken);
+            
+            // Retry request with new token
+            headers.set('Authorization', `Bearer ${refreshData.data.accessToken}`);
+            const retryRes = await fetch(`${API_BASE}${url}`, {
+              ...options,
+              headers,
+            });
+            const retryJson = await retryRes.json();
+            return retryJson.data || retryJson;
+          }
+        } catch {
+          // Refresh failed, logout
+          logout();
+        }
+      }
+    }
+
+    const json = await response.json();
+    if (!response.ok) {
+      throw new Error(json.message || 'Request failed');
+    }
+    return json.data !== undefined ? json.data : json;
+  };
+
+  // Load initial global data
+  const loadGlobalData = async () => {
+    try {
+      const prodsRes = await apiRequest('/products?limit=100');
+      if (prodsRes) {
+        if (Array.isArray(prodsRes)) {
+          setProducts(prodsRes);
+        } else if (prodsRes.products) {
+          setProducts(prodsRes.products);
+        }
+      }
+      
+      const artisansRes = await apiRequest('/artisans?status=all');
+      if (artisansRes) setArtisans(artisansRes);
+    } catch (err) {
+      console.error('Failed to load initial global catalogs:', err);
+    }
+  };
+
+  const loadUserData = async (currentUser: any) => {
+    try {
+      // Notifications
+      const notifs = await apiRequest('/notifications');
+      if (notifs) {
+        setNotifications(notifs.map((n: any) => ({
+          id: n.id,
+          message: n.message,
+          date: n.createdAt.split('T')[0],
+          read: n.read
+        })));
+      }
+
+      if (currentUser.role === 'buyer') {
+        // Cart
+        const cartItems = await apiRequest('/cart');
+        if (cartItems) {
+          setCart(cartItems.map((item: any) => ({
+            product: {
+              id: item.productId,
+              name: item.name,
+              price: item.price,
+              originalPrice: item.originalPrice,
+              image: item.image,
+              category: item.category,
+              weaver: { name: item.artisanName }
+            } as any,
+            quantity: item.quantity
+          })));
+        }
+
+        // Wishlist
+        const wishlistItems = await apiRequest('/wishlist');
+        if (wishlistItems) setWishlist(wishlistItems);
+
+        // Saved Artisans
+        const saved = await apiRequest('/artisans/saved');
+        if (saved) setSavedArtisans(saved);
+
+        // Orders
+        const ords = await apiRequest('/orders/buyer');
+        if (ords) setOrders(ords);
+
+      } else if (currentUser.role === 'artisan') {
+        // Orders
+        const ords = await apiRequest('/orders/artisan');
+        if (ords) setOrders(ords);
+      }
+    } catch (err) {
+      console.error('Failed to load user-specific data:', err);
+    }
+  };
+
   useEffect(() => {
     const localUser = localStorage.getItem('ll_user');
-    const localProducts = localStorage.getItem('ll_products');
-    const localArtisans = localStorage.getItem('ll_artisans');
-    const localOrders = localStorage.getItem('ll_orders');
-    const localCart = localStorage.getItem('ll_cart');
-    const localWishlist = localStorage.getItem('ll_wishlist');
-    const localSaved = localStorage.getItem('ll_saved_artisans');
-    const localNotifs = localStorage.getItem('ll_notifications');
+    const localAccessToken = localStorage.getItem('ll_access_token');
+    
+    loadGlobalData();
 
-    if (localUser) setUser(JSON.parse(localUser));
-    setProducts(localProducts ? JSON.parse(localProducts) : mockProducts);
-    setArtisans(localArtisans ? JSON.parse(localArtisans) : mockArtisans);
-    setOrders(localOrders ? JSON.parse(localOrders) : mockOrders);
-    setCart(localCart ? JSON.parse(localCart) : []);
-    setWishlist(localWishlist ? JSON.parse(localWishlist) : []);
-    setSavedArtisans(localSaved ? JSON.parse(localSaved) : []);
-    setNotifications(localNotifs ? JSON.parse(localNotifs) : [
-      { id: '1', message: "Welcome to LoomLedger! Securely verify traditional products.", date: "2026-07-15", read: false }
-    ]);
+    if (localUser && localAccessToken) {
+      const parsedUser = JSON.parse(localUser);
+      setUser(parsedUser);
+      loadUserData(parsedUser);
+    }
   }, []);
 
-  // Persistors
-  const saveUser = (u: any) => {
-    setUser(u);
-    if (u) localStorage.setItem('ll_user', JSON.stringify(u));
-    else localStorage.removeItem('ll_user');
-  };
-
-  const saveProducts = (p: Product[]) => {
-    setProducts(p);
-    localStorage.setItem('ll_products', JSON.stringify(p));
-  };
-
-  const saveArtisans = (a: Artisan[]) => {
-    setArtisans(a);
-    localStorage.setItem('ll_artisans', JSON.stringify(a));
-  };
-
-  const saveOrders = (o: Order[]) => {
-    setOrders(o);
-    localStorage.setItem('ll_orders', JSON.stringify(o));
-  };
-
-  const saveCart = (c: { product: Product; quantity: number }[]) => {
-    setCart(c);
-    localStorage.setItem('ll_cart', JSON.stringify(c));
-  };
-
-  const saveWishlist = (w: Product[]) => {
-    setWishlist(w);
-    localStorage.setItem('ll_wishlist', JSON.stringify(w));
-  };
-
-  const saveSavedArtisans = (sa: Artisan[]) => {
-    setSavedArtisans(sa);
-    localStorage.setItem('ll_saved_artisans', JSON.stringify(sa));
-  };
-
-  const saveNotifs = (n: typeof notifications) => {
-    setNotifications(n);
-    localStorage.setItem('ll_notifications', JSON.stringify(n));
-  };
-
   // Auth Functions
-  const login = (email: string, role: 'buyer' | 'artisan' | 'admin'): boolean => {
-    if (role === 'admin') {
-      if (email === 'admin@example.com') {
-        saveUser({ name: 'Admin Panel', email, role: 'admin', id: 'ADMIN_01' });
+  const login = async (email: string, password = 'password123'): Promise<boolean> => {
+    try {
+      const data = await apiRequest('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (data && data.accessToken) {
+        localStorage.setItem('ll_access_token', data.accessToken);
+        localStorage.setItem('ll_refresh_token', data.refreshToken);
+        localStorage.setItem('ll_user', JSON.stringify(data.user));
+        setUser(data.user);
+        await loadUserData(data.user);
         return true;
       }
       return false;
-    }
-    if (role === 'buyer') {
-      const idx = email.match(/\d/)?.[0] || '1';
-      const name = idx === '1' ? 'Priya Sharma' : `Buyer User ${idx}`;
-      saveUser({ name, email, role: 'buyer', id: `BUYER_0${idx}` });
-      addNotification(`Logged in successfully as ${name}.`);
-      return true;
-    }
-    if (role === 'artisan') {
-      const foundArtisan = artisans.find(a => a.email.toLowerCase() === email.toLowerCase());
-      if (foundArtisan) {
-        saveUser({ name: foundArtisan.name, email: foundArtisan.email, role: 'artisan', id: foundArtisan.id });
-        addNotification(`Logged in successfully as Artisan ${foundArtisan.name}.`);
-        return true;
-      }
+    } catch (err) {
+      console.error('Login failed:', err);
       return false;
     }
-    return false;
   };
 
   const logout = () => {
-    saveUser(null);
-    saveCart([]);
+    const refreshToken = localStorage.getItem('ll_refresh_token');
+    if (refreshToken) {
+      fetch(`${API_BASE}/auth/logout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refreshToken }),
+      }).catch(() => {});
+    }
+
+    localStorage.removeItem('ll_user');
+    localStorage.removeItem('ll_access_token');
+    localStorage.removeItem('ll_refresh_token');
+    setUser(null);
+    setCart([]);
+    setWishlist([]);
+    setOrders([]);
+    setNotifications([]);
   };
 
-  const signUpBuyer = (name: string, email: string, phone: string) => {
-    const newId = `BUYER_0${Math.floor(Math.random() * 1000)}`;
-    const newBuyer = { name, email, phone, id: newId, role: 'buyer' };
-    saveUser(newBuyer);
-    addNotification(`Welcome ${name}! Your LoomLedger account is now ready.`);
+  const signUpBuyer = async (name: string, email: string, phone: string, password = 'password123') => {
+    try {
+      const data = await apiRequest('/auth/register/buyer', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, phone, password }),
+      });
+
+      if (data && data.accessToken) {
+        localStorage.setItem('ll_access_token', data.accessToken);
+        localStorage.setItem('ll_refresh_token', data.refreshToken);
+        localStorage.setItem('ll_user', JSON.stringify(data.user));
+        setUser(data.user);
+        await loadUserData(data.user);
+      }
+    } catch (err: any) {
+      throw new Error(err.message || 'Registration failed');
+    }
   };
 
-  const signUpArtisan = (artisanData: Partial<Artisan>): string => {
-    const artId = `ART-OD-2026-0001${(artisans.length + 1).toString().padStart(2, '0')}`;
-    const newArtisan: Artisan = {
-      id: artId,
-      name: artisanData.name || "Unnamed Artisan",
-      region: `${artisanData.district || 'Varanasi'}, ${artisanData.state || 'Uttar Pradesh'}`,
-      district: artisanData.district || "Varanasi",
-      state: artisanData.state || "Uttar Pradesh",
-      craft: artisanData.craft || "Traditional Handloom",
-      experience: `${artisanData.experience || 5} Years`,
-      generation: "New Generation Weaver",
-      avatar: "/assets/images/weaver-portrait.png",
-      verified: false, // Must be approved by admin!
-      walletAddress: "0x" + Math.random().toString(16).substring(2, 10).toUpperCase() + "..." + Math.random().toString(16).substring(2, 6).toUpperCase(),
-      verificationHash: "",
-      blockchainTimestamp: "",
-      giCertified: artisanData.giCertified || false,
-      giNumber: artisanData.giNumber || "",
-      rating: 5.0,
-      followersCount: 0,
-      productsCount: 0,
-      bio: artisanData.bio || "Crafting heirloom fabrics with passion.",
-      specialties: artisanData.specialties || ["Handloom Weaving"],
-      awards: [],
-      phone: artisanData.phone || "",
-      email: artisanData.email || "",
-      achievements: []
-    };
+  const signUpArtisan = async (artisanData: Partial<Artisan> & { password?: string }): Promise<any> => {
+    try {
+      const payload = {
+        name: artisanData.name,
+        email: artisanData.email,
+        phone: artisanData.phone,
+        password: artisanData.password || 'password123',
+        state: artisanData.state || 'Uttar Pradesh',
+        district: artisanData.district || 'Varanasi',
+        craft: artisanData.craft || 'Banarasi Silk Weaving',
+        experience: artisanData.experience || '10 Years',
+        giNumber: artisanData.giNumber || '',
+        bio: artisanData.bio || '',
+      };
 
-    saveArtisans([...artisans, newArtisan]);
-    addNotification(`Artisan profile submitted for review: ${newArtisan.name}`);
-    return artId;
+      const data = await apiRequest('/auth/register/artisan', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+
+      if (data && data.accessToken) {
+        localStorage.setItem('ll_access_token', data.accessToken);
+        localStorage.setItem('ll_refresh_token', data.refreshToken);
+        localStorage.setItem('ll_user', JSON.stringify(data.user));
+        setUser(data.user);
+        await loadUserData(data.user);
+        return data;
+      }
+      return { artisanId: 'ART-NEW' };
+    } catch (err: any) {
+      throw new Error(err.message || 'Registration failed');
+    }
   };
 
   // Product Operations
-  const addProduct = (pData: Partial<Product>) => {
-    const newProdId = `PROD_0${products.length + 1}`;
-    const wallet = user?.role === 'artisan' ? (artisans.find(a => a.id === user.id)?.walletAddress || '0xArtisanWalletAddress') : '0xArtisanWalletAddress';
-    
-    // Polygon Amoy transaction hashes & registration mock
-    const txHash = "0x" + Math.random().toString(16).substring(2, 12).toLowerCase() + "8f9a0c1d2e3f4a5b6c7d8e9f0a1b2c3d";
-    
-    const newProduct: Product = {
-      id: newProdId,
-      name: pData.name || "New Handloom Saree",
-      slug: (pData.name || "new-handloom-saree").toLowerCase().replace(/\s+/g, '-'),
-      price: pData.price || 5000,
-      originalPrice: pData.originalPrice || 6000,
-      currency: "INR",
-      image: pData.image || "product-banarasi.png",
-      gallery: pData.gallery || ["product-banarasi.png"],
-      category: pData.category || "Banarasi Silk",
-      categorySlug: (pData.category || "Banarasi Silk").toLowerCase().replace(/\s+/g, '-'),
-      region: pData.region || user?.region || "Varanasi, Uttar Pradesh",
-      weaver: {
-        id: user?.id || "ART-OD-2026-000101",
-        name: user?.name || "Ramesh Vishwakarma",
-        avatar: "/assets/images/weaver-portrait.png"
-      },
-      verified: true, // Auto verified since uploaded by approved artisan
-      blockchainId: txHash,
-      giCertified: pData.giCertified || false,
-      rating: 5.0,
-      reviews: [],
-      inStock: true,
-      tags: pData.tags || ["New", "Handloom"],
-      description: pData.description || "A beautifully styled craft piece.",
-      careInstructions: pData.careInstructions || "Dry clean only.",
-      craftStory: pData.craftStory || "AI-generated storytelling coming soon.",
-      craftTime: pData.craftTime || "15 Days",
-      fabric: pData.fabric || "Cotton Silk",
-      specifications: pData.specifications || { "Length": "5.5 meters" },
-      timeline: [
-        { stage: "Yarn Dyeing", date: new Date().toISOString().split('T')[0], location: pData.region || "Workshop", status: "complete" },
-        { stage: "Woven on Handloom", date: new Date().toISOString().split('T')[0], location: pData.region || "Workshop", status: "complete" },
-        { stage: "Blockchain Secure Passport Minted", date: new Date().toISOString().split('T')[0], location: "Polygon Amoy", status: "complete" }
-      ]
-    };
+  const addProduct = async (pData: Partial<Product>) => {
+    try {
+      const payload = {
+        name: pData.name,
+        price: pData.price,
+        originalPrice: pData.originalPrice,
+        category: pData.category || 'Banarasi Silk',
+        image: pData.image,
+        description: pData.description,
+        fabric: pData.fabric,
+        craftTime: pData.craftTime,
+        tags: pData.tags,
+        specifications: pData.specifications,
+        giCertified: pData.giCertified,
+      };
 
-    saveProducts([newProduct, ...products]);
-    addNotification(`New product listed: ${newProduct.name}. Blockchain transaction logged.`);
+      const data = await apiRequest('/products', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+
+      // Reload global list
+      await loadGlobalData();
+      return data;
+    } catch (err: any) {
+      throw new Error(err.message || 'Failed to list product');
+    }
   };
 
   // Admin Verification Panel
-  const approveArtisan = (artisanId: string) => {
-    const tx = "0x" + Math.random().toString(16).substring(2, 12).toLowerCase() + "7a3b9c1d2e4f5a6b7c8d9e0f1a2b3c4d";
-    const timestamp = new Date().toISOString();
-
-    const updatedArtisans = artisans.map(art => {
-      if (art.id === artisanId) {
-        return {
-          ...art,
-          verified: true,
-          blockchainTimestamp: timestamp,
-          verificationHash: tx
-        };
-      }
-      return art;
-    });
-
-    saveArtisans(updatedArtisans);
-    addNotification(`Artisan ${artisanId} verified and recorded on Polygon Amoy.`);
+  const approveArtisan = async (artisanId: string) => {
+    try {
+      await apiRequest(`/admin/approve-artisan/${artisanId}`, { method: 'POST' });
+      await loadGlobalData();
+    } catch (err: any) {
+      throw new Error(err.message || 'Failed to approve artisan');
+    }
   };
 
-  const rejectArtisan = (artisanId: string) => {
-    saveArtisans(artisans.filter(art => art.id !== artisanId));
-    addNotification(`Artisan registration for ${artisanId} rejected.`);
+  const rejectArtisan = async (artisanId: string) => {
+    try {
+      await apiRequest(`/admin/reject-artisan/${artisanId}`, { method: 'POST' });
+      await loadGlobalData();
+    } catch (err: any) {
+      throw new Error(err.message || 'Failed to reject artisan');
+    }
   };
 
   // Cart Management
-  const addToCart = (product: Product) => {
-    const existing = cart.find(item => item.product.id === product.id);
-    if (existing) {
-      saveCart(cart.map(item => item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item));
-    } else {
-      saveCart([...cart, { product, quantity: 1 }]);
+  const addToCart = async (product: Product) => {
+    try {
+      if (!user) {
+        window.dispatchEvent(new CustomEvent('loomledger:login-required', { detail: { message: 'Please log in to add items to your cart.' } }));
+        return;
+      }
+
+      await apiRequest('/cart/add', {
+        method: 'POST',
+        body: JSON.stringify({ productId: product.id, quantity: 1 }),
+      });
+      await loadUserData(user);
+    } catch (err) {
+      console.error('Failed to add to cart:', err);
     }
   };
 
-  const removeFromCart = (productId: string) => {
-    saveCart(cart.filter(item => item.product.id !== productId));
-  };
+  const removeFromCart = async (productId: string) => {
+    try {
+      if (!user) {
+        setCart(cart.filter(item => item.product.id !== productId));
+        return;
+      }
 
-  const updateCartQuantity = (productId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-    } else {
-      saveCart(cart.map(item => item.product.id === productId ? { ...item, quantity } : item));
+      await apiRequest('/cart/remove', {
+        method: 'POST',
+        body: JSON.stringify({ productId }),
+      });
+      await loadUserData(user);
+    } catch (err) {
+      console.error('Failed to remove from cart:', err);
     }
   };
 
-  const clearCart = () => {
-    saveCart([]);
+  const updateCartQuantity = async (productId: string, quantity: number) => {
+    try {
+      if (!user) {
+        if (quantity <= 0) {
+          setCart(cart.filter(item => item.product.id !== productId));
+        } else {
+          setCart(cart.map(item => item.product.id === productId ? { ...item, quantity } : item));
+        }
+        return;
+      }
+
+      await apiRequest('/cart/update', {
+        method: 'POST',
+        body: JSON.stringify({ productId, quantity }),
+      });
+      await loadUserData(user);
+    } catch (err) {
+      console.error('Failed to update quantity:', err);
+    }
+  };
+
+  const clearCart = async () => {
+    try {
+      if (!user) {
+        setCart([]);
+        return;
+      }
+
+      await apiRequest('/cart/clear', { method: 'POST' });
+      setCart([]);
+    } catch (err) {
+      console.error('Failed to clear cart:', err);
+    }
   };
 
   // Wishlist
-  const toggleWishlist = (product: Product) => {
-    if (isWishlisted(product.id)) {
-      saveWishlist(wishlist.filter(item => item.id !== product.id));
-    } else {
-      saveWishlist([...wishlist, product]);
+  const toggleWishlist = async (product: Product) => {
+    try {
+      if (!user) {
+        window.dispatchEvent(new CustomEvent('loomledger:login-required', { detail: { message: 'Please log in to add items to your wishlist.' } }));
+        return;
+      }
+
+      await apiRequest('/wishlist/toggle', {
+        method: 'POST',
+        body: JSON.stringify({ productId: product.id }),
+      });
+      await loadUserData(user);
+    } catch (err) {
+      console.error('Failed to toggle wishlist:', err);
     }
   };
 
   const isWishlisted = (productId: string) => wishlist.some(item => item.id === productId);
 
   // Saved Artisans
-  const toggleSaveArtisan = (artisan: Artisan) => {
-    if (isArtisanSaved(artisan.id)) {
-      saveSavedArtisans(savedArtisans.filter(item => item.id !== artisan.id));
-    } else {
-      saveSavedArtisans([...savedArtisans, artisan]);
+  const toggleSaveArtisan = async (artisan: Artisan) => {
+    try {
+      if (!user) {
+        if (isArtisanSaved(artisan.id)) {
+          setSavedArtisans(savedArtisans.filter(item => item.id !== artisan.id));
+        } else {
+          setSavedArtisans([...savedArtisans, artisan]);
+        }
+        return;
+      }
+
+      await apiRequest('/artisans/save', {
+        method: 'POST',
+        body: JSON.stringify({ artisanId: artisan.id }),
+      });
+      await loadUserData(user);
+    } catch (err) {
+      console.error('Failed to toggle save artisan:', err);
     }
   };
 
@@ -314,43 +453,57 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       date: new Date().toISOString().split('T')[0],
       read: false
     };
-    saveNotifs([newNotif, ...notifications]);
+    setNotifications(prev => [newNotif, ...prev]);
   };
 
-  const markNotificationsRead = () => {
-    saveNotifs(notifications.map(n => ({ ...n, read: true })));
+  const markNotificationsRead = async () => {
+    try {
+      if (user) {
+        await apiRequest('/notifications/read-all', { method: 'POST' });
+      }
+      setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    } catch (err) {
+      console.error('Failed to mark notifications read:', err);
+    }
   };
 
   // Place Order
-  const placeOrder = () => {
-    if (cart.length === 0) return;
-    
-    const newOrdersList: Order[] = cart.map((item, idx) => {
-      const tx = "0x" + Math.random().toString(16).substring(2, 12).toLowerCase() + "f9a0c1d2e3f4a5b6c7d8e9f0a1b2c3d4";
-      return {
-        id: `ORD-2026-${1000 + orders.length + idx + 1}`,
-        buyerId: user?.id || 'GUEST',
-        buyerName: user?.name || 'Guest User',
-        productId: item.product.id,
-        productName: item.product.name,
-        productImage: item.product.image,
-        artisanId: item.product.weaver.id,
-        artisanName: item.product.weaver.name,
-        amount: item.product.price * item.quantity,
-        status: 'Processing',
-        date: new Date().toISOString().split('T')[0],
-        blockchainTxHash: tx,
-        walletAddress: user?.walletAddress || '0xDefaultBuyerWalletAddress',
-        timeline: [
-          { status: 'Order Placed', date: new Date().toISOString().split('T')[0], note: 'Order logged on LoomLedger.' },
-          { status: 'Processing', date: new Date().toISOString().split('T')[0], note: 'Artisan has been notified.' }
-        ]
-      };
-    });
+  const placeOrder = async (shippingDetails?: any) => {
+    try {
+      if (cart.length === 0) return;
+      if (!user) {
+        alert('Please login to place orders.');
+        return;
+      }
 
-    saveOrders([...newOrdersList, ...orders]);
-    clearCart();
-    addNotification("Checkout complete! Blockchain logs generated for your order items.");
+      const shipping = shippingDetails || {
+        shippingName: user.name,
+        shippingAddress: 'Lane No. 3, Heritage Colony, Mandir Rd',
+        shippingCity: 'Varanasi',
+        shippingState: 'Uttar Pradesh',
+        shippingPincode: '221001',
+        shippingPhone: '+91 99999 88888',
+      };
+
+      const payload = {
+        items: cart.map(item => ({
+          productId: item.product.id,
+          quantity: item.quantity,
+        })),
+        ...shipping,
+      };
+
+      await apiRequest('/orders', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+
+      setCart([]);
+      await loadUserData(user);
+    } catch (err: any) {
+      console.error('Failed to place order:', err);
+      throw new Error(err.message || 'Checkout failed');
+    }
   };
 
   return (
@@ -358,7 +511,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       user, products, artisans, orders, cart, wishlist, savedArtisans, notifications,
       login, logout, signUpBuyer, signUpArtisan, addProduct, approveArtisan, rejectArtisan,
       addToCart, removeFromCart, updateCartQuantity, clearCart, toggleWishlist, isWishlisted,
-      toggleSaveArtisan, isArtisanSaved, addNotification, markNotificationsRead, placeOrder
+      toggleSaveArtisan, isArtisanSaved, addNotification, markNotificationsRead, placeOrder,
+      loadGlobalData
     }}>
       {children}
     </AppContext.Provider>

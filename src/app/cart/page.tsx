@@ -23,17 +23,18 @@ export default function CartPage() {
   const tax = subtotal * 0.05; // 5% GST
   const total = subtotal + shipping + tax;
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     setCheckingOut(true);
-    
-    // Simulate checkout
-    setTimeout(() => {
-      const orderCountBefore = orders.length;
-      placeOrder();
+    try {
+      await placeOrder();
       setCheckingOut(false);
       setShowSuccess(true);
-    }, 1500);
+    } catch (err: any) {
+      setCheckingOut(false);
+      alert(err.message || 'Checkout failed.');
+    }
   };
+
 
   if (showSuccess) {
     return (
@@ -127,7 +128,7 @@ export default function CartPage() {
                   {/* Product Image */}
                   <div className="relative w-20 h-24 sm:w-24 sm:h-32 bg-secondary rounded overflow-hidden shrink-0 border border-border/80">
                     <Image 
-                      src={`/assets/images/${item.product.image}`} 
+                      src={item.product.image.startsWith('http') || item.product.image.startsWith('/') || item.product.image.startsWith('data:') ? item.product.image : `/assets/images/${item.product.image}`} 
                       alt={item.product.name} 
                       fill 
                       className="object-cover object-center" 

@@ -44,7 +44,12 @@ export default function BuyerWishlistPage() {
             {wishlist.map(product => (
               <div key={product.id} className="bg-white border border-border rounded-lg overflow-hidden hover:shadow-sm transition-shadow flex">
                 <div className="relative w-24 sm:w-28 bg-secondary shrink-0">
-                  <Image src={`/assets/images/${product.image}`} alt={product.name} fill className="object-cover" />
+                  <Image 
+                    src={product.image.startsWith('http') || product.image.startsWith('/') || product.image.startsWith('data:') ? product.image : `/assets/images/${product.image}`} 
+                    alt={product.name} 
+                    fill 
+                    className="object-cover" 
+                  />
                 </div>
                 <div className="p-4 flex-grow flex flex-col justify-between">
                   <div className="space-y-1">

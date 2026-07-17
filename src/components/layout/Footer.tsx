@@ -19,7 +19,7 @@ const footerLinks = {
     title: 'Platform',
     links: [
       { label: 'Blockchain Verification', path: '/verify' },
-      { label: 'Artisan Directory', path: '/stories' },
+      { label: 'Artisan Directory', path: '/artisans' },
       { label: 'Digital Product Passports', path: '/verify' },
       { label: 'Seller Registration', path: '/signup' },
     ],
@@ -28,7 +28,7 @@ const footerLinks = {
     title: 'Company',
     links: [
       { label: 'About Us', path: '/about' },
-      { label: 'Weaving Heritage', path: '/stories' },
+      { label: 'Our Weavers', path: '/artisans' },
       { label: 'Contact Support', path: '/contact' },
       { label: 'Privacy Policy', path: '#' },
       { label: 'Terms of Service', path: '#' },

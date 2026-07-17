@@ -8,7 +8,7 @@ import {
   Package, ShoppingBag, BarChart3, TrendingUp, Settings, LogOut, Plus, 
   Trash2, QrCode, Sparkles, ShieldCheck, ArrowLeft, Upload, FileText, Check 
 } from 'lucide-react';
-import { useApp } from '@/context/AppContext';
+import { useApp, API_BASE } from '@/context/AppContext';
 import Badge from '@/components/ui/Badge';
 import VerificationBadge from '@/components/ui/VerificationBadge';
 
@@ -23,12 +23,30 @@ function ArtisanProductsContent() {
   
   // Form states
   const [prodName, setProdName] = useState('');
-  const [prodCategory, setProdCategory] = useState('Banarasi Silk');
+  const [prodCategory, setProdCategory] = useState('Sarees & Traditional Wear');
+  const [customCategory, setCustomCategory] = useState('');
   const [prodPrice, setProdPrice] = useState(6500);
+  const [availableCategories, setAvailableCategories] = useState<{ id: string; name: string; slug: string }[]>([]);
+
+  React.useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/products/categories`);
+        const json = await res.json();
+        if (json.success) {
+          setAvailableCategories(json.data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch categories:', err);
+      }
+    };
+    fetchCategories();
+  }, []);
   const [prodDesc, setProdDesc] = useState('');
   const [prodFabric, setProdFabric] = useState('');
   const [prodCraftTime, setProdCraftTime] = useState('');
-  const [mockSelectedImage, setMockSelectedImage] = useState('product-banarasi.png');
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string>('');
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [tags, setTags] = useState<string[]>(['Pure Silk', 'Handwoven']);
   const [specs, setSpecs] = useState<Record<string, string>>({
     'Dye Type': 'Natural Indigo Dye',
@@ -54,44 +72,88 @@ function ArtisanProductsContent() {
   const currentArtisan = artisans.find(a => a.id === user.id) || artisans[0];
   const artisanProducts = products.filter(p => p.weaver.id === user.id);
 
-  // Trigger Gemini AI generation simulation
-  const handleAIGenerate = () => {
+  // Handle Real-Time Cloudinary Image Upload
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await fetch(`${API_BASE}/upload`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('ll_access_token')}`
+        },
+        body: formData
+      });
+      const json = await res.json();
+      if (json.success) {
+        setUploadedImageUrl(json.data.url);
+      } else {
+        alert(json.message || 'Image upload failed.');
+      }
+    } catch (err: any) {
+      alert(err.message || 'Image upload failed.');
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  // Trigger Gemini AI generation
+  const handleAIGenerate = async () => {
     if (!prodName.trim()) {
       alert("Please enter a product title first so Gemini can analyze the style!");
       return;
     }
     setGeneratingAI(true);
-    setTimeout(() => {
-      setGeneratingAI(false);
-      setProdDesc(`An authentic handwoven creation featuring intricate, traditional motifs. Inspired by generational weave patterns, this saree is crafted painstakingly using pure threads, creating a shimmering dual-tone effect suitable for weddings and grand festive celebrations.`);
-      setProdFabric("Pure mulberry silk warp and weft");
-      setProdCraftTime("18 Days on Loom");
-      setSpecs({
-        'Dye Type': 'Hand-dyed organic colors',
-        'Loom Type': 'Traditional hand-operated wooden loom',
-        'Zari Type': 'Tested golden zari borders',
-        'Thread Count': '120/2 double ply silk'
+    try {
+      // Connect to real backend API base
+      const res = await fetch(`${API_BASE}/products/ai-specs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('ll_access_token')}`
+        },
+        body: JSON.stringify({ name: prodName, category: prodCategory === 'Other' ? customCategory : prodCategory })
       });
-      setWizardStep(2);
-    }, 1800);
+      const json = await res.json();
+      setGeneratingAI(false);
+      if (json.success) {
+        setProdDesc(json.data.description);
+        setProdFabric(json.data.fabric);
+        setProdCraftTime(json.data.craftTime);
+        setSpecs(json.data.specifications);
+        setTags(json.data.tags);
+        setWizardStep(2);
+      } else {
+        alert(json.message || 'AI generation failed');
+      }
+    } catch (err: any) {
+      setGeneratingAI(false);
+      alert(err.message || 'AI generation failed');
+    }
   };
 
-  // Trigger Polygon Minting simulation
-  const handleMintPassport = (e: React.FormEvent) => {
+  // Trigger Polygon Minting
+  const handleMintPassport = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!uploadedImageUrl) {
+      alert("Please upload a product photo first!");
+      return;
+    }
     setMintingOnChain(true);
     
-    const randomHash = "0x" + Math.random().toString(16).substring(2, 12).toLowerCase() + "8f9a0c1d2e3f4a5b6c7d8e9f0a1b2c3d";
-    
-    setTimeout(() => {
-      setMintingOnChain(false);
-      addProduct({
+    try {
+      const resData = await addProduct({
         name: prodName,
         price: prodPrice,
         originalPrice: Math.round(prodPrice * 1.2),
-        category: prodCategory,
-        image: mockSelectedImage,
-        gallery: [mockSelectedImage],
+        category: prodCategory === 'Other' ? customCategory : prodCategory,
+        image: uploadedImageUrl,
+        gallery: [uploadedImageUrl],
         description: prodDesc,
         fabric: prodFabric,
         craftTime: prodCraftTime,
@@ -100,17 +162,22 @@ function ArtisanProductsContent() {
         tags: tags
       });
       
-      setRegisteredPassport({
-        txHash: randomHash,
+      setMintingOnChain(false);
+      setRegisteredPassport(resData.passport || {
+        txHash: resData.product.blockchainId,
         wallet: currentArtisan.walletAddress || "0xArtisanWalletAddress",
         title: prodName,
         price: prodPrice,
-        tokenId: `PROD_0${products.length + 1}`
+        tokenId: `PROD_${resData.product.id.slice(0,6)}`
       });
       
       setWizardStep(3);
-    }, 2000);
+    } catch (err: any) {
+      setMintingOnChain(false);
+      alert(err.message || 'Minting passport failed.');
+    }
   };
+
 
   const resetForm = () => {
     setProdName('');
@@ -119,6 +186,7 @@ function ArtisanProductsContent() {
     setProdDesc('');
     setProdFabric('');
     setProdCraftTime('');
+    setUploadedImageUrl('');
     setWizardStep(1);
     setRegisteredPassport(null);
     setShowUploadWizard(false);
@@ -228,33 +296,54 @@ function ArtisanProductsContent() {
                   {/* Left Column: inputs */}
                   <div className="md:col-span-7 space-y-4">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-foreground uppercase tracking-wide">Product Title / Saree Style</label>
+                      <label className="text-xs font-bold text-foreground uppercase tracking-wide">Product Title / Weave Style</label>
                       <input 
                         type="text"
                         required
                         value={prodName}
                         onChange={e => setProdName(e.target.value)}
-                        placeholder="e.g., Kora Silk Banarasi Saree with Silver Brocade"
+                        placeholder="e.g., Kora Silk Banarasi Shawl or Heritage Brocade Saree"
                         className="w-full bg-white border border-border px-3.5 py-2 rounded text-sm outline-none focus:ring-1 focus:ring-primary text-foreground"
                       />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-foreground uppercase tracking-wide">Category Cluster</label>
+                      <div className="space-y-1.5 col-span-2">
+                        <label className="text-xs font-bold text-foreground uppercase tracking-wide">Product Category</label>
                         <select
                           value={prodCategory}
                           onChange={e => setProdCategory(e.target.value)}
                           className="w-full bg-white border border-border px-3 py-2 rounded text-sm outline-none focus:ring-1 focus:ring-primary text-foreground"
                         >
-                          <option value="Banarasi Silk">Banarasi Silk</option>
-                          <option value="Chanderi Cotton">Chanderi Cotton</option>
-                          <option value="Pochampally Ikat">Pochampally Ikat</option>
-                          <option value="Sambhalpuri Saree">Sambhalpuri Saree</option>
-                          <option value="Bhagalpuri Tussar">Bhagalpuri Tussar</option>
+                          <option value="Sarees & Traditional Wear">Sarees & Traditional Wear</option>
+                          <option value="Shawls, Stoles & Scarves">Shawls, Stoles & Scarves</option>
+                          <option value="Apparel & Clothing">Apparel & Clothing</option>
+                          <option value="Home Decor & Furnishing">Home Decor & Furnishing</option>
+                          <option value="Fabric Yardage & Textiles">Fabric Yardage & Textiles</option>
+                          <option value="Bags & Accessories">Bags & Accessories</option>
+                          {availableCategories.filter(cat => 
+                            !["Sarees & Traditional Wear", "Shawls, Stoles & Scarves", "Apparel & Clothing", "Home Decor & Furnishing", "Fabric Yardage & Textiles", "Bags & Accessories"].includes(cat.name)
+                          ).map(cat => (
+                            <option key={cat.id} value={cat.name}>{cat.name}</option>
+                          ))}
+                          <option value="Other">Other (Write Custom Category)</option>
                         </select>
+
+                        {prodCategory === 'Other' && (
+                          <div className="pt-2">
+                            <input
+                              type="text"
+                              required
+                              placeholder="Type custom category name (e.g. Handmade Quilts, Woolen Rugs)"
+                              value={customCategory}
+                              onChange={e => setCustomCategory(e.target.value)}
+                              className="w-full bg-white border border-border px-3.5 py-2 rounded text-sm outline-none focus:ring-1 focus:ring-primary text-foreground"
+                            />
+                          </div>
+                        )}
                       </div>
-                      <div className="space-y-1.5">
+
+                      <div className="space-y-1.5 col-span-2">
                         <label className="text-xs font-bold text-foreground uppercase tracking-wide">Target Price (INR)</label>
                         <input 
                           type="number"
@@ -266,29 +355,44 @@ function ArtisanProductsContent() {
                       </div>
                     </div>
 
-                    {/* Image Selector Mock */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-foreground uppercase tracking-wide">Choose Mock Heritage Image Asset</label>
-                      <div className="grid grid-cols-4 gap-2">
-                        {[
-                          'product-banarasi.png',
-                          'product-kanjivaram.png',
-                          'product-chanderi.png',
-                          'product-ikat.png'
-                        ].map(img => (
-                          <button
-                            key={img}
-                            type="button"
-                            onClick={() => setMockSelectedImage(img)}
-                            className={`relative aspect-square rounded border overflow-hidden transition-all ${
-                              mockSelectedImage === img ? 'ring-2 ring-primary border-primary' : 'border-border'
-                            }`}
+                    {/* Real Image Upload */}
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-foreground uppercase tracking-wide block">Product Image Upload (Real-time Cloudinary)</label>
+                      <div className="flex items-center gap-4 bg-secondary/20 border border-border p-3.5 rounded-lg">
+                        <div className="relative w-16 h-20 rounded border border-border overflow-hidden bg-secondary flex items-center justify-center shrink-0">
+                          {uploadedImageUrl ? (
+                            <Image
+                              src={uploadedImageUrl.startsWith('http') || uploadedImageUrl.startsWith('/') || uploadedImageUrl.startsWith('data:') ? uploadedImageUrl : `/assets/images/${uploadedImageUrl}`}
+                              alt="Uploaded Preview"
+                              fill
+                              className="object-cover"
+                            />
+                          ) : (
+                            <span className="text-lg">📸</span>
+                          )}
+                        </div>
+                        <div className="flex-grow space-y-1.5">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                            className="hidden"
+                            id="artisan-product-file"
+                            disabled={uploadingImage}
+                          />
+                          <label
+                            htmlFor="artisan-product-file"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded text-xs font-semibold hover:bg-secondary cursor-pointer transition-colors bg-white text-foreground"
                           >
-                            <Image src={`/assets/images/${img}`} alt="Asset swatches" fill className="object-cover" />
-                          </button>
-                        ))}
+                            <Upload size={14} />
+                            <span>{uploadingImage ? 'Uploading to Cloudinary...' : 'Upload Real-time Photo'}</span>
+                          </label>
+                          <p className="text-[10px] text-muted-foreground">JPEG, PNG or WEBP up to 5MB.</p>
+                        </div>
                       </div>
                     </div>
+
+
 
                     <div className="pt-4 flex gap-4">
                       <button
@@ -396,8 +500,17 @@ function ArtisanProductsContent() {
                     {/* Right column details review card */}
                     <div className="md:col-span-5 bg-secondary/20 border border-border rounded-lg overflow-hidden flex flex-col justify-between self-stretch">
                       <div>
-                        <div className="relative aspect-[4/3] bg-secondary">
-                          <Image src={`/assets/images/${mockSelectedImage}`} alt={prodName} fill className="object-cover" />
+                        <div className="relative aspect-[4/3] bg-secondary flex items-center justify-center">
+                          {uploadedImageUrl ? (
+                            <Image
+                              src={uploadedImageUrl.startsWith('http') || uploadedImageUrl.startsWith('/') || uploadedImageUrl.startsWith('data:') ? uploadedImageUrl : `/assets/images/${uploadedImageUrl}`}
+                              alt={prodName}
+                              fill
+                              className="object-cover"
+                            />
+                          ) : (
+                            <span className="text-3xl">📸</span>
+                          )}
                         </div>
                         <div className="p-5 space-y-2">
                           <span className="text-[10px] text-primary uppercase font-bold tracking-widest block">{prodCategory}</span>
@@ -460,7 +573,7 @@ function ArtisanProductsContent() {
                     </span>
                     <h3 className="text-2xl font-serif font-semibold text-foreground">Digital Product Passport Active</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      Saree metadata is locked on the Polygon Amoy network. An automated QR code passport has been minted.
+                      Product metadata is locked on the Polygon Amoy network. An automated QR code passport has been minted.
                     </p>
                   </div>
 
@@ -513,14 +626,14 @@ function ArtisanProductsContent() {
             <div className="flex justify-between items-baseline">
               <div>
                 <h1 className="text-2xl font-serif font-semibold text-foreground">Workshop Product Listings</h1>
-                <p className="text-xs text-muted-foreground">Manage details and block verification states of your active sarees.</p>
+                <p className="text-xs text-muted-foreground">Manage details and block verification states of your active creations.</p>
               </div>
               <button
                 onClick={() => setShowUploadWizard(true)}
                 className="px-4 py-2 bg-primary text-white text-xs font-semibold rounded hover:bg-primary-hover shadow flex items-center gap-2"
               >
                 <Plus size={14} />
-                <span>Add Saree</span>
+                <span>Add Product</span>
               </button>
             </div>
 
@@ -545,7 +658,12 @@ function ArtisanProductsContent() {
                   >
                     <div className="space-y-4">
                       <div className="relative aspect-[16/10] bg-secondary">
-                        <Image src={`/assets/images/${product.image}`} alt={product.name} fill className="object-cover" />
+                        <Image
+                          src={product.image.startsWith('http') || product.image.startsWith('/') || product.image.startsWith('data:') ? product.image : `/assets/images/${product.image}`}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                        />
                         <div className="absolute top-3 right-3 flex gap-1.5">
                           {product.verified && <VerificationBadge size="sm" showLabel={false} />}
                           {product.giCertified && <Badge variant="saffron" size="xs">GI Certified</Badge>}

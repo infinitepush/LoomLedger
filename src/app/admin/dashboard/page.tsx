@@ -12,7 +12,7 @@ import Badge from '@/components/ui/Badge';
 
 export default function AdminDashboardPage() {
   const router = useRouter();
-  const { user, logout, artisans, approveArtisan, rejectArtisan, products, orders } = useApp();
+  const { user, logout, artisans, approveArtisan, rejectArtisan, products, orders, loadGlobalData } = useApp();
   const [searchTerm, setSearchTerm] = useState('');
   const [processingId, setProcessingId] = useState<string | null>(null);
 
@@ -21,6 +21,8 @@ export default function AdminDashboardPage() {
       router.push('/login');
     } else if (user.role !== 'admin') {
       router.push(`/${user.role}/dashboard`);
+    } else {
+      loadGlobalData();
     }
   }, [user]);
 
@@ -30,27 +32,39 @@ export default function AdminDashboardPage() {
   const pendingArtisans = artisans.filter(art => !art.verified);
   const activeArtisans = artisans.filter(art => art.verified);
 
-  const filteredPending = pendingArtisans.filter(art => 
-    art.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    art.craft.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    art.region.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPending = pendingArtisans.filter(art => {
+    const name = art.user?.name || art.name || '';
+    const craft = art.craft || '';
+    const region = art.region || '';
+    return (
+      name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      craft.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      region.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
-  const handleApprove = (id: string) => {
+  const handleApprove = async (id: string) => {
     setProcessingId(id);
-    setTimeout(() => {
-      approveArtisan(id);
+    try {
+      await approveArtisan(id);
+    } catch (err: any) {
+      alert(err.message || 'Approval failed');
+    } finally {
       setProcessingId(null);
-    }, 1200);
+    }
   };
 
-  const handleReject = (id: string) => {
+  const handleReject = async (id: string) => {
     setProcessingId(id);
-    setTimeout(() => {
-      rejectArtisan(id);
+    try {
+      await rejectArtisan(id);
+    } catch (err: any) {
+      alert(err.message || 'Rejection failed');
+    } finally {
       setProcessingId(null);
-    }, 1000);
+    }
   };
+
 
   return (
     <div className="flex flex-col lg:flex-row min-h-[calc(100vh-64px)] bg-background flex-grow">
@@ -156,7 +170,7 @@ export default function AdminDashboardPage() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <div className="flex items-center gap-2">
-                          <h4 className="font-serif font-semibold text-base text-foreground">{artisan.name}</h4>
+                          <h4 className="font-serif font-semibold text-base text-foreground">{artisan.user?.name || artisan.name}</h4>
                           <span className="text-[10px] text-muted-foreground font-mono">{artisan.id}</span>
                         </div>
                         <p className="text-xs text-primary font-semibold">{artisan.craft} · {artisan.experience}</p>
@@ -176,11 +190,11 @@ export default function AdminDashboardPage() {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
                       <div>
                         <span className="text-[10px] text-muted-foreground block uppercase font-bold tracking-wider">Email</span>
-                        <span className="font-semibold text-foreground">{artisan.email}</span>
+                        <span className="font-semibold text-foreground">{artisan.user?.email || artisan.email}</span>
                       </div>
                       <div>
                         <span className="text-[10px] text-muted-foreground block uppercase font-bold tracking-wider">Phone</span>
-                        <span className="font-semibold text-foreground">{artisan.phone}</span>
+                        <span className="font-semibold text-foreground">{artisan.user?.phone || artisan.phone}</span>
                       </div>
                       <div>
                         <span className="text-[10px] text-muted-foreground block uppercase font-bold tracking-wider">GI Certification Status</span>

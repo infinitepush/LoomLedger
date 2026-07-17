@@ -245,7 +245,7 @@ function MarketplaceContent() {
                   <article key={product.id} className="group bg-white border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all flex flex-col h-full">
                     <div className="relative aspect-[3/4] bg-secondary overflow-hidden">
                       <Image
-                        src={`/assets/images/${product.image}`}
+                        src={product.image.startsWith('http') || product.image.startsWith('/') || product.image.startsWith('data:') ? product.image : `/assets/images/${product.image}`}
                         alt={product.name}
                         fill
                         className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
@@ -335,7 +335,7 @@ function MarketplaceContent() {
 
             <div className="relative w-full md:w-1/2 aspect-[3/4] md:aspect-auto md:h-full bg-secondary min-h-[300px]">
               <Image
-                src={`/assets/images/${quickViewProduct.image}`}
+                src={quickViewProduct.image.startsWith('http') || quickViewProduct.image.startsWith('/') || quickViewProduct.image.startsWith('data:') ? quickViewProduct.image : `/assets/images/${quickViewProduct.image}`}
                 alt={quickViewProduct.name}
                 fill
                 className="object-cover"

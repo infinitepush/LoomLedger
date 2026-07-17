@@ -41,27 +41,24 @@ export default function SignupPage() {
   const [mockWallet, setMockWallet] = useState('');
   const [mockTxHash, setMockTxHash] = useState('');
 
-  const handleBuyerSignup = (e: React.FormEvent) => {
+  const handleBuyerSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setRegistering(true);
-    setTimeout(() => {
+    try {
+      await signUpBuyer(buyerName, buyerEmail, buyerPhone, buyerPassword);
       setRegistering(false);
-      signUpBuyer(buyerName, buyerEmail, buyerPhone);
       router.push('/buyer/dashboard');
-    }, 1200);
+    } catch (err: any) {
+      setRegistering(false);
+      alert(err.message || 'Buyer registration failed.');
+    }
   };
 
-  const handleArtisanSignup = (e: React.FormEvent) => {
+  const handleArtisanSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setRegistering(true);
-    
-    // Create random mock wallet and blockhash for Polygon Amoy
-    const randWallet = "0x" + Math.random().toString(16).substring(2, 10).toUpperCase() + "..." + Math.random().toString(16).substring(2, 6).toUpperCase();
-    const randTx = "0x" + Math.random().toString(16).substring(2, 12).toLowerCase() + "7a3b9c1d2e4f5a6b7c8d9e0f1a2b3c4d";
-
-    setTimeout(() => {
-      setRegistering(false);
-      const newId = signUpArtisan({
+    try {
+      const resData: any = await signUpArtisan({
         name: artisanName,
         email: artisanEmail,
         phone: artisanPhone,
@@ -71,15 +68,21 @@ export default function SignupPage() {
         experience: artisanExp,
         giNumber: giNumber,
         bio: artisanBio,
-        giCertified: !!giNumber
-      });
+        giCertified: !!giNumber,
+        password: artisanPassword
+      } as any);
       
-      setGeneratedArtisanId(newId);
-      setMockWallet(randWallet);
-      setMockTxHash(randTx);
+      setRegistering(false);
+      setGeneratedArtisanId(resData.artisanId || 'ART-NEW');
+      setMockWallet(resData.walletAddress || '0xArtisanWallet');
+      setMockTxHash(resData.txHash || '0xVerificationTxHash');
       setShowSuccess(true);
-    }, 2000);
+    } catch (err: any) {
+      setRegistering(false);
+      alert(err.message || 'Artisan registration failed.');
+    }
   };
+
 
   return (
     <div className="py-8 bg-background flex-grow flex items-center justify-center">

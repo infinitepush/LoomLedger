@@ -13,7 +13,7 @@ import {
   Star,
   Award,
   Zap,
-  BookOpen,
+
   HelpCircle,
   ChevronDown,
   UserCheck,
@@ -22,7 +22,7 @@ import {
   Search
 } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
-import { mockFaqs, mockStories } from '@/data/mockData';
+import { mockFaqs } from '@/data/mockData';
 
 // Simple CTA Button helper
 import Button from '@/components/ui/Button';
@@ -53,9 +53,6 @@ export default function LandingPage() {
   // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // AI Story Showcase index
-  const [activeStoryIdx, setActiveStoryIdx] = useState(0);
-  const activeStory = mockStories[activeStoryIdx] || mockStories[0];
 
   return (
     <div className="flex flex-col w-full">
@@ -171,7 +168,7 @@ export default function LandingPage() {
               >
                 <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
                   <Image 
-                    src={`/assets/images/${product.image}`}
+                    src={product.image.startsWith('http') || product.image.startsWith('/') || product.image.startsWith('data:') ? product.image : `/assets/images/${product.image}`}
                     alt={product.name}
                     fill
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
@@ -324,8 +321,8 @@ export default function LandingPage() {
                 We verify and showcase artisans preserving decades of generational knowledge.
               </p>
             </div>
-            <Link href="/stories" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-hover group">
-              <span>Read Weaver Stories</span>
+            <Link href="/artisans" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-hover group">
+              <span>View All Weavers</span>
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -356,21 +353,23 @@ export default function LandingPage() {
                   </div>
                   
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1"><MapPin size={12} /> {artisan.region.split(',')[0]}</span>
-                    <span className="flex items-center gap-1"><Clock size={12} /> {artisan.experience} exp</span>
+                    <span className="flex items-center gap-1"><MapPin size={12} /> {(artisan.region || artisan.district || 'India').split(',')[0]}</span>
+                    <span className="flex items-center gap-1"><Clock size={12} /> {artisan.experience || 'Master'} exp</span>
                   </div>
 
                   <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
                     {artisan.bio}
                   </p>
 
-                  <div className="flex flex-wrap gap-1.5 pt-2">
-                    {artisan.specialties.map(spec => (
-                      <span key={spec} className="text-[10px] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">
-                        {spec}
-                      </span>
-                    ))}
-                  </div>
+                  {artisan.specialties && artisan.specialties.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {artisan.specialties.map((spec: string) => (
+                        <span key={spec} className="text-[10px] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-border flex items-center justify-between">
@@ -433,83 +432,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 8. AI STORYTELLING SHOWCASE */}
-      <section className="py-20 border-b border-border bg-[#F5F3EF]/30">
-        <div className="container grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 space-y-6">
-            <span className="text-xs uppercase tracking-widest text-primary font-bold">AI Weaver Stories</span>
-            <h2 className="text-3xl lg:text-4xl font-serif font-semibold text-foreground">Preserving Heritage via AI Storytelling</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              We leverage large language models to help weavers describe their intricate process, family histories, and regional design meanings—sharing ancient knowledge with conscious consumers globally.
-            </p>
-            
-            <div className="flex flex-col gap-3">
-              {mockStories.map((story, i) => (
-                <button
-                  key={story.slug}
-                  onClick={() => setActiveStoryIdx(i)}
-                  className={`flex items-center gap-4 p-3 rounded-lg border text-left transition-all ${
-                    activeStoryIdx === i
-                      ? 'border-primary bg-primary-light/50 text-foreground'
-                      : 'border-border bg-white text-muted-foreground hover:bg-secondary'
-                  }`}
-                >
-                  <div className="w-10 h-10 rounded-full bg-secondary relative overflow-hidden flex-shrink-0">
-                    <Image src="/assets/images/weaver-portrait.png" alt={story.artisanName} fill className="object-cover" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold text-foreground">{story.artisanName}</h4>
-                    <p className="text-xs line-clamp-1">{story.title}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-            
-            <Link 
-              href={`/stories/${activeStory.slug}`}
-              className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-hover group"
-            >
-              <span>Read Full Digital Storybook</span>
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
 
-          <div className="lg:col-span-7 bg-white border border-border rounded-xl shadow-lg p-6 sm:p-8 space-y-6">
-            <div className="relative h-64 sm:h-80 rounded-lg overflow-hidden">
-              <Image 
-                src={activeStory.coverImage}
-                alt={activeStory.title}
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-xs uppercase tracking-wider bg-primary px-2.5 py-1 rounded font-semibold">{activeStory.region}</span>
-                <h3 className="text-lg sm:text-xl font-serif font-semibold mt-2">{activeStory.title}</h3>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <p className="text-sm text-foreground/80 leading-relaxed italic border-l-2 border-primary pl-4">
-                &ldquo;{activeStory.excerpt}&rdquo;
-              </p>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-4">
-                {activeStory.content}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-border">
-              {activeStory.craftProcess.slice(0, 3).map((pr, i) => (
-                <div key={i} className="text-xs space-y-1 bg-secondary/50 p-2.5 rounded">
-                  <span className="font-bold text-primary">{pr.step}</span>
-                  <h4 className="font-semibold text-foreground leading-tight line-clamp-1">{pr.title}</h4>
-                  <p className="text-[10px] text-muted-foreground line-clamp-2">{pr.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 9. CUSTOMER TESTIMONIALS */}
       <section className="py-20 border-b border-border bg-white">

@@ -44,7 +44,7 @@ export default function WishlistPage() {
               >
                 <div className="relative aspect-[3/4] bg-secondary border-b border-border">
                   <Image 
-                    src={`/assets/images/${product.image}`} 
+                    src={product.image.startsWith('http') || product.image.startsWith('/') || product.image.startsWith('data:') ? product.image : `/assets/images/${product.image}`} 
                     alt={product.name} 
                     fill 
                     className="object-cover" 

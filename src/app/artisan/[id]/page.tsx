@@ -31,7 +31,7 @@ export default function ArtisanProfilePage() {
     return (
       <div className="py-20 text-center space-y-4">
         <h2>Artisan not found</h2>
-        <Link href="/stories" className="text-primary font-bold">Back to Weavers</Link>
+        <Link href="/artisans" className="text-primary font-bold">Back to Weavers</Link>
       </div>
     );
   }
@@ -195,7 +195,7 @@ export default function ArtisanProfilePage() {
                   <article key={product.id} className="group bg-white border border-border rounded-lg overflow-hidden hover:shadow transition-all flex flex-col h-full">
                     <div className="relative aspect-[3/4] bg-secondary overflow-hidden">
                       <Image
-                        src={`/assets/images/${product.image}`}
+                        src={product.image.startsWith('http') || product.image.startsWith('/') || product.image.startsWith('data:') ? product.image : `/assets/images/${product.image}`}
                         alt={product.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"

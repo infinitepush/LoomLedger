@@ -22,74 +22,86 @@ export default function VerifyPage() {
     setVerifying(true);
     setResult(null);
 
-    setTimeout(() => {
-      setVerifying(false);
-      
-      if (method === 'id') {
-        // Find product by ID or slug
-        const prod = products.find(p => p.id.toLowerCase() === searchVal.trim().toLowerCase() || p.slug.toLowerCase().includes(searchVal.trim().toLowerCase()));
-        if (prod) {
-          setResult({
-            type: 'product',
-            verified: prod.verified,
-            title: prod.name,
-            artisan: prod.weaver.name,
-            region: prod.region,
-            blockchainId: prod.blockchainId || "0xMockPolygonTxHashGeneratedOnDemand",
-            giCertified: prod.giCertified,
-            mintDate: "2026-03-02",
-            image: prod.image,
-            fabric: prod.fabric,
-            timeline: prod.timeline
-          });
+    const runVerify = async () => {
+      try {
+        const type = method === 'artisan' ? 'artisan' : 'product';
+        const res = await fetch(`http://localhost:5000/api/verify/${type}/${searchVal.trim()}`);
+        const json = await res.json();
+        setVerifying(false);
+        if (json.success) {
+          const item = json.data.data;
+          if (type === 'product') {
+            setResult({
+              type: 'product',
+              verified: json.data.blockchainVerified,
+              title: item.name,
+              artisan: item.weaver.name,
+              region: item.region,
+              blockchainId: item.blockchainId,
+              giCertified: item.giCertified,
+              mintDate: item.mintedAt.split('T')[0],
+              image: item.image,
+              fabric: item.fabric,
+              timeline: item.timeline
+            });
+          } else {
+            setResult({
+              type: 'artisan',
+              verified: json.data.blockchainVerified,
+              title: item.name,
+              region: item.region,
+              craft: item.craft,
+              experience: item.experience,
+              blockchainId: item.verificationHash,
+              giCertified: item.giCertified,
+              mintDate: item.verificationHash ? '2026-01-10' : null,
+              awards: []
+            });
+          }
         } else {
           setResult({ verified: false });
         }
-      } else if (method === 'artisan') {
-        // Find artisan by ID or name
-        const art = artisans.find(a => a.id.toLowerCase() === searchVal.trim().toLowerCase() || a.name.toLowerCase().includes(searchVal.trim().toLowerCase()));
-        if (art) {
-          setResult({
-            type: 'artisan',
-            verified: art.verified,
-            title: art.name,
-            region: art.region,
-            craft: art.craft,
-            experience: art.experience,
-            blockchainId: art.verificationHash || "0xMockPolygonArtisanTxHash",
-            giCertified: art.giCertified,
-            mintDate: art.blockchainTimestamp ? art.blockchainTimestamp.split('T')[0] : "2026-01-10",
-            awards: art.awards
-          });
-        } else {
-          setResult({ verified: false });
-        }
+      } catch (err) {
+        setVerifying(false);
+        setResult({ verified: false });
       }
-    }, 1500);
+    };
+
+    runVerify();
   };
 
-  const handleMockQrScan = () => {
+  const handleMockQrScan = async () => {
     setVerifying(true);
     setResult(null);
-    setTimeout(() => {
+    try {
+      const prodId = products[0]?.id || 'PROD_01';
+      const res = await fetch(`http://localhost:5000/api/verify/product/${prodId}`);
+      const json = await res.json();
       setVerifying(false);
-      // Select the first product as a mock QR scan result
-      const prod = products[0];
-      setResult({
-        type: 'product',
-        verified: true,
-        title: prod.name,
-        artisan: prod.weaver.name,
-        region: prod.region,
-        blockchainId: prod.blockchainId,
-        giCertified: prod.giCertified,
-        mintDate: "2026-03-02",
-        image: prod.image,
-        fabric: prod.fabric,
-        timeline: prod.timeline
-      });
-    }, 1500);
+      if (json.success) {
+        const item = json.data.data;
+        setResult({
+          type: 'product',
+          verified: json.data.blockchainVerified,
+          title: item.name,
+          artisan: item.weaver.name,
+          region: item.region,
+          blockchainId: item.blockchainId,
+          giCertified: item.giCertified,
+          mintDate: item.mintedAt.split('T')[0],
+          image: item.image,
+          fabric: item.fabric,
+          timeline: item.timeline
+        });
+      } else {
+        setResult({ verified: false });
+      }
+    } catch {
+      setVerifying(false);
+      setResult({ verified: false });
+    }
   };
+
 
   return (
     <div className="py-8 bg-background flex-grow">

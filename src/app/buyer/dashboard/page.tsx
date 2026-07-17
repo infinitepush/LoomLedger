@@ -239,7 +239,7 @@ export default function BuyerDashboardPage() {
                 {recommendedProducts.map(prod => (
                   <Link href={`/marketplace/${prod.slug}`} key={prod.id} className="group flex gap-3 bg-white border border-border p-2.5 rounded-lg hover:shadow transition-shadow">
                     <div className="relative w-10 h-12 rounded overflow-hidden bg-secondary shrink-0">
-                      <Image src={`/assets/images/${prod.image}`} alt={prod.name} fill className="object-cover" />
+                      <Image src={prod.image.startsWith('http') || prod.image.startsWith('/') || prod.image.startsWith('data:') ? prod.image : `/assets/images/${prod.image}`} alt={prod.name} fill className="object-cover" />
                     </div>
                     <div className="space-y-0.5 overflow-hidden">
                       <h4 className="font-semibold text-xs text-foreground line-clamp-1 group-hover:text-primary transition-colors">{prod.name}</h4>

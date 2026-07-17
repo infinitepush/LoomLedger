@@ -54,14 +54,15 @@ export default function ArtisanDashboardPage() {
   // Calculate stats
   const totalRevenue = deliveredOrders.reduce((sum, o) => sum + o.amount, 0);
   const visitorsCount = 1420;
-  const profileViews = currentArtisan.followersCount * 1.5;
+  const followersCount = currentArtisan?.followersCount || 0;
+  const profileViews = followersCount * 1.5;
   const storyViews = 840;
 
   const stats = [
     { label: 'Total Revenue', value: `₹${totalRevenue.toLocaleString('en-IN')}`, change: '+12.5% this month', icon: DollarSign, color: 'text-success bg-success-light' },
     { label: 'Orders Received', value: artisanOrders.length, change: `+${pendingOrders.length} pending`, icon: ShoppingBag, color: 'text-indigo bg-indigo-light' },
     { label: 'Products Listed', value: artisanProducts.length, change: `${artisanProducts.filter(p => p.verified).length} active`, icon: Package, color: 'text-primary bg-primary-light' },
-    { label: 'Profile Views', value: profileViews, change: `+${currentArtisan.followersCount} followers`, icon: Eye, color: 'text-accent bg-accent-light' }
+    { label: 'Profile Views', value: profileViews, change: `+${followersCount} followers`, icon: Eye, color: 'text-accent bg-accent-light' }
   ];
 
   return (

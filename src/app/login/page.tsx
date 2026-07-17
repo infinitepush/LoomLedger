@@ -19,28 +19,25 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    setTimeout(() => {
+    try {
+      const success = await login(email.trim(), password);
       setLoading(false);
-      const success = login(email.trim(), role);
       if (success) {
         if (role === 'admin') router.push('/admin/dashboard');
         else if (role === 'artisan') router.push('/artisan/dashboard');
         else router.push('/buyer/dashboard');
       } else {
-        setError('Invalid credentials. Check the demo account details.');
+        setError('Invalid credentials. Please verify your email and password.');
       }
-    }, 1000);
-  };
-
-  const autofillDemo = (demoEmail: string, demoRole: 'buyer' | 'artisan' | 'admin') => {
-    setEmail(demoEmail);
-    setPassword('123456');
-    setRole(demoRole);
+    } catch (err: any) {
+      setLoading(false);
+      setError(err.message || 'Login failed.');
+    }
   };
 
   return (
@@ -166,23 +163,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Social login mock */}
-          <div className="relative flex items-center justify-center my-4">
-            <div className="border-t border-border w-full absolute z-0" />
-            <span className="bg-white px-3 text-[10px] font-bold text-muted-foreground uppercase tracking-wider relative z-10">Or Connect With</span>
-          </div>
 
-          <button
-            onClick={() => {
-              if (role === 'buyer') autofillDemo('buyer1@example.com', 'buyer');
-              else if (role === 'artisan') autofillDemo('artisan1@example.com', 'artisan');
-              else autofillDemo('admin@example.com', 'admin');
-            }}
-            className="w-full flex items-center justify-center gap-2 py-2 border border-border rounded text-xs font-semibold hover:bg-secondary transition-colors text-muted-foreground"
-          >
-            <Globe size={14} className="text-foreground" />
-            <span>Use Demo {role.toUpperCase()} Credentials</span>
-          </button>
 
           {/* Bottom */}
           <div className="text-center text-xs text-muted-foreground">

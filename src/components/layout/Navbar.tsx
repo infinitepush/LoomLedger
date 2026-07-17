@@ -5,13 +5,21 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Search, Heart, ShoppingBag, Menu, X, User, LogOut, LayoutDashboard, ShieldCheck } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
+import { useToast } from '@/components/ui/Toast';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const { user, logout, cart, wishlist } = useApp();
+  const { showLoginPrompt } = useToast();
   const pathname = usePathname();
   const router = useRouter();
   
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (!user) {
+      e.preventDefault();
+      showLoginPrompt('Please log in to access your ' + (path === '/cart' ? 'cart' : 'wishlist') + '.');
+    }
+  };
   const [visible, setVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -78,8 +86,7 @@ export default function Navbar() {
             {[
               { label: 'Marketplace', path: '/marketplace' },
               { label: 'Verify', path: '/verify' },
-              { label: 'Stories', path: '/stories' },
-              { label: 'For Artisans', path: '/artisan/dashboard' },
+              { label: 'Our Weavers', path: '/artisans' },
               { label: 'About', path: '/about' },
               { label: 'Contact', path: '/contact' }
             ].map(link => (
@@ -87,7 +94,7 @@ export default function Navbar() {
                 key={link.path}
                 href={link.path}
                 className={`px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-secondary hover:text-foreground ${
-                  pathname === link.path ? 'text-primary' : 'text-muted-foreground'
+                  (link.path === '/' ? pathname === '/' : pathname.startsWith(link.path)) ? 'text-primary bg-secondary/40' : 'text-muted-foreground'
                 }`}
               >
                 {link.label}
@@ -107,6 +114,7 @@ export default function Navbar() {
 
             <Link
               href="/wishlist"
+              onClick={(e) => handleNavClick(e, '/wishlist')}
               className="p-2 text-muted-foreground hover:text-foreground rounded-md hover:bg-secondary transition-colors relative"
               aria-label="Wishlist"
             >
@@ -120,6 +128,7 @@ export default function Navbar() {
 
             <Link
               href="/cart"
+              onClick={(e) => handleNavClick(e, '/cart')}
               className="p-2 text-muted-foreground hover:text-foreground rounded-md hover:bg-secondary transition-colors relative mr-2"
               aria-label="Cart"
             >
@@ -240,8 +249,7 @@ export default function Navbar() {
                 {[
                   { label: 'Marketplace', path: '/marketplace' },
                   { label: 'Verify', path: '/verify' },
-                  { label: 'Stories', path: '/stories' },
-                  { label: 'For Artisans', path: '/artisan/dashboard' },
+                  { label: 'Our Weavers', path: '/artisans' },
                   { label: 'About', path: '/about' },
                   { label: 'Contact', path: '/contact' }
                 ].map(link => (
@@ -249,7 +257,7 @@ export default function Navbar() {
                     key={link.path}
                     href={link.path}
                     className={`block px-4 py-3 rounded-md font-medium text-base hover:bg-secondary ${
-                      pathname === link.path ? 'text-primary bg-primary-light' : 'text-muted-foreground'
+                      (link.path === '/' ? pathname === '/' : pathname.startsWith(link.path)) ? 'text-primary bg-primary-light' : 'text-muted-foreground'
                     }`}
                   >
                     {link.label}

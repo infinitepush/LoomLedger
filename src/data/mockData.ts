@@ -23,6 +23,11 @@ export interface Artisan {
   phone: string;
   email: string;
   achievements: string[];
+  user?: {
+    name: string;
+    email: string;
+    phone?: string;
+  };
 }
 
 export interface Review {

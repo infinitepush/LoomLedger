@@ -1,7 +1,7 @@
 # 🧶 LoomLedger
 > **Digital Trust Platform for Authentic Handloom Products**
 
-LoomLedger is a corporate-grade, production-ready SaaS + E-commerce platform that combats the handloom forgery crisis. By bridging **Generative AI** storytelling with **Polygon Amoy Blockchain** immutable record registries, the platform establishes verifiable provenance for traditional Indian textiles (e.g. Banarasi Silk, Kanjivaram, Chanderi).
+LoomLedger is a corporate-grade, production-ready SaaS + E-commerce platform that combats the handloom forgery crisis. By bridging a **Node.js Express.js API Backend** with **Generative AI** storytelling and a **Polygon Amoy Blockchain** immutable record registry, the platform establishes verifiable provenance for traditional Indian textiles (e.g. Banarasi Silk, Kanjivaram, Chanderi).
 
 ---
 
@@ -20,63 +20,126 @@ LoomLedger is a corporate-grade, production-ready SaaS + E-commerce platform tha
 
 ## 🛠️ Tech Stack
 
-* **Framework:** Next.js 15 (App Router) + TypeScript + React 19
+### Frontend
+* **Framework:** Next.js 16 (App Router) + TypeScript + React 19
 * **Styling:** Tailwind CSS v4 (customized heritage HSL token system)
 * **Animations:** Framer Motion (micro-animations, state transition cues)
-* **Icons:** Lucide Icons
 * **State & Queries:** Custom AppContext state provider + TanStack React Query
+
+### Backend
+* **Server:** Node.js + Express.js + TypeScript
+* **ORM:** Prisma ORM
+* **Database:** PostgreSQL (Neon Serverless PostgreSQL ready)
+* **Authentication:** JWT (Access + Refresh Tokens) & bcrypt hashing
+* **AI Engine:** Gemini 2.5 Flash API (Google Gen AI)
+* **Payment Gateway:** Razorpay API
+* **Cloud Storage:** Cloudinary SDK
+* **Blockchain Integrator:** ethers.js (Polygon Amoy Testnet Integration)
+* **Logger:** Winston Logger
 
 ---
 
 ## 🚀 Getting Started
 
+LoomLedger runs as a monorepo containing a Next.js frontend at the root and an Express.js backend inside the `server/` directory.
+
 ### 1. Installation
-Clone the repository and install all dependencies:
+Install root dependencies (frontend):
 ```bash
 npm install
 ```
 
-### 2. Local Development
-Start the local server:
+Install backend dependencies:
+```bash
+cd server
+npm install
+```
+
+### 2. Environment Configuration
+Create a `.env` file inside the `server/` directory based on the provided `server/.env.example`:
+```env
+PORT=5000
+DATABASE_URL="postgresql://postgres:password@localhost:5432/loomledger?schema=public"
+JWT_SECRET="your-jwt-secret-key"
+JWT_REFRESH_SECRET="your-jwt-refresh-secret"
+
+# Integrations (Optional for development fallbacks)
+CLOUDINARY_CLOUD_NAME="your-cloudinary-name"
+CLOUDINARY_API_KEY="your-cloudinary-key"
+CLOUDINARY_API_SECRET="your-cloudinary-secret"
+GEMINI_API_KEY="your-gemini-key"
+RAZORPAY_KEY_ID="your-razorpay-key"
+RAZORPAY_KEY_SECRET="your-razorpay-secret"
+POLYGON_RPC_URL="https://rpc-amoy.polygon.technology"
+```
+
+### 3. Database Migration and Seeding
+Ensure your local or Neon PostgreSQL instance is running. Run migrations and seed files inside the `server/` directory:
+```bash
+# Generate Prisma Client
+npx prisma generate
+
+# Push schema directly to database
+npx prisma db push
+
+# Seed 10 artisans, 30 buyers, 100 products, and 50 orders
+npm run db:seed
+```
+
+### 4. Running the Application
+Start the backend server (from the `server/` directory):
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-### 3. Production Build
-Compile the application:
+Start the frontend server (from the root directory):
 ```bash
-npm run build
+npm run dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ---
 
 ## 🔑 Demo Account Credentials
 
-You can log in directly using the following credentials:
+You can log in directly using the following credentials seeded in the database:
 
-* **Buyer Workspace:** `buyer1@example.com` / `123456`
-* **Artisan Workspace:** `artisan1@example.com` / `123456`
-* **Admin Moderator Console:** `admin@example.com` / `123456`
+* **Buyer Workspace:** `buyer1@example.com` / `password123`
+* **Artisan Workspace:** `artisan1@example.com` / `password123`
+* **Admin Moderator Console:** `admin@loomledger.com` / `password123`
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-src/
-├── app/                  # Next.js page routers & static templates
-│   ├── admin/            # Admin moderation dashboards
-│   ├── artisan/          # Artisan profiles & settings subviews
-│   ├── buyer/            # Buyer accounts & certificates vault
-│   ├── marketplace/      # Verified saree lists & dynamic details
-│   ├── stories/          # AI Weaver Chronicles blogs
-│   └── verify/           # Provenance validation scanner mockup
-├── components/           # Decoupled UI modules and primitives
-│   ├── layout/           # Sticky navbars and footers
-│   └── ui/               # Reusable Button and Badge elements
-├── context/              # Centralized AppContext provider (localStorage sync)
-└── data/                 # Mock database profiles & FAQs
+├── src/                      # Next.js App Router Frontend
+│   ├── app/                  # Next.js page routers & components
+│   │   ├── admin/            # Admin moderation console dashboards
+│   │   ├── artisan/          # Artisan profiles & settings subviews
+│   │   ├── buyer/            # Buyer accounts & certificates vault
+│   │   ├── cart/             # Shopping Cart routing
+│   │   ├── marketplace/      # Verified saree lists & dynamic details
+│   │   ├── stories/          # AI Weaver Chronicles blogs
+│   │   └── verify/           # Provenance validation scanner
+│   ├── components/           # Decoupled UI modules and layouts
+│   └── context/              # AppContext provider (API communication layer)
+│
+└── server/                   # Express.js API Backend
+    ├── prisma/               # Prisma Database Schema & Seed scripts
+    └── src/
+        ├── ai/               # Gemini AI API wrapper
+        ├── auth/             # JWT & Password utility helpers
+        ├── blockchain/       # Ethers.js integration contract layer
+        ├── controllers/      # Route controllers
+        ├── middlewares/      # CORS, JWT verification, and roles
+        ├── payments/         # Razorpay checkout wrapper
+        ├── repositories/     # Database access abstraction wrappers
+        ├── routes/           # Express routes mapping
+        ├── services/         # Business logic service layer
+        ├── storage/          # Cloudinary uploads integration
+        └── validators/       # Zod schemas for input validation
 ```
 
 ---
