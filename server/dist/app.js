@@ -50,6 +50,13 @@ const limiter = (0, express_rate_limit_1.default)({
     legacyHeaders: false,
 });
 app.use('/api', limiter);
+// Auto-rewrite requests missing '/api' prefix (e.g. /products -> /api/products)
+app.use((req, _res, next) => {
+    if (req.path !== '/' && !req.path.startsWith('/api')) {
+        req.url = `/api${req.url}`;
+    }
+    next();
+});
 // Register API Routes
 app.use('/api', routes_1.default);
 // Base Route

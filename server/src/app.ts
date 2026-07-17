@@ -58,6 +58,14 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
+// Auto-rewrite requests missing '/api' prefix (e.g. /products -> /api/products)
+app.use((req, _res, next) => {
+  if (req.path !== '/' && !req.path.startsWith('/api')) {
+    req.url = `/api${req.url}`;
+  }
+  next();
+});
+
 // Register API Routes
 app.use('/api', routes);
 

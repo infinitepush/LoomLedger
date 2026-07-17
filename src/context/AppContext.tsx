@@ -35,7 +35,16 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const getApiBase = () => {
+  let envUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  envUrl = envUrl.trim().replace(/\/+$/, '');
+  if (!envUrl.endsWith('/api')) {
+    envUrl = `${envUrl}/api`;
+  }
+  return envUrl;
+};
+
+export const API_BASE = getApiBase();
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any | null>(null);
