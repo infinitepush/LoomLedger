@@ -1,0 +1,33 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_routes_1 = __importDefault(require("./auth.routes"));
+const product_routes_1 = __importDefault(require("./product.routes"));
+const artisan_routes_1 = __importDefault(require("./artisan.routes"));
+const order_routes_1 = __importDefault(require("./order.routes"));
+const cart_routes_1 = __importDefault(require("./cart.routes"));
+const wishlist_routes_1 = __importDefault(require("./wishlist.routes"));
+const admin_routes_1 = __importDefault(require("./admin.routes"));
+const story_routes_1 = __importDefault(require("./story.routes"));
+const verify_routes_1 = __importDefault(require("./verify.routes"));
+const notification_routes_1 = __importDefault(require("./notification.routes"));
+const upload_routes_1 = __importDefault(require("./upload.routes"));
+const assistant_routes_1 = __importDefault(require("./assistant.routes"));
+const router = (0, express_1.Router)();
+router.use('/auth', auth_routes_1.default);
+router.use('/products', product_routes_1.default);
+router.use('/artisans', artisan_routes_1.default);
+router.use('/orders', order_routes_1.default);
+router.use('/cart', cart_routes_1.default);
+router.use('/wishlist', wishlist_routes_1.default);
+router.use('/admin', admin_routes_1.default);
+router.use('/stories', story_routes_1.default);
+router.use('/verify', verify_routes_1.default);
+router.use('/notifications', notification_routes_1.default);
+router.use('/upload', upload_routes_1.default);
+router.use('/assistant', assistant_routes_1.default);
+exports.default = router;
+//# sourceMappingURL=index.js.map

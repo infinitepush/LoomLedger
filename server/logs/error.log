@@ -1,0 +1,155 @@
+2026-07-17 10:28:42 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:85:36[39m
+
+[31m  82 }[39m
+[31m  83 [39m
+[31m  84 async login(input: LoginInput) {[39m
+[31m→ 85   const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:30:27 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:34:40[39m
+
+[31m  31 }[39m
+[31m  32 [39m
+[31m  33 async registerArtisan(input: RegisterArtisanInput) {[39m
+[31m→ 34   const existing = await prisma.user.findUnique([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:31:18 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:34:40[39m
+
+[31m  31 }[39m
+[31m  32 [39m
+[31m  33 async registerArtisan(input: RegisterArtisanInput) {[39m
+[31m→ 34   const existing = await prisma.user.findUnique([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:31:25 [[31merror[39m]: [31mUncaught Exception: listen EADDRINUSE: address already in use :::5000[39m
+2026-07-17 10:31:56 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.product.findMany()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\product.service.ts:65:22[39m
+
+[31m  62 }[39m
+[31m  63 [39m
+[31m  64 const [products, total] = await Promise.all([[39m
+[31m→ 65   prisma.product.findMany([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:39:57 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:34:40[39m
+
+[31m  31 }[39m
+[31m  32 [39m
+[31m  33 async registerArtisan(input: RegisterArtisanInput) {[39m
+[31m→ 34   const existing = await prisma.user.findUnique([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 11:30:43 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [400 Bad Request] Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), "You are an expert Indian Handloom textile storyteller.[39m
+[31m        Generate product details for a traditional handloom item:[39m
+[31m        Name: "Benarasi Brocode"[39m
+[31m        Category: "Banarasi Silk"[39m
+
+[31m        Provide the output in JSON format with exactly the following fields:[39m
+[31m        {[39m
+[31m          "description": "A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.",[39m
+[31m          "fabric": "Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'",[39m
+[31m          "craftTime": "Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'",[39m
+[31m          "specifications": {[39m
+[31m            "Dye Type": "Organic Natural Dyes / Tested Indigo Dyebath",[39m
+[31m            "Loom Type": "Wooden Pit Loom / Hand-guided Frame Loom",[39m
+[31m            "Zari Grade": "Real Zari / Metallic zari weave"[39m
+[31m          },[39m
+[31m          "tags": ["Tag1", "Tag2"][39m
+[31m        }" [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"contents","description":"Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), \"You are an expert Indian Handloom textile storyteller.\n        Generate product details for a traditional handloom item:\n        Name: \"Benarasi Brocode\"\n        Category: \"Banarasi Silk\"\n\n        Provide the output in JSON format with exactly the following fields:\n        {\n          \"description\": \"A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.\",\n          \"fabric\": \"Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'\",\n          \"craftTime\": \"Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'\",\n          \"specifications\": {\n            \"Dye Type\": \"Organic Natural Dyes / Tested Indigo Dyebath\",\n            \"Loom Type\": \"Wooden Pit Loom / Hand-guided Frame Loom\",\n            \"Zari Grade\": \"Real Zari / Metallic zari weave\"\n          },\n          \"tags\": [\"Tag1\", \"Tag2\"]\n        }\""}]}][39m
+2026-07-17 11:43:52 [[31merror[39m]: [31mCloudinary upload error: Invalid cloud_name Loom_Ledger[39m
+2026-07-17 11:43:52 [[31merror[39m]: [31mUnhandled error: Invalid cloud_name Loom_Ledger[39m
+2026-07-17 11:44:09 [[31merror[39m]: [31mCloudinary upload error: Invalid cloud_name Loom_Ledger[39m
+2026-07-17 11:44:09 [[31merror[39m]: [31mUnhandled error: Invalid cloud_name Loom_Ledger[39m
+2026-07-17 11:47:31 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [400 Bad Request] Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), "You are an expert Indian Handloom textile storyteller.[39m
+[31m        Generate product details for a traditional handloom item:[39m
+[31m        Name: "towels "[39m
+[31m        Category: "Banarasi Silk"[39m
+
+[31m        Provide the output in JSON format with exactly the following fields:[39m
+[31m        {[39m
+[31m          "description": "A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.",[39m
+[31m          "fabric": "Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'",[39m
+[31m          "craftTime": "Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'",[39m
+[31m          "specifications": {[39m
+[31m            "Dye Type": "Organic Natural Dyes / Tested Indigo Dyebath",[39m
+[31m            "Loom Type": "Wooden Pit Loom / Hand-guided Frame Loom",[39m
+[31m            "Zari Grade": "Real Zari / Metallic zari weave"[39m
+[31m          },[39m
+[31m          "tags": ["Tag1", "Tag2"][39m
+[31m        }" [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"contents","description":"Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), \"You are an expert Indian Handloom textile storyteller.\n        Generate product details for a traditional handloom item:\n        Name: \"towels \"\n        Category: \"Banarasi Silk\"\n\n        Provide the output in JSON format with exactly the following fields:\n        {\n          \"description\": \"A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.\",\n          \"fabric\": \"Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'\",\n          \"craftTime\": \"Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'\",\n          \"specifications\": {\n            \"Dye Type\": \"Organic Natural Dyes / Tested Indigo Dyebath\",\n            \"Loom Type\": \"Wooden Pit Loom / Hand-guided Frame Loom\",\n            \"Zari Grade\": \"Real Zari / Metallic zari weave\"\n          },\n          \"tags\": [\"Tag1\", \"Tag2\"]\n        }\""}]}][39m
+2026-07-17 11:52:52 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [400 Bad Request] Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), "You are an expert Indian Handloom textile storyteller.[39m
+[31m        Generate product details for a traditional handloom item:[39m
+[31m        Name: "towels"[39m
+[31m        Category: "Banarasi Silk"[39m
+
+[31m        Provide the output in JSON format with exactly the following fields:[39m
+[31m        {[39m
+[31m          "description": "A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.",[39m
+[31m          "fabric": "Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'",[39m
+[31m          "craftTime": "Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'",[39m
+[31m          "specifications": {[39m
+[31m            "Dye Type": "Organic Natural Dyes / Tested Indigo Dyebath",[39m
+[31m            "Loom Type": "Wooden Pit Loom / Hand-guided Frame Loom",[39m
+[31m            "Zari Grade": "Real Zari / Metallic zari weave"[39m
+[31m          },[39m
+[31m          "tags": ["Tag1", "Tag2"][39m
+[31m        }" [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"contents","description":"Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), \"You are an expert Indian Handloom textile storyteller.\n        Generate product details for a traditional handloom item:\n        Name: \"towels\"\n        Category: \"Banarasi Silk\"\n\n        Provide the output in JSON format with exactly the following fields:\n        {\n          \"description\": \"A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.\",\n          \"fabric\": \"Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'\",\n          \"craftTime\": \"Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'\",\n          \"specifications\": {\n            \"Dye Type\": \"Organic Natural Dyes / Tested Indigo Dyebath\",\n            \"Loom Type\": \"Wooden Pit Loom / Hand-guided Frame Loom\",\n            \"Zari Grade\": \"Real Zari / Metallic zari weave\"\n          },\n          \"tags\": [\"Tag1\", \"Tag2\"]\n        }\""}]}][39m
+2026-07-17 12:04:45 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [400 Bad Request] Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), "You are an expert Indian Handloom textile storyteller.[39m
+[31m        Generate product details for a traditional handloom item:[39m
+[31m        Name: "towels"[39m
+[31m        Category: "benarasi cotton towels"[39m
+
+[31m        Provide the output in JSON format with exactly the following fields:[39m
+[31m        {[39m
+[31m          "description": "A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.",[39m
+[31m          "fabric": "Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'",[39m
+[31m          "craftTime": "Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'",[39m
+[31m          "specifications": {[39m
+[31m            "Dye Type": "Organic Natural Dyes / Tested Indigo Dyebath",[39m
+[31m            "Loom Type": "Wooden Pit Loom / Hand-guided Frame Loom",[39m
+[31m            "Zari Grade": "Real Zari / Metallic zari weave"[39m
+[31m          },[39m
+[31m          "tags": ["Tag1", "Tag2"][39m
+[31m        }" [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"contents","description":"Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), \"You are an expert Indian Handloom textile storyteller.\n        Generate product details for a traditional handloom item:\n        Name: \"towels\"\n        Category: \"benarasi cotton towels\"\n\n        Provide the output in JSON format with exactly the following fields:\n        {\n          \"description\": \"A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.\",\n          \"fabric\": \"Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'\",\n          \"craftTime\": \"Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'\",\n          \"specifications\": {\n            \"Dye Type\": \"Organic Natural Dyes / Tested Indigo Dyebath\",\n            \"Loom Type\": \"Wooden Pit Loom / Hand-guided Frame Loom\",\n            \"Zari Grade\": \"Real Zari / Metallic zari weave\"\n          },\n          \"tags\": [\"Tag1\", \"Tag2\"]\n        }\""}]}][39m
+2026-07-17 12:06:58 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.[39m
+2026-07-17 12:08:09 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.[39m
+2026-07-17 12:09:40 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.[39m
+2026-07-17 14:13:11 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.story.findMany()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\repositories\story.repository.ts:31:25[39m
+
+[31m  28 }[39m
+[31m  29 [39m
+[31m  30 async list(where?: Prisma.StoryWhereInput, orderBy?: Prisma.StoryOrderByWithRelationInput, skip?: number, take?: number) {[39m
+[31m→ 31   return prisma.story.findMany([39m
+[31mCan't reach database server at `ep-noisy-truth-avovukpd-pooler.c-11.us-east-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-noisy-truth-avovukpd-pooler.c-11.us-east-1.aws.neon.tech:5432`.[39m
+2026-07-17 20:39:36 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:34:40[39m
+
+[31m  31 }[39m
+[31m  32 [39m
+[31m  33 async registerArtisan(input: RegisterArtisanInput) {[39m
+[31m→ 34   const existing = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-noisy-truth-avovukpd-pooler.c-11.us-east-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-noisy-truth-avovukpd-pooler.c-11.us-east-1.aws.neon.tech:5432`.[39m
+2026-07-17 22:02:54 [[31merror[39m]: [31mCloudinary upload error, falling back to mock:[39m
+2026-07-17 22:09:56 [[31merror[39m]: [31mCloudinary upload error, falling back to mock:[39m

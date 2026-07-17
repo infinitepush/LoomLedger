@@ -1,0 +1,919 @@
+2026-07-17 10:27:29 [[33mwarn[39m]: [33mGemini API key missing. Running in simulated generation mode.[39m
+2026-07-17 10:27:31 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 10:27:41 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 10:27:42 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 10:28:42 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:85:36[39m
+
+[31m  82 }[39m
+[31m  83 [39m
+[31m  84 async login(input: LoginInput) {[39m
+[31m→ 85   const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:28:42 [[32minfo[39m]: [32m[0mPOST /api/auth/login [31m500[0m 4647.600 ms - 51[0m[39m
+2026-07-17 10:30:27 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:34:40[39m
+
+[31m  31 }[39m
+[31m  32 [39m
+[31m  33 async registerArtisan(input: RegisterArtisanInput) {[39m
+[31m→ 34   const existing = await prisma.user.findUnique([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:30:27 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [31m500[0m 4085.340 ms - 51[0m[39m
+2026-07-17 10:31:18 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:34:40[39m
+
+[31m  31 }[39m
+[31m  32 [39m
+[31m  33 async registerArtisan(input: RegisterArtisanInput) {[39m
+[31m→ 34   const existing = await prisma.user.findUnique([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:31:18 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [31m500[0m 4116.383 ms - 51[0m[39m
+2026-07-17 10:31:24 [[33mwarn[39m]: [33mGemini API key missing. Running in simulated generation mode.[39m
+2026-07-17 10:31:24 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 10:31:25 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 10:31:25 [[31merror[39m]: [31mUncaught Exception: listen EADDRINUSE: address already in use :::5000[39m
+2026-07-17 10:31:56 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.product.findMany()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\product.service.ts:65:22[39m
+
+[31m  62 }[39m
+[31m  63 [39m
+[31m  64 const [products, total] = await Promise.all([[39m
+[31m→ 65   prisma.product.findMany([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:31:56 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [31m500[0m 4115.900 ms - 51[0m[39m
+2026-07-17 10:39:57 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:34:40[39m
+
+[31m  31 }[39m
+[31m  32 [39m
+[31m  33 async registerArtisan(input: RegisterArtisanInput) {[39m
+[31m→ 34   const existing = await prisma.user.findUnique([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-07-17 10:39:57 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [31m500[0m 4082.689 ms - 51[0m[39m
+2026-07-17 10:46:02 [[33mwarn[39m]: [33mGemini API key missing. Running in simulated generation mode.[39m
+2026-07-17 10:46:03 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 10:46:03 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 10:46:03 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 10:53:28 [[33mwarn[39m]: [33mGemini API key missing. Running in simulated generation mode.[39m
+2026-07-17 10:53:28 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 10:53:28 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 10:53:28 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 10:54:52 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [32m201[0m 7064.495 ms - 926[0m[39m
+2026-07-17 10:54:52 [[32minfo[39m]: [32m[0mGET /api/notifications [32m200[0m 653.564 ms - 46[0m[39m
+2026-07-17 10:54:53 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [32m200[0m 776.154 ms - 46[0m[39m
+2026-07-17 10:59:11 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 8.825 ms - 685[0m[39m
+2026-07-17 10:59:23 [[32minfo[39m]: [32m[0mPOST /api/products [33m404[0m 1073.569 ms - 47[0m[39m
+2026-07-17 10:59:33 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 687.562 ms - 64[0m[39m
+2026-07-17 11:11:24 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:11:28 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:11:41 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:11:43 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:15:11 [[32minfo[39m]: [32m[0mPOST /api/auth/register/buyer [32m201[0m 5808.680 ms - 749[0m[39m
+2026-07-17 11:15:11 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 704.462 ms - -[0m[39m
+2026-07-17 11:15:12 [[32minfo[39m]: [32m[0mGET /api/cart [32m200[0m 653.839 ms - 46[0m[39m
+2026-07-17 11:15:13 [[32minfo[39m]: [32m[0mGET /api/wishlist [32m200[0m 640.298 ms - 46[0m[39m
+2026-07-17 11:15:13 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [32m200[0m 641.625 ms - 46[0m[39m
+2026-07-17 11:15:14 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [32m200[0m 666.995 ms - 46[0m[39m
+2026-07-17 11:15:20 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 706.915 ms - 64[0m[39m
+2026-07-17 11:15:46 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 635.295 ms - 55[0m[39m
+2026-07-17 11:19:17 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 639.910 ms - 55[0m[39m
+2026-07-17 11:21:29 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 5227.416 ms - 746[0m[39m
+2026-07-17 11:21:30 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 642.174 ms - -[0m[39m
+2026-07-17 11:22:18 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 950.411 ms - 64[0m[39m
+2026-07-17 11:22:33 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 684.911 ms - 55[0m[39m
+2026-07-17 11:22:58 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 624.859 ms - 55[0m[39m
+2026-07-17 11:23:20 [[32minfo[39m]: [32m[0mPOST /api/auth/register/buyer [32m201[0m 2346.282 ms - 749[0m[39m
+2026-07-17 11:23:20 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 327.994 ms - -[0m[39m
+2026-07-17 11:23:21 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 618.824 ms - -[0m[39m
+2026-07-17 11:23:22 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 668.559 ms - -[0m[39m
+2026-07-17 11:23:22 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 656.912 ms - -[0m[39m
+2026-07-17 11:23:23 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 682.518 ms - -[0m[39m
+2026-07-17 11:23:32 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 757.921 ms - 47[0m[39m
+2026-07-17 11:23:38 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 635.110 ms - 47[0m[39m
+2026-07-17 11:24:04 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 756.194 ms - 47[0m[39m
+2026-07-17 11:24:41 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:24:41 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:24:42 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:24:42 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:24:54 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:24:54 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:24:55 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:24:55 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:25:04 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:25:04 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:25:04 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:25:05 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:25:13 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:25:13 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:25:14 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:25:14 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:25:23 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:25:23 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:25:24 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:25:24 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:25:33 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:25:33 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:25:34 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:25:34 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:25:45 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:25:45 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:25:45 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:25:46 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:26:42 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_001 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:26:43 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_001 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:26:45 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 3455.760 ms - 47[0m[39m
+2026-07-17 11:26:48 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 4513.679 ms - 47[0m[39m
+2026-07-17 11:26:48 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_001 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:26:49 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 392.089 ms - 47[0m[39m
+2026-07-17 11:26:55 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_001 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:26:56 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 344.014 ms - 47[0m[39m
+2026-07-17 11:26:56 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 3079.147 ms - -[0m[39m
+2026-07-17 11:26:57 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 760.945 ms - -[0m[39m
+2026-07-17 11:26:58 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 646.400 ms - -[0m[39m
+2026-07-17 11:26:58 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 4629.497 ms - -[0m[39m
+2026-07-17 11:26:58 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 654.201 ms - -[0m[39m
+2026-07-17 11:26:59 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 659.133 ms - -[0m[39m
+2026-07-17 11:26:59 [[32minfo[39m]: [32m[0mGET /api/artisans [32m200[0m 1339.708 ms - -[0m[39m
+2026-07-17 11:27:25 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 1019.234 ms - 64[0m[39m
+2026-07-17 11:27:54 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 3311.268 ms - 756[0m[39m
+2026-07-17 11:27:54 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 639.636 ms - -[0m[39m
+2026-07-17 11:27:55 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 655.803 ms - -[0m[39m
+2026-07-17 11:27:56 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 716.200 ms - -[0m[39m
+2026-07-17 11:27:57 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 829.290 ms - -[0m[39m
+2026-07-17 11:27:57 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 690.579 ms - -[0m[39m
+2026-07-17 11:28:09 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_002 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:28:10 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_002 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:28:10 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 947.569 ms - 47[0m[39m
+2026-07-17 11:28:11 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 993.798 ms - 47[0m[39m
+2026-07-17 11:28:30 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 1051.099 ms - 64[0m[39m
+2026-07-17 11:28:47 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 3352.797 ms - 756[0m[39m
+2026-07-17 11:28:48 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 368.402 ms - -[0m[39m
+2026-07-17 11:28:48 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 335.028 ms - -[0m[39m
+2026-07-17 11:28:48 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 320.645 ms - -[0m[39m
+2026-07-17 11:28:49 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 377.147 ms - -[0m[39m
+2026-07-17 11:28:49 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 389.819 ms - -[0m[39m
+2026-07-17 11:29:00 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 380.430 ms - 64[0m[39m
+2026-07-17 11:29:49 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [33m409[0m 647.597 ms - 54[0m[39m
+2026-07-17 11:30:15 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [32m201[0m 4691.118 ms - -[0m[39m
+2026-07-17 11:30:15 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 347.613 ms - -[0m[39m
+2026-07-17 11:30:16 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 660.805 ms - -[0m[39m
+2026-07-17 11:30:43 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [400 Bad Request] Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), "You are an expert Indian Handloom textile storyteller.[39m
+[31m        Generate product details for a traditional handloom item:[39m
+[31m        Name: "Benarasi Brocode"[39m
+[31m        Category: "Banarasi Silk"[39m
+
+[31m        Provide the output in JSON format with exactly the following fields:[39m
+[31m        {[39m
+[31m          "description": "A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.",[39m
+[31m          "fabric": "Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'",[39m
+[31m          "craftTime": "Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'",[39m
+[31m          "specifications": {[39m
+[31m            "Dye Type": "Organic Natural Dyes / Tested Indigo Dyebath",[39m
+[31m            "Loom Type": "Wooden Pit Loom / Hand-guided Frame Loom",[39m
+[31m            "Zari Grade": "Real Zari / Metallic zari weave"[39m
+[31m          },[39m
+[31m          "tags": ["Tag1", "Tag2"][39m
+[31m        }" [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"contents","description":"Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), \"You are an expert Indian Handloom textile storyteller.\n        Generate product details for a traditional handloom item:\n        Name: \"Benarasi Brocode\"\n        Category: \"Banarasi Silk\"\n\n        Provide the output in JSON format with exactly the following fields:\n        {\n          \"description\": \"A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.\",\n          \"fabric\": \"Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'\",\n          \"craftTime\": \"Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'\",\n          \"specifications\": {\n            \"Dye Type\": \"Organic Natural Dyes / Tested Indigo Dyebath\",\n            \"Loom Type\": \"Wooden Pit Loom / Hand-guided Frame Loom\",\n            \"Zari Grade\": \"Real Zari / Metallic zari weave\"\n          },\n          \"tags\": [\"Tag1\", \"Tag2\"]\n        }\""}]}][39m
+2026-07-17 11:30:43 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 1114.822 ms - 681[0m[39m
+2026-07-17 11:32:35 [[32minfo[39m]: [32m[0mPOST /api/products [32m201[0m 13497.996 ms - -[0m[39m
+2026-07-17 11:32:42 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 7321.288 ms - -[0m[39m
+2026-07-17 11:32:44 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1337.109 ms - -[0m[39m
+2026-07-17 11:32:59 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:32:59 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:33:00 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:33:13 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:33:13 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:33:19 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 2952.066 ms - 64[0m[39m
+2026-07-17 11:33:47 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 8379.986 ms - -[0m[39m
+2026-07-17 11:33:49 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1394.547 ms - -[0m[39m
+2026-07-17 11:33:56 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 650.670 ms - 55[0m[39m
+2026-07-17 11:34:04 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 608.897 ms - 55[0m[39m
+2026-07-17 11:34:13 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 2512.810 ms - 756[0m[39m
+2026-07-17 11:34:13 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 805.276 ms - -[0m[39m
+2026-07-17 11:34:14 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 688.314 ms - -[0m[39m
+2026-07-17 11:34:15 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 661.526 ms - -[0m[39m
+2026-07-17 11:34:16 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 834.385 ms - -[0m[39m
+2026-07-17 11:34:16 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 652.814 ms - -[0m[39m
+2026-07-17 11:34:47 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 971.005 ms - 64[0m[39m
+2026-07-17 11:38:36 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 1047.965 ms - 55[0m[39m
+2026-07-17 11:38:47 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 5448.109 ms - 756[0m[39m
+2026-07-17 11:38:48 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 852.594 ms - -[0m[39m
+2026-07-17 11:38:49 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 975.749 ms - -[0m[39m
+2026-07-17 11:38:50 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 910.548 ms - -[0m[39m
+2026-07-17 11:38:51 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 707.277 ms - -[0m[39m
+2026-07-17 11:38:51 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 811.028 ms - -[0m[39m
+2026-07-17 11:39:00 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_031 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:39:01 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_031 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:39:01 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 924.481 ms - 47[0m[39m
+2026-07-17 11:39:01 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_031 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:39:01 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_031 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:39:01 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 362.114 ms - 47[0m[39m
+2026-07-17 11:39:04 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 3450.795 ms - 47[0m[39m
+2026-07-17 11:39:05 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 3472.166 ms - 47[0m[39m
+2026-07-17 11:39:08 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 897.260 ms - -[0m[39m
+2026-07-17 11:39:09 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 702.094 ms - -[0m[39m
+2026-07-17 11:39:10 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 722.981 ms - -[0m[39m
+2026-07-17 11:39:10 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 688.112 ms - -[0m[39m
+2026-07-17 11:39:11 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_002 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:39:11 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_002 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:39:11 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 391.509 ms - 47[0m[39m
+2026-07-17 11:39:11 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 737.983 ms - -[0m[39m
+2026-07-17 11:39:11 [[32minfo[39m]: [32m[CartController] Add product ID: PROD_002 for user: 8ddfa4a8-037c-48d2-b05f-ceba7609af6f[39m
+2026-07-17 11:39:12 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 465.669 ms - 47[0m[39m
+2026-07-17 11:39:12 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 4954.143 ms - -[0m[39m
+2026-07-17 11:39:14 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1475.605 ms - -[0m[39m
+2026-07-17 11:39:14 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m404[0m 3381.454 ms - 47[0m[39m
+2026-07-17 11:39:16 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 1044.621 ms - 64[0m[39m
+2026-07-17 11:40:13 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3755.870 ms - -[0m[39m
+2026-07-17 11:40:14 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 783.895 ms - -[0m[39m
+2026-07-17 11:40:21 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 4578.144 ms - -[0m[39m
+2026-07-17 11:40:22 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 733.419 ms - -[0m[39m
+2026-07-17 11:40:43 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 4668.484 ms - -[0m[39m
+2026-07-17 11:40:44 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 858.786 ms - -[0m[39m
+2026-07-17 11:40:45 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 1013.300 ms - -[0m[39m
+2026-07-17 11:43:52 [[31merror[39m]: [31mCloudinary upload error: Invalid cloud_name Loom_Ledger[39m
+2026-07-17 11:43:52 [[31merror[39m]: [31mUnhandled error: Invalid cloud_name Loom_Ledger[39m
+2026-07-17 11:43:52 [[32minfo[39m]: [32m[0mPOST /api/upload [31m500[0m 2871.654 ms - 51[0m[39m
+2026-07-17 11:44:09 [[31merror[39m]: [31mCloudinary upload error: Invalid cloud_name Loom_Ledger[39m
+2026-07-17 11:44:09 [[31merror[39m]: [31mUnhandled error: Invalid cloud_name Loom_Ledger[39m
+2026-07-17 11:44:09 [[32minfo[39m]: [32m[0mPOST /api/upload [31m500[0m 3051.638 ms - 51[0m[39m
+2026-07-17 11:44:49 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:44:49 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:44:50 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:44:51 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:44:51 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:46:18 [[32minfo[39m]: [32m[0mGET /api/products/categories [32m200[0m 4729.563 ms - -[0m[39m
+2026-07-17 11:46:22 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 11:46:22 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 45.526 ms - 109[0m[39m
+2026-07-17 11:46:32 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 11:46:32 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 23.635 ms - 109[0m[39m
+2026-07-17 11:46:41 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 3723.515 ms - -[0m[39m
+2026-07-17 11:46:41 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 3718.060 ms - -[0m[39m
+2026-07-17 11:46:41 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 691.337 ms - -[0m[39m
+2026-07-17 11:46:45 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 7718.543 ms - -[0m[39m
+2026-07-17 11:46:46 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1334.036 ms - -[0m[39m
+2026-07-17 11:47:01 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 4638.433 ms - -[0m[39m
+2026-07-17 11:47:02 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 659.295 ms - -[0m[39m
+2026-07-17 11:47:03 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 685.023 ms - -[0m[39m
+2026-07-17 11:47:08 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 665.716 ms - -[0m[39m
+2026-07-17 11:47:08 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 404.666 ms - -[0m[39m
+2026-07-17 11:47:26 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 11:47:26 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 6.382 ms - 109[0m[39m
+2026-07-17 11:47:31 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [400 Bad Request] Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), "You are an expert Indian Handloom textile storyteller.[39m
+[31m        Generate product details for a traditional handloom item:[39m
+[31m        Name: "towels "[39m
+[31m        Category: "Banarasi Silk"[39m
+
+[31m        Provide the output in JSON format with exactly the following fields:[39m
+[31m        {[39m
+[31m          "description": "A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.",[39m
+[31m          "fabric": "Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'",[39m
+[31m          "craftTime": "Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'",[39m
+[31m          "specifications": {[39m
+[31m            "Dye Type": "Organic Natural Dyes / Tested Indigo Dyebath",[39m
+[31m            "Loom Type": "Wooden Pit Loom / Hand-guided Frame Loom",[39m
+[31m            "Zari Grade": "Real Zari / Metallic zari weave"[39m
+[31m          },[39m
+[31m          "tags": ["Tag1", "Tag2"][39m
+[31m        }" [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"contents","description":"Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), \"You are an expert Indian Handloom textile storyteller.\n        Generate product details for a traditional handloom item:\n        Name: \"towels \"\n        Category: \"Banarasi Silk\"\n\n        Provide the output in JSON format with exactly the following fields:\n        {\n          \"description\": \"A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.\",\n          \"fabric\": \"Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'\",\n          \"craftTime\": \"Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'\",\n          \"specifications\": {\n            \"Dye Type\": \"Organic Natural Dyes / Tested Indigo Dyebath\",\n            \"Loom Type\": \"Wooden Pit Loom / Hand-guided Frame Loom\",\n            \"Zari Grade\": \"Real Zari / Metallic zari weave\"\n          },\n          \"tags\": [\"Tag1\", \"Tag2\"]\n        }\""}]}][39m
+2026-07-17 11:47:31 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 1345.647 ms - 681[0m[39m
+2026-07-17 11:50:28 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:50:28 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:50:29 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:50:30 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:50:30 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:50:34 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:50:35 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:50:35 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:50:36 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:50:36 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:51:12 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 3372.640 ms - -[0m[39m
+2026-07-17 11:52:48 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 11:52:48 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 33.473 ms - 109[0m[39m
+2026-07-17 11:52:52 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [400 Bad Request] Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), "You are an expert Indian Handloom textile storyteller.[39m
+[31m        Generate product details for a traditional handloom item:[39m
+[31m        Name: "towels"[39m
+[31m        Category: "Banarasi Silk"[39m
+
+[31m        Provide the output in JSON format with exactly the following fields:[39m
+[31m        {[39m
+[31m          "description": "A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.",[39m
+[31m          "fabric": "Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'",[39m
+[31m          "craftTime": "Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'",[39m
+[31m          "specifications": {[39m
+[31m            "Dye Type": "Organic Natural Dyes / Tested Indigo Dyebath",[39m
+[31m            "Loom Type": "Wooden Pit Loom / Hand-guided Frame Loom",[39m
+[31m            "Zari Grade": "Real Zari / Metallic zari weave"[39m
+[31m          },[39m
+[31m          "tags": ["Tag1", "Tag2"][39m
+[31m        }" [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"contents","description":"Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), \"You are an expert Indian Handloom textile storyteller.\n        Generate product details for a traditional handloom item:\n        Name: \"towels\"\n        Category: \"Banarasi Silk\"\n\n        Provide the output in JSON format with exactly the following fields:\n        {\n          \"description\": \"A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.\",\n          \"fabric\": \"Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'\",\n          \"craftTime\": \"Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'\",\n          \"specifications\": {\n            \"Dye Type\": \"Organic Natural Dyes / Tested Indigo Dyebath\",\n            \"Loom Type\": \"Wooden Pit Loom / Hand-guided Frame Loom\",\n            \"Zari Grade\": \"Real Zari / Metallic zari weave\"\n          },\n          \"tags\": [\"Tag1\", \"Tag2\"]\n        }\""}]}][39m
+2026-07-17 11:52:52 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 1492.545 ms - 681[0m[39m
+2026-07-17 11:55:18 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:55:18 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:55:19 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:55:20 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:55:20 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:55:28 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:55:28 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:55:28 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:55:29 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:55:29 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:55:37 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:55:37 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:55:38 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:55:39 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:55:39 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:55:48 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:55:48 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:55:48 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:55:49 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:55:49 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:55:58 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 11:55:59 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 11:55:59 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 11:56:00 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 11:56:00 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 11:57:00 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 3433.578 ms - -[0m[39m
+2026-07-17 12:03:22 [[32minfo[39m]: [32m[0mPOST /api/upload [33m401[0m 18.484 ms - 43[0m[39m
+2026-07-17 12:03:28 [[32minfo[39m]: [32m[0mGET /api/notifications [33m401[0m 6.011 ms - 43[0m[39m
+2026-07-17 12:03:32 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 4461.888 ms - -[0m[39m
+2026-07-17 12:03:35 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [32m200[0m 7762.008 ms - 743[0m[39m
+2026-07-17 12:03:36 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 807.015 ms - -[0m[39m
+2026-07-17 12:03:37 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 9449.499 ms - -[0m[39m
+2026-07-17 12:03:37 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 874.724 ms - -[0m[39m
+2026-07-17 12:03:39 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1553.722 ms - -[0m[39m
+2026-07-17 12:03:56 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 4514.922 ms - -[0m[39m
+2026-07-17 12:03:57 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 1009.018 ms - -[0m[39m
+2026-07-17 12:03:58 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 913.563 ms - -[0m[39m
+2026-07-17 12:04:02 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 933.791 ms - -[0m[39m
+2026-07-17 12:04:02 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 401.093 ms - -[0m[39m
+2026-07-17 12:04:43 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 12:04:43 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 21.271 ms - 109[0m[39m
+2026-07-17 12:04:45 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [400 Bad Request] Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), "You are an expert Indian Handloom textile storyteller.[39m
+[31m        Generate product details for a traditional handloom item:[39m
+[31m        Name: "towels"[39m
+[31m        Category: "benarasi cotton towels"[39m
+
+[31m        Provide the output in JSON format with exactly the following fields:[39m
+[31m        {[39m
+[31m          "description": "A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.",[39m
+[31m          "fabric": "Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'",[39m
+[31m          "craftTime": "Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'",[39m
+[31m          "specifications": {[39m
+[31m            "Dye Type": "Organic Natural Dyes / Tested Indigo Dyebath",[39m
+[31m            "Loom Type": "Wooden Pit Loom / Hand-guided Frame Loom",[39m
+[31m            "Zari Grade": "Real Zari / Metallic zari weave"[39m
+[31m          },[39m
+[31m          "tags": ["Tag1", "Tag2"][39m
+[31m        }" [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"contents","description":"Invalid value at 'contents' (type.googleapis.com/google.ai.generativelanguage.v1beta.Content), \"You are an expert Indian Handloom textile storyteller.\n        Generate product details for a traditional handloom item:\n        Name: \"towels\"\n        Category: \"benarasi cotton towels\"\n\n        Provide the output in JSON format with exactly the following fields:\n        {\n          \"description\": \"A compelling 3-4 sentence paragraph describing the weaver heritage, motifs used, and suitability.\",\n          \"fabric\": \"Material details, e.g., '100% Pure Mulberry Silk' or 'Cotton Handspun Warp'\",\n          \"craftTime\": \"Time taken on loom, e.g., '12 Days on Loom' or '4 Weeks'\",\n          \"specifications\": {\n            \"Dye Type\": \"Organic Natural Dyes / Tested Indigo Dyebath\",\n            \"Loom Type\": \"Wooden Pit Loom / Hand-guided Frame Loom\",\n            \"Zari Grade\": \"Real Zari / Metallic zari weave\"\n          },\n          \"tags\": [\"Tag1\", \"Tag2\"]\n        }\""}]}][39m
+2026-07-17 12:04:45 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 791.370 ms - 699[0m[39m
+2026-07-17 12:05:52 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 12:05:52 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 12:05:52 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 12:05:53 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 12:05:53 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 12:06:00 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 12:06:00 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 12:06:01 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 12:06:01 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 12:06:01 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 12:06:24 [[32minfo[39m]: [32m[0mPOST /api/products [32m201[0m 14092.780 ms - -[0m[39m
+2026-07-17 12:06:32 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 8086.103 ms - -[0m[39m
+2026-07-17 12:06:34 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1447.330 ms - -[0m[39m
+2026-07-17 12:06:55 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 12:06:55 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 24.845 ms - 105[0m[39m
+2026-07-17 12:06:58 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.[39m
+2026-07-17 12:06:58 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 1564.242 ms - 699[0m[39m
+2026-07-17 12:07:26 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 12:07:26 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 12:07:26 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 12:07:27 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 12:07:27 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 12:07:37 [[32minfo[39m]: [32m[0mGET /api/products/categories [32m200[0m 3445.082 ms - -[0m[39m
+2026-07-17 12:07:37 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 324.213 ms - -[0m[39m
+2026-07-17 12:07:42 [[32minfo[39m]: [32m[0mPOST /api/products [32m201[0m 14565.448 ms - -[0m[39m
+2026-07-17 12:07:44 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 12:07:44 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 26.016 ms - 109[0m[39m
+2026-07-17 12:07:47 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 5392.758 ms - -[0m[39m
+2026-07-17 12:07:49 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1416.409 ms - -[0m[39m
+2026-07-17 12:08:09 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.[39m
+2026-07-17 12:08:09 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 1220.430 ms - 717[0m[39m
+2026-07-17 12:09:38 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 12:09:38 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 8.345 ms - 109[0m[39m
+2026-07-17 12:09:40 [[31merror[39m]: [31mGemini call failed, using simulation fallback: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.[39m
+2026-07-17 12:09:40 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 1220.620 ms - 717[0m[39m
+2026-07-17 12:10:02 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 12:10:02 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 12:10:03 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 12:10:04 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 12:10:04 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 12:10:08 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 12:10:09 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 12:10:09 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 12:10:10 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 12:10:10 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 12:10:59 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 12:10:59 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 57.813 ms - 105[0m[39m
+2026-07-17 12:11:21 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 11450.670 ms - 943[0m[39m
+2026-07-17 12:12:02 [[32minfo[39m]: [32m[0mPOST /api/products [32m201[0m 15705.182 ms - -[0m[39m
+2026-07-17 12:12:09 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 7519.958 ms - -[0m[39m
+2026-07-17 12:12:11 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1467.553 ms - -[0m[39m
+2026-07-17 14:13:11 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.story.findMany()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\repositories\story.repository.ts:31:25[39m
+
+[31m  28 }[39m
+[31m  29 [39m
+[31m  30 async list(where?: Prisma.StoryWhereInput, orderBy?: Prisma.StoryOrderByWithRelationInput, skip?: number, take?: number) {[39m
+[31m→ 31   return prisma.story.findMany([39m
+[31mCan't reach database server at `ep-noisy-truth-avovukpd-pooler.c-11.us-east-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-noisy-truth-avovukpd-pooler.c-11.us-east-1.aws.neon.tech:5432`.[39m
+2026-07-17 14:13:11 [[32minfo[39m]: [32m[0mGET /api/stories [31m500[0m 5148.746 ms - 51[0m[39m
+2026-07-17 14:13:16 [[32minfo[39m]: [32m[0mGET /api/stories [32m200[0m 5047.490 ms - -[0m[39m
+2026-07-17 20:22:01 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 5196.757 ms - -[0m[39m
+2026-07-17 20:22:02 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 1090.245 ms - -[0m[39m
+2026-07-17 20:22:10 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 979.286 ms - -[0m[39m
+2026-07-17 20:22:11 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 1096.112 ms - -[0m[39m
+2026-07-17 20:23:08 [[32minfo[39m]: [32m[0mGET /api/notifications [33m401[0m 6.585 ms - 43[0m[39m
+2026-07-17 20:23:09 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 1305.716 ms - -[0m[39m
+2026-07-17 20:23:14 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [32m200[0m 5673.257 ms - 743[0m[39m
+2026-07-17 20:23:14 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 679.414 ms - -[0m[39m
+2026-07-17 20:23:15 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 6593.273 ms - -[0m[39m
+2026-07-17 20:23:15 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 705.372 ms - -[0m[39m
+2026-07-17 20:23:16 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1442.395 ms - -[0m[39m
+2026-07-17 20:26:02 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 949.884 ms - -[0m[39m
+2026-07-17 20:26:03 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 637.514 ms - -[0m[39m
+2026-07-17 20:26:03 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 2248.019 ms - -[0m[39m
+2026-07-17 20:26:06 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 5042.142 ms - -[0m[39m
+2026-07-17 20:26:07 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1384.820 ms - -[0m[39m
+2026-07-17 20:28:41 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 2929.754 ms - -[0m[39m
+2026-07-17 20:28:42 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 733.486 ms - -[0m[39m
+2026-07-17 20:28:45 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 7171.178 ms - -[0m[39m
+2026-07-17 20:28:46 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1321.192 ms - -[0m[39m
+2026-07-17 20:28:49 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 643.967 ms - -[0m[39m
+2026-07-17 20:28:49 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 638.803 ms - -[0m[39m
+2026-07-17 20:28:53 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 4982.912 ms - -[0m[39m
+2026-07-17 20:28:55 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 2144.737 ms - -[0m[39m
+2026-07-17 20:31:57 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 20:31:58 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 20:32:00 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 20:32:12 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 20:32:13 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 20:32:33 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 20:32:33 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 20:32:34 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 20:32:34 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 20:32:34 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 20:36:45 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 3752.745 ms - -[0m[39m
+2026-07-17 20:36:46 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 649.105 ms - -[0m[39m
+2026-07-17 20:36:51 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 9916.821 ms - -[0m[39m
+2026-07-17 20:36:53 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1467.635 ms - -[0m[39m
+2026-07-17 20:37:38 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 720.093 ms - -[0m[39m
+2026-07-17 20:37:39 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 324.081 ms - -[0m[39m
+2026-07-17 20:37:43 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 5339.617 ms - -[0m[39m
+2026-07-17 20:37:43 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 1369.548 ms - 64[0m[39m
+2026-07-17 20:37:46 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 2554.939 ms - -[0m[39m
+2026-07-17 20:38:16 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 20:38:16 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 20:38:16 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 20:38:17 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 20:38:17 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 20:38:40 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 20:38:40 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 20:38:40 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 20:38:40 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 20:38:41 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 20:39:36 [[31merror[39m]: [31mUnhandled error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\LENOVO\Desktop\handloom hackathon\server\src\services\auth.service.ts:34:40[39m
+
+[31m  31 }[39m
+[31m  32 [39m
+[31m  33 async registerArtisan(input: RegisterArtisanInput) {[39m
+[31m→ 34   const existing = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-noisy-truth-avovukpd-pooler.c-11.us-east-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-noisy-truth-avovukpd-pooler.c-11.us-east-1.aws.neon.tech:5432`.[39m
+2026-07-17 20:39:36 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [31m500[0m 5156.504 ms - 51[0m[39m
+2026-07-17 20:40:11 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [32m201[0m 7925.191 ms - -[0m[39m
+2026-07-17 20:40:11 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 632.272 ms - -[0m[39m
+2026-07-17 20:40:12 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 624.353 ms - -[0m[39m
+2026-07-17 20:42:11 [[32minfo[39m]: [32m[0mGET /api/notifications [0m-[0m - ms - -[0m[39m
+2026-07-17 20:42:11 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [0m-[0m - ms - -[0m[39m
+2026-07-17 20:42:15 [[32minfo[39m]: [32m[0mGET /api/notifications [32m200[0m 3006.784 ms - 46[0m[39m
+2026-07-17 20:42:16 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 632.736 ms - -[0m[39m
+2026-07-17 20:42:20 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 7719.278 ms - -[0m[39m
+2026-07-17 20:42:22 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1902.879 ms - -[0m[39m
+2026-07-17 20:44:10 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 3963.171 ms - -[0m[39m
+2026-07-17 20:44:11 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 713.707 ms - -[0m[39m
+2026-07-17 20:44:12 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 699.449 ms - -[0m[39m
+2026-07-17 20:44:28 [[32minfo[39m]: [32m[0mGET /api/products/categories [32m200[0m 1259.684 ms - -[0m[39m
+2026-07-17 20:44:28 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 334.041 ms - -[0m[39m
+2026-07-17 20:44:53 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 20:44:53 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 18.040 ms - 111[0m[39m
+2026-07-17 20:45:00 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 20:45:00 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 7.590 ms - 109[0m[39m
+2026-07-17 20:45:10 [[33mwarn[39m]: [33mCloudinary cloud name is unconfigured or invalid. Using simulated mock image fallback.[39m
+2026-07-17 20:45:10 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 5.350 ms - 111[0m[39m
+2026-07-17 20:46:05 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 11510.050 ms - 845[0m[39m
+2026-07-17 20:46:11 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 20:46:11 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 20:46:11 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 20:46:12 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 20:46:12 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 20:46:26 [[32minfo[39m]: [32m[Blockchain] Minting Digital Passport for product "Towels" via Render microservice...[39m
+2026-07-17 20:47:20 [[32minfo[39m]: [32m[Blockchain] Digital Passport minted successfully: TokenID 881, TxHash 0x256d7eb4demockmintf9a0c1d2e3f4a5b6c7d8e9f0a1b2c3d4[39m
+2026-07-17 20:47:26 [[32minfo[39m]: [32m[0mPOST /api/products [32m201[0m 70204.919 ms - -[0m[39m
+2026-07-17 20:47:34 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 8061.027 ms - -[0m[39m
+2026-07-17 20:47:36 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1591.964 ms - -[0m[39m
+2026-07-17 20:50:23 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 1126.386 ms - 64[0m[39m
+2026-07-17 20:50:38 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m422[0m 4.353 ms - 47[0m[39m
+2026-07-17 20:51:59 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 3635.055 ms - 746[0m[39m
+2026-07-17 20:52:00 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 829.595 ms - -[0m[39m
+2026-07-17 20:59:49 [[33mwarn[39m]: [33mBlockchain Service: Missing RPC provider or private key. Running in Mock/Simulated mode.[39m
+2026-07-17 20:59:49 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 20:59:51 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 21:00:01 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 21:00:01 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 21:00:08 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 5670.985 ms - 55[0m[39m
+2026-07-17 21:00:12 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [32m200[0m 3941.523 ms - 595[0m[39m
+2026-07-17 21:00:13 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 1333.191 ms - 55[0m[39m
+2026-07-17 21:00:44 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-17 21:00:44 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 21:00:44 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 21:00:45 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 21:00:45 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 21:07:25 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 6187.502 ms - -[0m[39m
+2026-07-17 21:07:26 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 968.506 ms - -[0m[39m
+2026-07-17 21:07:27 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 3541.489 ms - 64[0m[39m
+2026-07-17 21:07:44 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 4846.658 ms - 746[0m[39m
+2026-07-17 21:07:44 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 708.946 ms - -[0m[39m
+2026-07-17 21:07:55 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 461.247 ms - 64[0m[39m
+2026-07-17 21:08:10 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 3197.907 ms - -[0m[39m
+2026-07-17 21:08:11 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 328.187 ms - -[0m[39m
+2026-07-17 21:08:11 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 769.439 ms - -[0m[39m
+2026-07-17 21:08:21 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 355.960 ms - 64[0m[39m
+2026-07-17 21:10:20 [[32minfo[39m]: [32m[0mPOST /api/auth/register/artisan [32m201[0m 4947.611 ms - -[0m[39m
+2026-07-17 21:10:21 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 502.790 ms - -[0m[39m
+2026-07-17 21:10:21 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 495.414 ms - -[0m[39m
+2026-07-17 21:10:39 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 1236.887 ms - 64[0m[39m
+2026-07-17 21:10:50 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 1891.278 ms - 55[0m[39m
+2026-07-17 21:11:00 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 2472.729 ms - 746[0m[39m
+2026-07-17 21:11:00 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 412.904 ms - -[0m[39m
+2026-07-17 21:15:37 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [0m-[0m - ms - -[0m[39m
+2026-07-17 21:15:37 [[32minfo[39m]: [32m[0mGET /api/notifications [0m-[0m - ms - -[0m[39m
+2026-07-17 21:15:41 [[32minfo[39m]: [32m[0mGET /api/notifications [32m200[0m 3015.776 ms - 46[0m[39m
+2026-07-17 21:15:45 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 6573.655 ms - -[0m[39m
+2026-07-17 21:15:46 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [32m200[0m 1389.578 ms - -[0m[39m
+2026-07-17 21:16:46 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 928.066 ms - -[0m[39m
+2026-07-17 21:16:48 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3566.682 ms - -[0m[39m
+2026-07-17 21:16:49 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [0m-[0m - ms - -[0m[39m
+2026-07-17 21:18:09 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 723.934 ms - -[0m[39m
+2026-07-17 21:18:12 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3615.465 ms - -[0m[39m
+2026-07-17 21:18:13 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [32m200[0m 737.796 ms - -[0m[39m
+2026-07-17 21:18:16 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 372.376 ms - -[0m[39m
+2026-07-17 21:18:21 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 4805.086 ms - -[0m[39m
+2026-07-17 21:18:22 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1682.063 ms - -[0m[39m
+2026-07-17 21:18:27 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 5822.804 ms - -[0m[39m
+2026-07-17 21:18:29 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 2299.660 ms - -[0m[39m
+2026-07-17 21:18:35 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 3066.612 ms - 746[0m[39m
+2026-07-17 21:18:35 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 334.906 ms - -[0m[39m
+2026-07-17 21:18:39 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3735.926 ms - -[0m[39m
+2026-07-17 21:18:40 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1275.375 ms - -[0m[39m
+2026-07-17 21:18:42 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3513.460 ms - -[0m[39m
+2026-07-17 21:18:43 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1042.567 ms - -[0m[39m
+2026-07-17 21:19:53 [[32minfo[39m]: [32m[Blockchain] Registering artisan AyushSingh on-chain via Render microservice...[39m
+2026-07-17 21:20:18 [[32minfo[39m]: [32m[Blockchain] Artisan registered successfully via API: TxHash 0xb02d053446mocktxhash7a3b9c1d2e4f5a6b7c8d9e0f1a2b3c4d[39m
+2026-07-17 21:20:22 [[32minfo[39m]: [32m[0mPOST /api/admin/approve-artisan/0c8d6e0b-f5b7-457e-ad41-fe29468bd1b8 [32m200[0m 31025.081 ms - 160[0m[39m
+2026-07-17 21:20:27 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 4905.633 ms - -[0m[39m
+2026-07-17 21:20:28 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [32m200[0m 902.642 ms - -[0m[39m
+2026-07-17 21:22:25 [[32minfo[39m]: [32m[Blockchain] Registering artisan Waiz Alam on-chain via Render microservice...[39m
+2026-07-17 21:22:28 [[32minfo[39m]: [32m[Blockchain] Artisan registered successfully via API: TxHash 0xe1ecc73244mocktxhash7a3b9c1d2e4f5a6b7c8d9e0f1a2b3c4d[39m
+2026-07-17 21:22:31 [[32minfo[39m]: [32m[0mPOST /api/admin/approve-artisan/a37f7abe-f2b2-4bbd-93b3-3508722e2127 [32m200[0m 12119.603 ms - 160[0m[39m
+2026-07-17 21:22:38 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 7447.471 ms - -[0m[39m
+2026-07-17 21:22:40 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [32m200[0m 1488.526 ms - -[0m[39m
+2026-07-17 21:24:06 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 4673.741 ms - -[0m[39m
+2026-07-17 21:24:09 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 3573.145 ms - -[0m[39m
+2026-07-17 21:24:09 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3658.073 ms - -[0m[39m
+2026-07-17 21:24:10 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 762.538 ms - -[0m[39m
+2026-07-17 21:29:01 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-17 21:29:01 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 21:29:03 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 21:29:13 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 21:29:13 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 21:30:05 [[32minfo[39m]: [32m[Blockchain] Registering artisan Piyush Tiwari on-chain via Render microservice...[39m
+2026-07-17 21:30:07 [[32minfo[39m]: [32m[Blockchain] Artisan registered successfully via API: TxHash 0x888cf9eab0mocktxhash7a3b9c1d2e4f5a6b7c8d9e0f1a2b3c4d[39m
+2026-07-17 21:30:10 [[32minfo[39m]: [32m[0mPOST /api/admin/approve-artisan/1c40ed7d-f873-4893-af6d-6b39c20d59fc [32m200[0m 11092.436 ms - 160[0m[39m
+2026-07-17 21:30:18 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 7951.833 ms - -[0m[39m
+2026-07-17 21:30:20 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [32m200[0m 2038.988 ms - -[0m[39m
+2026-07-17 21:53:25 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 4344.438 ms - 64[0m[39m
+2026-07-17 21:53:51 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 8178.502 ms - -[0m[39m
+2026-07-17 21:53:52 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1664.025 ms - -[0m[39m
+2026-07-17 21:57:02 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 5947.788 ms - -[0m[39m
+2026-07-17 21:57:04 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1435.058 ms - -[0m[39m
+2026-07-17 21:57:23 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3899.294 ms - -[0m[39m
+2026-07-17 21:57:24 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 911.159 ms - -[0m[39m
+2026-07-17 21:57:35 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3548.560 ms - -[0m[39m
+2026-07-17 21:57:36 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1104.961 ms - -[0m[39m
+2026-07-17 21:58:23 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3602.049 ms - -[0m[39m
+2026-07-17 21:58:23 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 775.414 ms - -[0m[39m
+2026-07-17 22:01:11 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 6384.552 ms - -[0m[39m
+2026-07-17 22:01:12 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [0m-[0m - ms - -[0m[39m
+2026-07-17 22:01:15 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [0m-[0m - ms - -[0m[39m
+2026-07-17 22:01:16 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [0m-[0m - ms - -[0m[39m
+2026-07-17 22:01:17 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [0m-[0m - ms - -[0m[39m
+2026-07-17 22:01:17 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [0m-[0m - ms - -[0m[39m
+2026-07-17 22:01:23 [[32minfo[39m]: [32m[0mGET /api/stories [32m200[0m 616.810 ms - 46[0m[39m
+2026-07-17 22:01:24 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 6173.426 ms - -[0m[39m
+2026-07-17 22:01:24 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 317.009 ms - -[0m[39m
+2026-07-17 22:01:25 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [32m200[0m 1625.874 ms - -[0m[39m
+2026-07-17 22:01:50 [[32minfo[39m]: [32m[0mPOST /api/auth/login [32m200[0m 4856.540 ms - -[0m[39m
+2026-07-17 22:01:51 [[32minfo[39m]: [32m[0mGET /api/notifications [32m200[0m 796.659 ms - 379[0m[39m
+2026-07-17 22:01:52 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 828.590 ms - -[0m[39m
+2026-07-17 22:02:26 [[32minfo[39m]: [32m[0mGET /api/products/categories [32m200[0m 1179.808 ms - -[0m[39m
+2026-07-17 22:02:26 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 506.860 ms - -[0m[39m
+2026-07-17 22:02:29 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 308.644 ms - -[0m[39m
+2026-07-17 22:02:29 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 301.024 ms - -[0m[39m
+2026-07-17 22:02:54 [[31merror[39m]: [31mCloudinary upload error, falling back to mock:[39m
+2026-07-17 22:02:54 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 2893.332 ms - 109[0m[39m
+2026-07-17 22:03:48 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 14062.031 ms - 968[0m[39m
+2026-07-17 22:04:36 [[32minfo[39m]: [32m[Blockchain] Minting Digital Passport for product "towels" via Render microservice...[39m
+2026-07-17 22:05:03 [[32minfo[39m]: [32m[Blockchain] Digital Passport minted successfully: TokenID 809, TxHash 0xb0d1b8ccbfmockmintf9a0c1d2e3f4a5b6c7d8e9f0a1b2c3d4[39m
+2026-07-17 22:05:10 [[32minfo[39m]: [32m[0mPOST /api/products [32m201[0m 44690.104 ms - -[0m[39m
+2026-07-17 22:05:13 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 3020.146 ms - -[0m[39m
+2026-07-17 22:05:15 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1909.292 ms - -[0m[39m
+2026-07-17 22:08:34 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-17 22:08:34 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 22:08:34 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 22:08:35 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 22:08:35 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 22:09:37 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 3987.943 ms - -[0m[39m
+2026-07-17 22:09:37 [[32minfo[39m]: [32m[0mGET /api/products/categories [36m304[0m 390.861 ms - -[0m[39m
+2026-07-17 22:09:56 [[31merror[39m]: [31mCloudinary upload error, falling back to mock:[39m
+2026-07-17 22:09:56 [[32minfo[39m]: [32m[0mPOST /api/upload [32m200[0m 2802.804 ms - -[0m[39m
+2026-07-17 22:10:03 [[32minfo[39m]: [32m[0mPOST /api/products/ai-specs [32m200[0m 7739.586 ms - 848[0m[39m
+2026-07-17 22:15:06 [[32minfo[39m]: [32m[0mPOST /api/assistant/ask [32m200[0m 39314.121 ms - 681[0m[39m
+2026-07-17 22:18:40 [[32minfo[39m]: [32m[0mPOST /api/products [33m401[0m 13.661 ms - 43[0m[39m
+2026-07-17 22:18:47 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [32m200[0m 7906.795 ms - 723[0m[39m
+2026-07-17 22:18:58 [[32minfo[39m]: [32m[Blockchain] Minting Digital Passport for product "towel" via Render microservice...[39m
+2026-07-17 22:19:01 [[32minfo[39m]: [32m[Blockchain] Digital Passport minted successfully: TokenID 370, TxHash 0xbca6038551mockmintf9a0c1d2e3f4a5b6c7d8e9f0a1b2c3d4[39m
+2026-07-17 22:19:07 [[32minfo[39m]: [32m[0mPOST /api/products [32m201[0m 19655.696 ms - -[0m[39m
+2026-07-17 22:19:12 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 4869.872 ms - -[0m[39m
+2026-07-17 22:19:14 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1611.336 ms - -[0m[39m
+2026-07-17 22:41:18 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m401[0m 2.932 ms - 43[0m[39m
+2026-07-17 22:41:22 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m401[0m 2.260 ms - 43[0m[39m
+2026-07-17 22:41:23 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m401[0m 9.029 ms - 43[0m[39m
+2026-07-17 22:41:24 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m401[0m 2.445 ms - 43[0m[39m
+2026-07-17 22:41:24 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [32m200[0m 6901.623 ms - 723[0m[39m
+2026-07-17 22:41:24 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m403[0m 2.269 ms - 57[0m[39m
+2026-07-17 22:41:25 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 620.669 ms - -[0m[39m
+2026-07-17 22:41:26 [[32minfo[39m]: [32m[0mGET /api/orders/artisan [36m304[0m 620.113 ms - -[0m[39m
+2026-07-17 22:41:26 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [33m401[0m 3832.334 ms - 51[0m[39m
+2026-07-17 22:41:26 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [33m401[0m 3195.695 ms - 51[0m[39m
+2026-07-17 22:41:27 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [33m401[0m 3164.284 ms - 51[0m[39m
+2026-07-17 22:41:29 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 733.151 ms - 64[0m[39m
+2026-07-17 22:41:44 [[32minfo[39m]: [32m[0mPOST /api/auth/login [33m401[0m 1399.316 ms - 55[0m[39m
+2026-07-17 22:42:18 [[32minfo[39m]: [32m[0mPOST /api/auth/register/buyer [32m201[0m 2986.591 ms - 719[0m[39m
+2026-07-17 22:42:19 [[32minfo[39m]: [32m[0mGET /api/notifications [32m200[0m 814.522 ms - 46[0m[39m
+2026-07-17 22:42:20 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 855.908 ms - -[0m[39m
+2026-07-17 22:42:20 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 658.897 ms - -[0m[39m
+2026-07-17 22:42:22 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 1116.910 ms - -[0m[39m
+2026-07-17 22:42:22 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 715.032 ms - -[0m[39m
+2026-07-17 22:42:37 [[32minfo[39m]: [32m[CartController] Add product ID: ba057d8b-45cf-447e-b3fc-a5bf9d2d93ce for user: 2f766139-177c-4617-acce-df077c1d8739[39m
+2026-07-17 22:42:39 [[32minfo[39m]: [32m[CartController] Add product ID: ba057d8b-45cf-447e-b3fc-a5bf9d2d93ce for user: 2f766139-177c-4617-acce-df077c1d8739[39m
+2026-07-17 22:42:41 [[32minfo[39m]: [32m[CartController] Add product ID: ba057d8b-45cf-447e-b3fc-a5bf9d2d93ce for user: 2f766139-177c-4617-acce-df077c1d8739[39m
+2026-07-17 22:42:47 [[32minfo[39m]: [32m[0mPOST /api/cart/add [33m409[0m 7791.513 ms - 69[0m[39m
+2026-07-17 22:42:47 [[32minfo[39m]: [32m[0mPOST /api/cart/add [32m200[0m 10659.584 ms - -[0m[39m
+2026-07-17 22:42:48 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 336.347 ms - -[0m[39m
+2026-07-17 22:42:49 [[32minfo[39m]: [32m[0mGET /api/cart [32m200[0m 1344.479 ms - -[0m[39m
+2026-07-17 22:42:49 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 323.889 ms - -[0m[39m
+2026-07-17 22:42:49 [[32minfo[39m]: [32m[0mPOST /api/cart/add [32m200[0m 8058.037 ms - -[0m[39m
+2026-07-17 22:42:50 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 332.459 ms - -[0m[39m
+2026-07-17 22:42:50 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 320.082 ms - -[0m[39m
+2026-07-17 22:42:50 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 664.147 ms - -[0m[39m
+2026-07-17 22:42:52 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1398.758 ms - -[0m[39m
+2026-07-17 22:42:52 [[32minfo[39m]: [32m[0mPOST /api/wishlist/toggle [32m200[0m 7820.764 ms - 73[0m[39m
+2026-07-17 22:42:52 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 309.118 ms - -[0m[39m
+2026-07-17 22:42:53 [[32minfo[39m]: [32m[0mPOST /api/wishlist/toggle [32m200[0m 7415.801 ms - 78[0m[39m
+2026-07-17 22:42:53 [[32minfo[39m]: [32m[0mGET /api/wishlist [32m200[0m 1698.354 ms - -[0m[39m
+2026-07-17 22:42:53 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 618.849 ms - -[0m[39m
+2026-07-17 22:42:54 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 676.401 ms - -[0m[39m
+2026-07-17 22:42:54 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1871.233 ms - -[0m[39m
+2026-07-17 22:42:55 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 655.578 ms - -[0m[39m
+2026-07-17 22:42:55 [[32minfo[39m]: [32m[0mGET /api/wishlist [32m200[0m 606.842 ms - 46[0m[39m
+2026-07-17 22:42:55 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 597.972 ms - -[0m[39m
+2026-07-17 22:42:55 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1255.387 ms - -[0m[39m
+2026-07-17 22:42:56 [[32minfo[39m]: [32m[0mPOST /api/wishlist/toggle [32m200[0m 10207.822 ms - 73[0m[39m
+2026-07-17 22:42:56 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 622.596 ms - -[0m[39m
+2026-07-17 22:42:57 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 644.942 ms - -[0m[39m
+2026-07-17 22:42:57 [[32minfo[39m]: [32m[0mGET /api/wishlist [32m200[0m 1555.862 ms - -[0m[39m
+2026-07-17 22:42:58 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 973.138 ms - -[0m[39m
+2026-07-17 22:42:59 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 710.851 ms - -[0m[39m
+2026-07-17 22:42:59 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 2773.609 ms - -[0m[39m
+2026-07-17 22:43:01 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1745.615 ms - -[0m[39m
+2026-07-17 22:43:02 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 853.806 ms - -[0m[39m
+2026-07-17 22:43:03 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 699.457 ms - -[0m[39m
+2026-07-17 22:43:37 [[32minfo[39m]: [32m[CartController] Add product ID: b07fce3c-1679-480b-bf3e-c9799d26fd83 for user: 2f766139-177c-4617-acce-df077c1d8739[39m
+2026-07-17 22:43:44 [[32minfo[39m]: [32m[0mPOST /api/wishlist/toggle [32m200[0m 4293.445 ms - 73[0m[39m
+2026-07-17 22:43:44 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 299.956 ms - -[0m[39m
+2026-07-17 22:43:45 [[32minfo[39m]: [32m[0mPOST /api/cart/add [32m200[0m 7899.749 ms - -[0m[39m
+2026-07-17 22:43:45 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 307.388 ms - -[0m[39m
+2026-07-17 22:43:46 [[32minfo[39m]: [32m[0mGET /api/cart [32m200[0m 1980.774 ms - -[0m[39m
+2026-07-17 22:43:48 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1538.093 ms - -[0m[39m
+2026-07-17 22:43:48 [[32minfo[39m]: [32m[0mGET /api/wishlist [32m200[0m 1539.761 ms - -[0m[39m
+2026-07-17 22:43:48 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 305.380 ms - -[0m[39m
+2026-07-17 22:43:48 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 314.606 ms - -[0m[39m
+2026-07-17 22:43:49 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1302.486 ms - -[0m[39m
+2026-07-17 22:43:49 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 337.014 ms - -[0m[39m
+2026-07-17 22:43:50 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 326.808 ms - -[0m[39m
+2026-07-17 22:44:09 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-17 22:44:10 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 22:44:10 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 22:44:11 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 22:44:11 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 22:44:23 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-17 22:44:23 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 22:44:24 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 22:44:25 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 22:44:25 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 22:44:34 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-17 22:44:34 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 22:44:34 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 22:44:35 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 22:44:35 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 22:47:57 [[32minfo[39m]: [32m[0mPOST /api/orders [33m400[0m 7048.031 ms - 66[0m[39m
+2026-07-17 22:48:07 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 3326.575 ms - -[0m[39m
+2026-07-17 22:48:07 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 613.805 ms - -[0m[39m
+2026-07-17 22:48:09 [[32minfo[39m]: [32m[0mGET /api/cart [32m200[0m 1285.986 ms - -[0m[39m
+2026-07-17 22:48:10 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 6256.852 ms - -[0m[39m
+2026-07-17 22:48:10 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 6454.603 ms - -[0m[39m
+2026-07-17 22:48:10 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 6111.780 ms - -[0m[39m
+2026-07-17 22:48:10 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 6015.390 ms - -[0m[39m
+2026-07-17 22:48:10 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1886.983 ms - -[0m[39m
+2026-07-17 22:48:11 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 617.264 ms - -[0m[39m
+2026-07-17 22:48:11 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 313.488 ms - -[0m[39m
+2026-07-17 22:48:11 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 615.100 ms - -[0m[39m
+2026-07-17 22:48:11 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 315.672 ms - -[0m[39m
+2026-07-17 22:48:12 [[32minfo[39m]: [32m[0mPOST /api/orders [33m400[0m 6180.409 ms - 66[0m[39m
+2026-07-17 22:48:12 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 324.266 ms - -[0m[39m
+2026-07-17 22:48:12 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 609.407 ms - -[0m[39m
+2026-07-17 22:48:12 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1460.641 ms - -[0m[39m
+2026-07-17 22:48:13 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1291.053 ms - -[0m[39m
+2026-07-17 22:48:15 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1253.467 ms - -[0m[39m
+2026-07-17 22:48:15 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1501.870 ms - -[0m[39m
+2026-07-17 22:48:16 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 644.281 ms - -[0m[39m
+2026-07-17 22:48:16 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1316.988 ms - -[0m[39m
+2026-07-17 22:48:16 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1261.842 ms - -[0m[39m
+2026-07-17 22:48:16 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 617.722 ms - -[0m[39m
+2026-07-17 22:48:17 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 615.579 ms - -[0m[39m
+2026-07-17 22:48:17 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 629.256 ms - -[0m[39m
+2026-07-17 22:48:17 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1267.358 ms - -[0m[39m
+2026-07-17 22:48:18 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 2160.964 ms - -[0m[39m
+2026-07-17 22:48:18 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 313.754 ms - -[0m[39m
+2026-07-17 22:48:19 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 313.303 ms - -[0m[39m
+2026-07-17 22:48:19 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 2154.854 ms - -[0m[39m
+2026-07-17 22:48:19 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 305.878 ms - -[0m[39m
+2026-07-17 22:48:19 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 3401.942 ms - -[0m[39m
+2026-07-17 22:48:19 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1824.629 ms - -[0m[39m
+2026-07-17 22:48:19 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 310.271 ms - -[0m[39m
+2026-07-17 22:48:19 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 1882.434 ms - -[0m[39m
+2026-07-17 22:48:19 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 2551.469 ms - -[0m[39m
+2026-07-17 22:48:20 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 301.608 ms - -[0m[39m
+2026-07-17 22:48:20 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 308.051 ms - -[0m[39m
+2026-07-17 22:48:20 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 331.159 ms - -[0m[39m
+2026-07-17 22:48:20 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 380.593 ms - -[0m[39m
+2026-07-17 22:48:20 [[32minfo[39m]: [32m[0mGET /api/cart [32m200[0m 1276.711 ms - -[0m[39m
+2026-07-17 22:48:20 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 311.805 ms - -[0m[39m
+2026-07-17 22:48:21 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1290.838 ms - -[0m[39m
+2026-07-17 22:48:22 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1515.751 ms - -[0m[39m
+2026-07-17 22:48:22 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 2186.437 ms - -[0m[39m
+2026-07-17 22:48:22 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 2170.173 ms - 320[0m[39m
+2026-07-17 22:48:22 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 644.551 ms - -[0m[39m
+2026-07-17 22:48:22 [[32minfo[39m]: [32m[0mPOST /api/cart/update [32m200[0m 2175.927 ms - 320[0m[39m
+2026-07-17 22:48:23 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 322.026 ms - -[0m[39m
+2026-07-17 22:48:23 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1279.514 ms - -[0m[39m
+2026-07-17 22:48:23 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 937.992 ms - -[0m[39m
+2026-07-17 22:48:23 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 309.580 ms - -[0m[39m
+2026-07-17 22:48:23 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 325.752 ms - -[0m[39m
+2026-07-17 22:48:23 [[32minfo[39m]: [32m[0mGET /api/cart [32m200[0m 2027.197 ms - 315[0m[39m
+2026-07-17 22:48:23 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 306.728 ms - -[0m[39m
+2026-07-17 22:48:24 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 312.858 ms - -[0m[39m
+2026-07-17 22:48:25 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1281.577 ms - -[0m[39m
+2026-07-17 22:48:25 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1898.603 ms - -[0m[39m
+2026-07-17 22:48:26 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1247.160 ms - -[0m[39m
+2026-07-17 22:48:26 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 668.212 ms - -[0m[39m
+2026-07-17 22:48:27 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1314.040 ms - -[0m[39m
+2026-07-17 22:48:27 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 683.380 ms - -[0m[39m
+2026-07-17 22:48:27 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1266.157 ms - -[0m[39m
+2026-07-17 22:48:27 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 620.662 ms - -[0m[39m
+2026-07-17 22:48:28 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 315.620 ms - -[0m[39m
+2026-07-17 22:48:28 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1291.370 ms - -[0m[39m
+2026-07-17 22:48:28 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 314.592 ms - -[0m[39m
+2026-07-17 22:48:28 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1274.755 ms - -[0m[39m
+2026-07-17 22:48:29 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 315.241 ms - -[0m[39m
+2026-07-17 22:48:29 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1303.945 ms - -[0m[39m
+2026-07-17 22:48:30 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 340.867 ms - -[0m[39m
+2026-07-17 22:48:30 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 1264.622 ms - -[0m[39m
+2026-07-17 22:48:30 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 339.011 ms - -[0m[39m
+2026-07-17 22:48:30 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1311.487 ms - -[0m[39m
+2026-07-17 22:48:31 [[32minfo[39m]: [32m[0mPOST /api/orders [33m400[0m 1981.941 ms - 67[0m[39m
+2026-07-17 22:48:31 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 335.437 ms - -[0m[39m
+2026-07-17 22:48:32 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 1305.593 ms - -[0m[39m
+2026-07-17 22:48:33 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 405.495 ms - -[0m[39m
+2026-07-17 22:48:33 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 402.769 ms - -[0m[39m
+2026-07-17 22:48:34 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 392.615 ms - -[0m[39m
+2026-07-17 23:00:58 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-17 23:00:58 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-17 23:00:58 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-17 23:00:59 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-17 23:00:59 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-17 23:01:01 [[32minfo[39m]: [32m[0mGET /api/notifications [33m401[0m 14.367 ms - 43[0m[39m
+2026-07-17 23:01:08 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [32m200[0m 6472.911 ms - 583[0m[39m
+2026-07-17 23:01:08 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 718.205 ms - -[0m[39m
+2026-07-17 23:01:11 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 2952.220 ms - -[0m[39m
+2026-07-17 23:01:11 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 10263.939 ms - -[0m[39m
+2026-07-17 23:01:13 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1397.680 ms - -[0m[39m
+2026-07-17 23:01:14 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 3021.844 ms - -[0m[39m
+2026-07-17 23:01:15 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 664.515 ms - -[0m[39m
+2026-07-17 23:01:16 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 665.773 ms - -[0m[39m
+2026-07-17 23:03:04 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 1117.302 ms - -[0m[39m
+2026-07-17 23:03:04 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 1123.280 ms - 139[0m[39m
+2026-07-17 23:03:05 [[32minfo[39m]: [32m[0mGET /api/cart [32m200[0m 698.862 ms - 46[0m[39m
+2026-07-17 23:03:05 [[32minfo[39m]: [32m[0mGET /api/wishlist [32m200[0m 399.691 ms - 46[0m[39m
+2026-07-17 23:03:05 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1406.387 ms - -[0m[39m
+2026-07-17 23:03:05 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 334.671 ms - -[0m[39m
+2026-07-17 23:03:06 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 325.451 ms - -[0m[39m
+2026-07-17 23:39:48 [[32minfo[39m]: [32m[0mGET /api/notifications [33m401[0m 7.032 ms - 43[0m[39m
+2026-07-17 23:39:53 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 4628.790 ms - -[0m[39m
+2026-07-17 23:39:54 [[32minfo[39m]: [32m[0mPOST /api/auth/logout [32m200[0m 3760.365 ms - 64[0m[39m
+2026-07-17 23:39:55 [[32minfo[39m]: [32m[0mPOST /api/auth/refresh [32m200[0m 6818.857 ms - 583[0m[39m
+2026-07-17 23:39:56 [[32minfo[39m]: [32m[0mGET /api/notifications [36m304[0m 675.997 ms - -[0m[39m
+2026-07-17 23:39:56 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1307.429 ms - -[0m[39m
+2026-07-17 23:39:57 [[32minfo[39m]: [32m[0mGET /api/cart [36m304[0m 713.813 ms - -[0m[39m
+2026-07-17 23:39:59 [[32minfo[39m]: [32m[0mGET /api/wishlist [36m304[0m 674.684 ms - -[0m[39m
+2026-07-17 23:40:00 [[32minfo[39m]: [32m[0mGET /api/artisans/saved [36m304[0m 665.731 ms - -[0m[39m
+2026-07-17 23:40:00 [[32minfo[39m]: [32m[0mGET /api/orders/buyer [36m304[0m 689.504 ms - -[0m[39m
+2026-07-17 23:45:28 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 3793.730 ms - -[0m[39m
+2026-07-17 23:45:28 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 421.003 ms - -[0m[39m
+2026-07-17 23:47:49 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 827.821 ms - -[0m[39m
+2026-07-17 23:47:50 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 508.825 ms - -[0m[39m
+2026-07-18 00:12:33 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 3590.811 ms - -[0m[39m
+2026-07-18 00:12:33 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 319.724 ms - -[0m[39m
+2026-07-18 00:14:18 [[32minfo[39m]: [32m[0mGET /api/stories [36m304[0m 810.435 ms - -[0m[39m
+2026-07-18 00:14:21 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3537.752 ms - -[0m[39m
+2026-07-18 00:14:23 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1689.402 ms - -[0m[39m
+2026-07-18 00:18:33 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 2464.630 ms - -[0m[39m
+2026-07-18 00:18:34 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 655.284 ms - -[0m[39m
+2026-07-18 00:18:42 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 989.113 ms - -[0m[39m
+2026-07-18 00:18:44 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 2217.137 ms - -[0m[39m
+2026-07-18 00:20:23 [[32minfo[39m]: [32mShutting down server gracefully...[39m
+2026-07-18 00:20:44 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-18 00:20:45 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-18 00:20:47 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-18 00:20:58 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-18 00:20:58 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-18 00:23:37 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 7469.713 ms - -[0m[39m
+2026-07-18 00:23:39 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1625.447 ms - -[0m[39m
+2026-07-18 00:24:15 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 1138.536 ms - -[0m[39m
+2026-07-18 00:24:16 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 1603.314 ms - -[0m[39m
+2026-07-18 00:25:11 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 707.044 ms - -[0m[39m
+2026-07-18 00:25:12 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 811.009 ms - -[0m[39m
+2026-07-18 00:26:14 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-18 00:26:14 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-18 00:26:14 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-18 00:26:14 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-18 00:26:14 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-18 00:26:24 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [0m-[0m - ms - -[0m[39m
+2026-07-18 00:26:28 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [32m200[0m 4214.530 ms - 139[0m[39m
+2026-07-18 00:26:31 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 2978.580 ms - -[0m[39m
+2026-07-18 00:27:13 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 633.950 ms - -[0m[39m
+2026-07-18 00:27:14 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 943.389 ms - -[0m[39m
+2026-07-18 00:29:56 [[32minfo[39m]: [32m[0mGET /api/artisans [32m200[0m 1762.153 ms - -[0m[39m
+2026-07-18 00:29:57 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 799.940 ms - -[0m[39m
+2026-07-18 00:33:43 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 4774.960 ms - -[0m[39m
+2026-07-18 00:33:44 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 625.287 ms - -[0m[39m
+2026-07-18 00:41:41 [[32minfo[39m]: [32m[0mGET /api/artisans [0m-[0m - ms - -[0m[39m
+2026-07-18 00:41:45 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3123.618 ms - -[0m[39m
+2026-07-18 00:41:46 [[32minfo[39m]: [32m[0mGET /api/artisans [32m200[0m 3733.803 ms - -[0m[39m
+2026-07-18 00:41:47 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 1606.862 ms - -[0m[39m
+2026-07-18 00:41:47 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [36m304[0m 2334.875 ms - -[0m[39m
+2026-07-18 00:41:48 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 749.912 ms - -[0m[39m
+2026-07-18 00:42:12 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 950.721 ms - -[0m[39m
+2026-07-18 00:42:13 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 706.374 ms - -[0m[39m
