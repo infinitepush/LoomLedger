@@ -1,148 +1,350 @@
-# 🧶 LoomLedger
-> **Digital Trust Platform for Authentic Handloom Products**
+<div align="center">
 
-LoomLedger is a corporate-grade, production-ready SaaS + E-commerce platform that combats the handloom forgery crisis. By bridging a **Node.js Express.js API Backend** with **Generative AI** storytelling and a **Polygon Amoy Blockchain** immutable record registry, the platform establishes verifiable provenance for traditional Indian textiles (e.g. Banarasi Silk, Kanjivaram, Chanderi).
+# 🪡 LoomLedger
 
----
+### Blockchain-Powered Digital Trust Platform for Authentic Indian Handloom
 
-## 🌟 Key Features
+<p>
+Bridging traditional Indian artisans with conscious buyers through
+<b>Blockchain</b>, <b>AI</b>, and <b>Digital Product Passports</b>.
+</p>
 
-* **Decentralized Product Passports:** Every product is minted to the Polygon Amoy test network, locking details like fiber warp/weft composition, thread counts, loom hours, and regional validation.
-* **Artisan Wallet Stamps:** Authenticated master weavers hold unique cryptographic wallet signatures and Geographical Indication (GI) license numbers.
-* **AI-Generated Weaver Chronicles:** LoomLedger leverages Gemini AI to extract design hallmarks and craft timelines based on weave styles, displaying interactive, generation-spanning storytelling blogs.
-* **Role-Based Workspaces:**
-  * **Buyer Console:** Access purchase histories, manage wishlists, bookmark artisans, and retrieve delivered digital certificates.
-  * **Artisan Dashboard:** Upload saree drafts, run AI spec generators, mint QR codes, and ship products.
-  * **Admin Moderator:** Inspect GI license numbers and weaver cards, approving profiles to automatically issue on-chain digital identities.
-* **Public Provenance Verification:** A central verification portal to scan high-security QR signatures or query block hashes, rendering provenance timelines and certificate PDF download links.
+<p>
+<img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" />
+<img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react" />
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript" />
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js" />
+<img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql" />
+<img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma" />
+<img src="https://img.shields.io/badge/Polygon-Amoy-8247E5?style=for-the-badge&logo=polygon" />
+<img src="https://img.shields.io/badge/Gemini-AI-4285F4?style=for-the-badge" />
+</p>
 
----
+<p>
+<a href="https://loom-ledger.vercel.app">
+<img src="https://img.shields.io/badge/🌐 Live Demo-black?style=for-the-badge">
+</a>
 
-## 🛠️ Tech Stack
+<a href="https://loomledger-d1zj.onrender.com/api">
+<img src="https://img.shields.io/badge/⚡ Backend API-46E3B7?style=for-the-badge">
+</a>
+</p>
 
-### Frontend
-* **Framework:** Next.js 16 (App Router) + TypeScript + React 19
-* **Styling:** Tailwind CSS v4 (customized heritage HSL token system)
-* **Animations:** Framer Motion (micro-animations, state transition cues)
-* **State & Queries:** Custom AppContext state provider + TanStack React Query
-
-### Backend
-* **Server:** Node.js + Express.js + TypeScript
-* **ORM:** Prisma ORM
-* **Database:** PostgreSQL (Neon Serverless PostgreSQL ready)
-* **Authentication:** JWT (Access + Refresh Tokens) & bcrypt hashing
-* **AI Engine:** Gemini 2.5 Flash API (Google Gen AI)
-* **Payment Gateway:** Razorpay API
-* **Cloud Storage:** Cloudinary SDK
-* **Blockchain Integrator:** ethers.js (Polygon Amoy Testnet Integration)
-* **Logger:** Winston Logger
+</div>
 
 ---
 
-## 🚀 Getting Started
+# 📖 Overview
 
-LoomLedger runs as a monorepo containing a Next.js frontend at the root and an Express.js backend inside the `server/` directory.
+LoomLedger is a blockchain-powered digital trust platform built to preserve the authenticity of Indian handloom products.
 
-### 1. Installation
-Install root dependencies (frontend):
-```bash
-npm install
-```
+The platform enables verified artisans to directly list and sell their products while providing buyers with transparent proof of authenticity through **Digital Product Passports (DPPs)** secured on the **Polygon Amoy Blockchain**.
 
-Install backend dependencies:
-```bash
-cd server
-npm install
-```
-
-### 2. Environment Configuration
-Create a `.env` file inside the `server/` directory based on the provided `server/.env.example`:
-```env
-PORT=5000
-DATABASE_URL="postgresql://postgres:password@localhost:5432/loomledger?schema=public"
-JWT_SECRET="your-jwt-secret-key"
-JWT_REFRESH_SECRET="your-jwt-refresh-secret"
-
-# Integrations (Optional for development fallbacks)
-CLOUDINARY_CLOUD_NAME="your-cloudinary-name"
-CLOUDINARY_API_KEY="your-cloudinary-key"
-CLOUDINARY_API_SECRET="your-cloudinary-secret"
-GEMINI_API_KEY="your-gemini-key"
-RAZORPAY_KEY_ID="your-razorpay-key"
-RAZORPAY_KEY_SECRET="your-razorpay-secret"
-POLYGON_RPC_URL="https://rpc-amoy.polygon.technology"
-```
-
-### 3. Database Migration and Seeding
-Ensure your local or Neon PostgreSQL instance is running. Run migrations and seed files inside the `server/` directory:
-```bash
-# Generate Prisma Client
-npx prisma generate
-
-# Push schema directly to database
-npx prisma db push
-
-# Seed 10 artisans, 30 buyers, 100 products, and 50 orders
-npm run db:seed
-```
-
-### 4. Running the Application
-Start the backend server (from the `server/` directory):
-```bash
-npm run dev
-```
-
-Start the frontend server (from the root directory):
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+By combining **AI-powered storytelling**, **blockchain verification**, and a **modern marketplace**, LoomLedger creates a trusted ecosystem that benefits artisans, buyers, and regulatory authorities.
 
 ---
 
-## 🔑 Demo Account Credentials
+# 🚨 Problem Statement
 
-You can log in directly using the following credentials seeded in the database:
+India's **₹70,000+ Crore Handloom Industry** faces several critical challenges:
 
-* **Buyer Workspace:** `buyer1@example.com` / `password123`
-* **Artisan Workspace:** `artisan1@example.com` / `password123`
-* **Admin Moderator Console:** `admin@loomledger.com` / `password123`
+- Counterfeit power-loom products sold as authentic handloom.
+- No transparent way to verify artisan identity or product origin.
+- GI-certified products being duplicated and misrepresented.
+- Middlemen reducing artisan profits significantly.
+- Lack of digital proof of authenticity throughout the product lifecycle.
 
 ---
 
-## 📂 Project Structure
+<table>
+<tr>
+
+<td width="20%" align="center">
+
+### 🔗 Blockchain
+
+Digital Product Passports
+
+</td>
+
+<td width="20%" align="center">
+
+### 🤖 AI
+
+Gemini-powered Product Intelligence
+
+</td>
+
+<td width="20%" align="center">
+
+### 💬 RAG Chatbot
+
+Knowledge-based Handloom Assistant
+
+</td>
+
+<td width="20%" align="center">
+
+### 🛍 Marketplace
+
+Direct Buyer ↔ Artisan Commerce
+
+</td>
+
+<td width="20%" align="center">
+
+### 📱 QR Verify
+
+Blockchain Authentication
+
+</td>
+
+</tr>
+</table>
+
+# ✨ Features
+
+## 👨‍🎨 Artisan Dashboard
+
+- Secure Artisan Registration
+- Blockchain-backed Verification
+- AI-assisted Product Listing
+- Cloudinary Image Upload
+- Product Management
+- Sales Analytics
+- Order Management
+- Digital Passport Generation
+
+---
+
+## 🛒 Buyer Dashboard
+
+- Public Marketplace
+- Product Search & Filtering
+- Wishlist
+- Shopping Cart
+- Saved Addresses
+- Order Tracking
+- Purchased Product Certificates
+- QR-based Product Verification
+
+---
+
+## 🛡️ Admin Dashboard
+
+- Artisan Verification
+- Product Moderation
+- Marketplace Management
+- Blockchain Registration
+- Analytics Dashboard
+
+---
+
+# 🔗 Blockchain Workflow
 
 ```text
-├── src/                      # Next.js App Router Frontend
-│   ├── app/                  # Next.js page routers & components
-│   │   ├── admin/            # Admin moderation console dashboards
-│   │   ├── artisan/          # Artisan profiles & settings subviews
-│   │   ├── buyer/            # Buyer accounts & certificates vault
-│   │   ├── cart/             # Shopping Cart routing
-│   │   ├── marketplace/      # Verified saree lists & dynamic details
-│   │   ├── stories/          # AI Weaver Chronicles blogs
-│   │   └── verify/           # Provenance validation scanner
-│   ├── components/           # Decoupled UI modules and layouts
-│   └── context/              # AppContext provider (API communication layer)
-│
-└── server/                   # Express.js API Backend
-    ├── prisma/               # Prisma Database Schema & Seed scripts
-    └── src/
-        ├── ai/               # Gemini AI API wrapper
-        ├── auth/             # JWT & Password utility helpers
-        ├── blockchain/       # Ethers.js integration contract layer
-        ├── controllers/      # Route controllers
-        ├── middlewares/      # CORS, JWT verification, and roles
-        ├── payments/         # Razorpay checkout wrapper
-        ├── repositories/     # Database access abstraction wrappers
-        ├── routes/           # Express routes mapping
-        ├── services/         # Business logic service layer
-        ├── storage/          # Cloudinary uploads integration
-        └── validators/       # Zod schemas for input validation
+Artisan Registration
+
+        │
+        ▼
+
+Backend Validation
+
+        │
+        ▼
+
+Polygon Amoy Smart Contract
+
+        │
+        ▼
+
+Digital Product Passport
+
+        │
+        ▼
+
+QR Code Generation
+
+        │
+        ▼
+
+Marketplace Listing
+
+        │
+        ▼
+
+Buyer Verification
 ```
 
 ---
 
-## 📄 License
-This project is open-source and developed as part of the Handloom Trust platform initiative.
+# 🏗️ System Architecture
+
+```text
+                 Buyer / Artisan / Admin
+                           │
+                           ▼
+                    Next.js Frontend
+                           │
+                     REST API (HTTPS)
+                           │
+                           ▼
+                   Express.js Backend
+       ┌────────────────┼────────────────┐
+       ▼                ▼                ▼
+ PostgreSQL        Gemini AI      Polygon Amoy
+       │                                 │
+       └───────────────┬─────────────────┘
+                       ▼
+          Digital Product Passport (DPP)
+```
+
+---
+
+# 🛠️ Tech Stack
+
+| Layer | Technologies |
+|--------|--------------|
+| **Frontend** | Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion, Lucide Icons |
+| **Backend** | Node.js, Express.js, TypeScript, JWT Authentication |
+| **Database** | PostgreSQL, Prisma ORM |
+| **Blockchain** | Solidity, Hardhat, Ethers.js, Polygon Amoy Testnet |
+| **AI** | Gemini 2.5 Flash |
+| **Storage** | Cloudinary |
+| **Payments** | Razorpay |
+| **Deployment** | Vercel, Render |
+
+---
+
+# 📂 Project Structure
+
+```text
+LoomLedger
+│
+├── src/                      # Frontend
+├── public/
+├── server/
+│   ├── src/
+│   ├── prisma/
+│   ├── routes/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── services/
+│   └── package.json
+│
+├── blockchain/
+├── contracts/
+│
+├── package.json
+└── README.md
+```
+
+---
+
+# 🚀 Local Setup
+
+## Clone Repository
+
+```bash
+git clone https://github.com/infinitepush/LoomLedger.git
+
+cd LoomLedger
+```
+
+---
+
+## Frontend
+
+```bash
+npm install
+
+npm run dev
+```
+
+---
+
+## Backend
+
+```bash
+cd server
+
+npm install
+
+npx prisma generate
+
+npx prisma db push
+
+npm run dev
+```
+
+---
+
+# 🔐 Environment Variables
+
+## Frontend (.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
+
+---
+
+## Backend (.env)
+
+```env
+DATABASE_URL=
+JWT_SECRET=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+GEMINI_API_KEY=
+
+RPC_URL=
+PRIVATE_KEY=
+CONTRACT_ADDRESS=
+
+PORT=5000
+```
+
+---
+
+# 🌍 Live Deployment
+
+| Service | URL |
+|----------|-----|
+| **Frontend** | https://loom-ledger.vercel.app |
+| **Backend API** | https://loomledger-d1zj.onrender.com/api |
+| **Polygon Explorer** | https://amoy.polygonscan.com/address/0x551049E4bb3eB377db9e24B65b83b226fc3Dc1eA |
+
+---
+
+<!--# 📸 Application Preview
+
+> Replace these placeholders with screenshots after completing the project.
+
+<table>
+<tr>
+<td align="center"><b>Landing Page</b></td>
+<td align="center"><b>Marketplace</b></td>
+</tr>
+
+<tr>
+<td><img src="docs/landing.png" width="450"/></td>
+<td><img src="docs/marketplace.png" width="450"/></td>
+</tr>
+
+<tr>
+<td align="center"><b>Artisan Dashboard</b></td>
+<td align="center"><b>Buyer Dashboard</b></td>
+</tr>
+
+<tr>
+<td><img src="docs/artisan-dashboard.png" width="450"/></td>
+<td><img src="docs/buyer-dashboard.png" width="450"/></td>
+</tr>
+</table> --!>
