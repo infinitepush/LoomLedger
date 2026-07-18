@@ -30,6 +30,7 @@ interface AppContextType {
   addNotification: (message: string) => void;
   markNotificationsRead: () => Promise<void>;
   placeOrder: (shippingDetails?: any) => Promise<void>;
+  updateUserAddress?: (addressData: any) => void;
   loadGlobalData: () => Promise<void>;
 }
 
@@ -485,7 +486,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const shipping = shippingDetails || {
+      let savedAddrObj: any = null;
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('ll_user_address');
+        if (saved) {
+          try { savedAddrObj = JSON.parse(saved); } catch (e) {}
+        }
+      }
+
+      const shipping = shippingDetails || savedAddrObj || {
         shippingName: user.name,
         shippingAddress: 'Lane No. 3, Heritage Colony, Mandir Rd',
         shippingCity: 'Varanasi',
@@ -515,13 +524,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const updateUserAddress = (addressData: any) => {
+    if (user) {
+      setUser({ ...user, shippingAddress: addressData });
+    }
+  };
+
   return (
     <AppContext.Provider value={{
       user, products, artisans, orders, cart, wishlist, savedArtisans, notifications,
       login, logout, signUpBuyer, signUpArtisan, addProduct, approveArtisan, rejectArtisan,
       addToCart, removeFromCart, updateCartQuantity, clearCart, toggleWishlist, isWishlisted,
       toggleSaveArtisan, isArtisanSaved, addNotification, markNotificationsRead, placeOrder,
-      loadGlobalData
+      updateUserAddress, loadGlobalData
     }}>
       {children}
     </AppContext.Provider>

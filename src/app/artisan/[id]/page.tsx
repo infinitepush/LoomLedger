@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { MapPin, Clock, Star, Award, Heart, ShieldCheck, Mail, Phone, Calendar, Check } from 'lucide-react';
-import { useApp } from '@/context/AppContext';
+import { API_BASE, useApp } from '@/context/AppContext';
 import Badge from '@/components/ui/Badge';
 import VerificationBadge from '@/components/ui/VerificationBadge';
 
@@ -17,26 +17,70 @@ export default function ArtisanProfilePage() {
   const { id } = useParams();
   const { artisans, products, addToCart, toggleWishlist, isWishlisted, toggleSaveArtisan, isArtisanSaved } = useApp();
 
-  const artisan = useMemo(() => {
-    return artisans.find(a => a.id === id) || artisans[0];
-  }, [artisans, id]);
-
+  const [fetchedArtisan, setFetchedArtisan] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
   const [following, setFollowing] = useState(false);
 
+  // Find artisan from context or fetched object
+  const artisan = useMemo(() => {
+    if (fetchedArtisan) return fetchedArtisan;
+    return artisans.find(a => a.id === id || (a as any).userId === id);
+  }, [artisans, id, fetchedArtisan]);
+
+  // Fetch directly from backend API if not available in memory context
+  useEffect(() => {
+    if (!artisan && id) {
+      setLoading(true);
+      fetch(`${API_BASE}/artisans/${id}`)
+        .then(res => res.json())
+        .then(json => {
+          if (json.success && json.data) {
+            setFetchedArtisan(json.data);
+          }
+        })
+        .catch(err => console.error('Failed to load artisan profile:', err))
+        .finally(() => setLoading(false));
+    }
+  }, [id, artisan]);
+
   const artisanProducts = useMemo(() => {
-    return products.filter(p => p.weaver.id === artisan.id && p.verified);
+    if (!artisan) return [];
+    return products.filter(p => (
+      (p as any).artisanId === artisan.id || 
+      (p.weaver && p.weaver.id === artisan.id) ||
+      ((p as any).artisan && (p as any).artisan.id === artisan.id)
+    ));
   }, [products, artisan]);
 
-  if (!artisan) {
+  if (loading) {
     return (
-      <div className="py-20 text-center space-y-4">
-        <h2>Artisan not found</h2>
-        <Link href="/artisans" className="text-primary font-bold">Back to Weavers</Link>
+      <div className="py-20 text-center text-sm text-muted-foreground flex flex-col items-center justify-center gap-3 flex-grow">
+        <span className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+        <span>Loading artisan profile...</span>
       </div>
     );
   }
 
-  const isSaved = isArtisanSaved(artisan.id);
+  if (!artisan) {
+    return (
+      <div className="py-20 text-center space-y-4 flex-grow">
+        <h2 className="text-xl font-serif font-semibold text-foreground">Artisan Profile Not Found</h2>
+        <p className="text-sm text-muted-foreground max-w-xs mx-auto">We couldn't locate this weaver's profile in the registry.</p>
+        <Link href="/artisans" className="inline-block px-4 py-2 bg-primary text-primary-foreground font-semibold rounded text-xs">
+          Back to Weavers
+        </Link>
+      </div>
+    );
+  }
+
+  const isSaved = isArtisanSaved ? isArtisanSaved(artisan.id) : false;
+  const name = artisan.user?.name || artisan.name || 'Master Weaver';
+  const craft = artisan.craft || 'Handloom Artisan';
+  const region = artisan.district ? `${artisan.district}, ${artisan.state || ''}` : (artisan.region || artisan.state || 'India');
+  const experience = artisan.experience ? `${artisan.experience} Years Exp.` : 'Master Weaver';
+  const rating = artisan.rating || '5.0';
+  const followersCount = (artisan.followersCount || 120) + (following ? 1 : 0);
+  const specialties = artisan.specialties || (artisan.craft ? [artisan.craft] : ['Handloom Weaving']);
 
   return (
     <div className="py-8 bg-background flex-grow">
@@ -47,7 +91,7 @@ export default function ArtisanProfilePage() {
           <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary/20 shadow-md bg-secondary flex-shrink-0">
             <Image
               src="/assets/images/weaver-portrait.png"
-              alt={artisan.name}
+              alt={name}
               fill
               className="object-cover"
             />
@@ -56,18 +100,18 @@ export default function ArtisanProfilePage() {
           <div className="text-center md:text-left space-y-4 flex-grow">
             <div className="space-y-1">
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
-                <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-foreground">{artisan.name}</h1>
+                <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-foreground">{name}</h1>
                 {artisan.verified && <VerificationBadge size="md" />}
                 {artisan.giCertified && <Badge variant="saffron" size="sm" icon={Award}>GI Artisan</Badge>}
               </div>
-              <p className="text-sm text-primary font-semibold">{artisan.craft}</p>
-              <p className="text-xs text-muted-foreground">{artisan.generation}</p>
+              <p className="text-sm text-primary font-semibold uppercase tracking-wide">{craft}</p>
+              {artisan.generation && <p className="text-xs text-muted-foreground">{artisan.generation}</p>}
             </div>
 
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1"><MapPin size={13} className="text-primary" /> {artisan.region}</span>
-              <span className="flex items-center gap-1"><Clock size={13} className="text-primary" /> {artisan.experience} Experience</span>
-              <span className="flex items-center gap-1"><Star size={13} className="text-accent fill-accent/15" /> {artisan.rating} Rating</span>
+              <span className="flex items-center gap-1"><MapPin size={13} className="text-primary" /> {region}</span>
+              <span className="flex items-center gap-1"><Clock size={13} className="text-primary" /> {experience}</span>
+              <span className="flex items-center gap-1"><Star size={13} className="text-accent fill-accent/15" /> {rating} Rating</span>
             </div>
 
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
@@ -103,7 +147,7 @@ export default function ArtisanProfilePage() {
             <div>
               <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider block">Followers</span>
               <span className="text-lg font-bold text-foreground mt-1 block">
-                {artisan.followersCount + (following ? 1 : 0)}
+                {followersCount}
               </span>
             </div>
             <div className="border-l border-border pr-2" />
@@ -122,12 +166,14 @@ export default function ArtisanProfilePage() {
           <aside className="lg:col-span-4 space-y-8">
             <div className="bg-white border border-border rounded-lg p-6 space-y-6 shadow-sm">
               <h3 className="font-serif font-semibold text-lg text-foreground border-b border-border pb-3">Artisan Biography</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{artisan.bio}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {artisan.bio || "Preserving traditional handloom weaving heritage and crafting authentic textiles with skill and dedication."}
+              </p>
               
               <div className="space-y-3 pt-2">
                 <h4 className="text-xs font-bold text-foreground uppercase tracking-wide">Craft Specialties</h4>
                 <div className="flex flex-wrap gap-2">
-                  {artisan.specialties.map(spec => (
+                  {specialties.map((spec: string) => (
                     <Badge key={spec} variant="default" size="sm">{spec}</Badge>
                   ))}
                 </div>
@@ -146,7 +192,7 @@ export default function ArtisanProfilePage() {
                       <span>Artisan Awards</span>
                     </h4>
                     <ul className="space-y-2 text-xs text-muted-foreground">
-                      {artisan.awards.map(aw => (
+                      {artisan.awards.map((aw: string) => (
                         <li key={aw} className="flex gap-2 items-start">
                           <Check size={12} className="text-success mt-0.5 flex-shrink-0" />
                           <span>{aw}</span>
@@ -163,7 +209,7 @@ export default function ArtisanProfilePage() {
                       <span>Workshop Milestones</span>
                     </h4>
                     <ul className="space-y-2 text-xs text-muted-foreground">
-                      {artisan.achievements.map(ach => (
+                      {artisan.achievements.map((ach: string) => (
                         <li key={ach} className="flex gap-2 items-start">
                           <Check size={12} className="text-success mt-0.5 flex-shrink-0" />
                           <span>{ach}</span>
@@ -195,7 +241,7 @@ export default function ArtisanProfilePage() {
                   <article key={product.id} className="group bg-white border border-border rounded-lg overflow-hidden hover:shadow transition-all flex flex-col h-full">
                     <div className="relative aspect-[3/4] bg-secondary overflow-hidden">
                       <Image
-                        src={product.image.startsWith('http') || product.image.startsWith('/') || product.image.startsWith('data:') ? product.image : `/assets/images/${product.image}`}
+                        src={product.image && (product.image.startsWith('http') || product.image.startsWith('/') || product.image.startsWith('data:')) ? product.image : `/assets/images/${product.image || 'banarasi-saree.png'}`}
                         alt={product.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"

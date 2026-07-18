@@ -917,3 +917,23 @@
 2026-07-18 00:41:48 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 749.912 ms - -[0m[39m
 2026-07-18 00:42:12 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 950.721 ms - -[0m[39m
 2026-07-18 00:42:13 [[32minfo[39m]: [32m[0mGET /api/artisans [36m304[0m 706.374 ms - -[0m[39m
+2026-07-18 01:10:55 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [0m-[0m - ms - -[0m[39m
+2026-07-18 01:10:58 [[32minfo[39m]: [32m[0mGET /api/products?limit=100 [36m304[0m 3023.717 ms - -[0m[39m
+2026-07-18 01:11:00 [[32minfo[39m]: [32m[0mGET /api/artisans?status=all [32m200[0m 1250.502 ms - -[0m[39m
+2026-07-18 01:39:07 [[32minfo[39m]: [32m[0mGET /api/verify/product/PROD_01 [33m404[0m 4645.856 ms - 68[0m[39m
+2026-07-18 01:39:07 [[32minfo[39m]: [32m[0mGET /api/verify/product/PROD_01 [33m404[0m 494.819 ms - 68[0m[39m
+2026-07-18 01:51:59 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-18 01:51:59 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-18 01:51:59 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-18 01:52:00 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-18 01:52:00 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-18 01:56:30 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-18 01:56:30 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-18 01:56:30 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-18 01:56:31 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-18 01:56:31 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-18 11:19:29 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-18 11:19:29 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-18 11:19:29 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-18 11:19:30 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-18 11:19:30 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m

@@ -6,7 +6,10 @@ import { NotFoundError } from '../utils/errors';
 
 export class ArtisanService {
   async getArtisanProfile(id: string) {
-    const artisan = await artisanRepository.findByUserId(id);
+    let artisan = await artisanRepository.findById(id);
+    if (!artisan) {
+      artisan = await artisanRepository.findByUserId(id);
+    }
     if (!artisan) throw new NotFoundError('Artisan profile not found');
     return artisan;
   }

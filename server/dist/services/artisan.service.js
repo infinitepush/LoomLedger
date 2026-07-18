@@ -40,7 +40,10 @@ const order_repository_1 = require("../repositories/order.repository");
 const errors_1 = require("../utils/errors");
 class ArtisanService {
     async getArtisanProfile(id) {
-        const artisan = await artisan_repository_1.artisanRepository.findByUserId(id);
+        let artisan = await artisan_repository_1.artisanRepository.findById(id);
+        if (!artisan) {
+            artisan = await artisan_repository_1.artisanRepository.findByUserId(id);
+        }
         if (!artisan)
             throw new errors_1.NotFoundError('Artisan profile not found');
         return artisan;

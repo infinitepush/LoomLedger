@@ -343,15 +343,81 @@ function ArtisanProductsContent() {
                         )}
                       </div>
 
-                      <div className="space-y-1.5 col-span-2">
-                        <label className="text-xs font-bold text-foreground uppercase tracking-wide">Target Price (INR)</label>
-                        <input 
-                          type="number"
-                          required
-                          value={prodPrice}
-                          onChange={e => setProdPrice(Number(e.target.value))}
-                          className="w-full bg-white border border-border px-3.5 py-2 rounded text-sm outline-none focus:ring-1 focus:ring-primary text-foreground"
-                        />
+                      <div className="space-y-2.5 col-span-2">
+                        <div className="flex items-center justify-between">
+                          <label className="text-xs font-bold text-foreground uppercase tracking-wide">Target Price (INR)</label>
+                          <span className="text-xs font-semibold text-primary bg-primary-light px-2 py-0.5 rounded">₹ {prodPrice ? prodPrice.toLocaleString('en-IN') : 0}</span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setProdPrice(prev => Math.max(100, (prev || 0) - 500))}
+                            className="px-2.5 py-2 bg-secondary border border-border rounded text-xs font-bold hover:bg-border transition-colors text-foreground shrink-0"
+                            title="Decrease by ₹500"
+                          >
+                            -500
+                          </button>
+                          
+                          <button
+                            type="button"
+                            onClick={() => setProdPrice(prev => Math.max(100, (prev || 0) - 100))}
+                            className="px-2.5 py-2 bg-secondary border border-border rounded text-xs font-bold hover:bg-border transition-colors text-foreground shrink-0"
+                            title="Decrease by ₹100"
+                          >
+                            -100
+                          </button>
+
+                          <div className="relative flex-grow">
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-bold text-sm">₹</span>
+                            <input 
+                              type="number"
+                              required
+                              min={100}
+                              step={50}
+                              value={prodPrice || ''}
+                              onChange={e => setProdPrice(Math.max(0, Number(e.target.value)))}
+                              className="w-full bg-white border border-border pl-7 pr-3.5 py-2 rounded text-sm font-semibold outline-none focus:ring-1 focus:ring-primary text-foreground"
+                            />
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => setProdPrice(prev => (prev || 0) + 100)}
+                            className="px-2.5 py-2 bg-secondary border border-border rounded text-xs font-bold hover:bg-border transition-colors text-foreground shrink-0"
+                            title="Increase by ₹100"
+                          >
+                            +100
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => setProdPrice(prev => (prev || 0) + 500)}
+                            className="px-2.5 py-2 bg-secondary border border-border rounded text-xs font-bold hover:bg-border transition-colors text-foreground shrink-0"
+                            title="Increase by ₹500"
+                          >
+                            +500
+                          </button>
+                        </div>
+
+                        {/* Quick Price Preset Chips */}
+                        <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                          <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider mr-1">Presets:</span>
+                          {[1000, 2500, 5000, 7500, 10000, 15000, 25000].map(pricePreset => (
+                            <button
+                              key={pricePreset}
+                              type="button"
+                              onClick={() => setProdPrice(pricePreset)}
+                              className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition-all ${
+                                prodPrice === pricePreset
+                                  ? 'bg-primary text-primary-foreground border-primary shadow-xs'
+                                  : 'bg-white text-muted-foreground border-border hover:bg-secondary hover:text-foreground'
+                              }`}
+                            >
+                              ₹{pricePreset >= 1000 ? `${pricePreset / 1000}k` : pricePreset}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
 
