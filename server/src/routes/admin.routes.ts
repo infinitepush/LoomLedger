@@ -11,5 +11,6 @@ router.use(requireRole('admin'));
 router.get('/pending-artisans', adminController.listPending);
 router.post('/approve-artisan/:id', adminController.approve);
 router.post('/reject-artisan/:id', adminController.reject);
+router.delete('/artisans/:id', adminController.deleteArtisan);
 
 export default router;

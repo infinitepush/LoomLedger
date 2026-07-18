@@ -937,3 +937,8 @@
 2026-07-18 11:19:29 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
 2026-07-18 11:19:30 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
 2026-07-18 11:19:30 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m
+2026-07-18 12:28:37 [[32minfo[39m]: [32mBlockchain Service initialized using external LoomLedger Render microservice.[39m
+2026-07-18 12:28:37 [[32minfo[39m]: [32mGemini AI Service initialized successfully.[39m
+2026-07-18 12:28:37 [[33mwarn[39m]: [33mRazorpay credentials missing. Running in simulated payment mode.[39m
+2026-07-18 12:28:45 [[32minfo[39m]: [32mCloudinary initialized successfully.[39m
+2026-07-18 12:28:45 [[32minfo[39m]: [32m🚀 Server running in development mode on port 5000[39m

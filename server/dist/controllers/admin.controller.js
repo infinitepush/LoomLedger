@@ -25,7 +25,16 @@ class AdminController {
     async reject(req, res, next) {
         try {
             const result = await admin_service_1.adminService.rejectArtisan(req.params.id);
-            (0, response_1.sendSuccess)(res, result, 'Artisan application rejected');
+            return (0, response_1.sendSuccess)(res, result, 'Artisan application rejected');
+        }
+        catch (error) {
+            next(error);
+        }
+    }
+    async deleteArtisan(req, res, next) {
+        try {
+            const result = await admin_service_1.adminService.deleteArtisan(req.params.id);
+            (0, response_1.sendSuccess)(res, result, 'Artisan and all listed products deleted successfully');
         }
         catch (error) {
             next(error);

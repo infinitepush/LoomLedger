@@ -41,6 +41,11 @@ export declare class AdminService {
     rejectArtisan(id: string): Promise<{
         rejected: boolean;
     }>;
+    deleteArtisan(id: string): Promise<{
+        deleted: boolean;
+        artisanId: string;
+        productsDeleted: number;
+    }>;
 }
 export declare const adminService: AdminService;
 //# sourceMappingURL=admin.service.d.ts.map

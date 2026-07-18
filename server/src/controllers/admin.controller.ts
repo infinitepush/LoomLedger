@@ -24,7 +24,16 @@ export class AdminController {
   async reject(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await adminService.rejectArtisan(req.params.id);
-      sendSuccess(res, result, 'Artisan application rejected');
+      return sendSuccess(res, result, 'Artisan application rejected');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteArtisan(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await adminService.deleteArtisan(req.params.id);
+      sendSuccess(res, result, 'Artisan and all listed products deleted successfully');
     } catch (error) {
       next(error);
     }

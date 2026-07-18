@@ -10,5 +10,6 @@ router.use((0, role_middleware_1.requireRole)('admin'));
 router.get('/pending-artisans', admin_controller_1.adminController.listPending);
 router.post('/approve-artisan/:id', admin_controller_1.adminController.approve);
 router.post('/reject-artisan/:id', admin_controller_1.adminController.reject);
+router.delete('/artisans/:id', admin_controller_1.adminController.deleteArtisan);
 exports.default = router;
 //# sourceMappingURL=admin.routes.js.map

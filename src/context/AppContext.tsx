@@ -19,6 +19,7 @@ interface AppContextType {
   addProduct: (product: Partial<Product>) => Promise<any>;
   approveArtisan: (artisanId: string) => Promise<void>;
   rejectArtisan: (artisanId: string) => Promise<void>;
+  deleteArtisan: (artisanId: string) => Promise<void>;
   addToCart: (product: Product) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
   updateCartQuantity: (productId: string, quantity: number) => Promise<void>;
@@ -337,7 +338,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       await apiRequest(`/admin/reject-artisan/${artisanId}`, { method: 'POST' });
       await loadGlobalData();
     } catch (err: any) {
-      throw new Error(err.message || 'Failed to reject artisan');
+      throw new Error(err.message || 'Rejection failed');
+    }
+  };
+
+  const deleteArtisan = async (artisanId: string) => {
+    try {
+      await apiRequest(`/admin/artisans/${artisanId}`, { method: 'DELETE' });
+      await loadGlobalData();
+    } catch (err: any) {
+      throw new Error(err.message || 'Artisan deletion failed');
     }
   };
 
@@ -533,7 +543,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
     <AppContext.Provider value={{
       user, products, artisans, orders, cart, wishlist, savedArtisans, notifications,
-      login, logout, signUpBuyer, signUpArtisan, addProduct, approveArtisan, rejectArtisan,
+      login, logout, signUpBuyer, signUpArtisan, addProduct, approveArtisan, rejectArtisan, deleteArtisan,
       addToCart, removeFromCart, updateCartQuantity, clearCart, toggleWishlist, isWishlisted,
       toggleSaveArtisan, isArtisanSaved, addNotification, markNotificationsRead, placeOrder,
       updateUserAddress, loadGlobalData
