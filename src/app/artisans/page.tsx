@@ -8,7 +8,7 @@ import { API_BASE, useApp } from '@/context/AppContext';
 import VerificationBadge from '@/components/ui/VerificationBadge';
 
 export default function ArtisansPage() {
-  const { user } = useApp();
+  const { artisans: contextArtisans } = useApp();
   const [artisans, setArtisans] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,19 +17,26 @@ export default function ArtisansPage() {
   useEffect(() => {
     const fetchArtisans = async () => {
       try {
-        const res = await fetch(`${API_BASE}/artisans`);
+        const res = await fetch(`${API_BASE}/artisans?status=all`);
         const json = await res.json();
-        if (json.success) {
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          setArtisans(json.data);
+        } else if (contextArtisans && contextArtisans.length > 0) {
+          setArtisans(contextArtisans);
+        } else if (json.data) {
           setArtisans(json.data);
         }
       } catch (err) {
         console.error('Failed to fetch artisans:', err);
+        if (contextArtisans && contextArtisans.length > 0) {
+          setArtisans(contextArtisans);
+        }
       } finally {
         setLoading(false);
       }
     };
     fetchArtisans();
-  }, []);
+  }, [contextArtisans]);
 
   const statesList = React.useMemo(() => {
     const set = new Set(artisans.map(a => a.state).filter(Boolean));
