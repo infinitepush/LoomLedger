@@ -25,9 +25,35 @@ export default function ArtisanAnalyticsPage() {
 
   if (!user) return null;
 
-  const currentArtisan = artisans.find(a => a.id === user.id) || artisans[0];
-  const artisanProducts = products.filter(p => p.weaver.id === user.id);
-  const artisanOrders = orders.filter(o => o.artisanId === user.id);
+  const currentArtisan = artisans.find(a => 
+    a.id === user.id || 
+    (a as any).userId === user.id || 
+    a.id === user.artisan?.id ||
+    (a as any).user?.id === user.id || 
+    (a as any).user?.email === user.email
+  ) || {
+    id: user.artisan?.id || user.id,
+    userId: user.id,
+    name: user.name,
+    craft: user.artisan?.craft || user.craft || 'Handloom Weaver',
+    experience: user.artisan?.experience || user.experience || 'Master Weaver',
+    region: user.artisan?.region || user.region || user.district || 'Varanasi',
+    district: user.district || 'Varanasi',
+    state: user.state || 'Uttar Pradesh',
+    bio: user.artisan?.bio || user.bio || 'Handloom artisan dedicated to authentic Indian weaving heritage.',
+    giCertified: user.artisan?.giCertified || false,
+    giNumber: user.artisan?.giNumber || '',
+    verified: user.artisan?.verified || true,
+    walletAddress: user.artisan?.walletAddress || '0xPolygonArtisanWalletAddress',
+    verificationHash: user.artisan?.verificationHash || '0xPolygonArtisanVerificationHash',
+    followersCount: user.artisan?.followersCount || 0,
+    rating: 5.0,
+    reviewCount: 0,
+    user: user
+  };
+
+  const artisanProducts = products.filter(p => p.weaver?.id === user.id || (p as any).artisanId === user.id || (p as any).artisanId === currentArtisan.id || (p.weaver && p.weaver.id === currentArtisan.id));
+  const artisanOrders = orders.filter(o => o.artisanId === user.id || o.artisanId === currentArtisan.id);
   const deliveredOrders = artisanOrders.filter(o => o.status === 'Delivered');
 
   const totalRevenue = deliveredOrders.reduce((sum, o) => sum + o.amount, 0);

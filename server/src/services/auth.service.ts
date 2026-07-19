@@ -71,10 +71,34 @@ export class AuthService {
       return newUser;
     });
 
+    const fullUser = await prisma.user.findUnique({
+      where: { id: user.id },
+      include: { artisan: true },
+    });
+
     const tokens = await this.generateTokens(user.id, user.email, user.role as any);
     return {
-      user: { id: user.id, name: user.name, email: user.email, role: user.role, avatar: user.avatar },
-      artisanId: user.id,
+      user: {
+        id: fullUser!.id,
+        name: fullUser!.name,
+        email: fullUser!.email,
+        role: fullUser!.role,
+        avatar: fullUser!.avatar,
+        phone: fullUser!.phone,
+        artisan: fullUser!.artisan ? {
+          id: fullUser!.artisan.id,
+          craft: fullUser!.artisan.craft,
+          experience: fullUser!.artisan.experience,
+          region: fullUser!.artisan.region,
+          bio: fullUser!.artisan.bio,
+          verified: fullUser!.artisan.verified,
+          walletAddress: fullUser!.artisan.walletAddress,
+          verificationHash: fullUser!.artisan.verificationHash,
+          giCertified: fullUser!.artisan.giCertified,
+          giNumber: fullUser!.artisan.giNumber,
+        } : undefined,
+      },
+      artisanId: fullUser?.artisan?.id || user.id,
       walletAddress,
       txHash: verificationHash,
       ...tokens,

@@ -20,6 +20,19 @@ export declare class AuthService {
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
             avatar: string | null;
+            phone: string | null;
+            artisan: {
+                id: string;
+                craft: string;
+                experience: string;
+                region: string;
+                bio: string | null;
+                verified: boolean;
+                walletAddress: string | null;
+                verificationHash: string | null;
+                giCertified: boolean;
+                giNumber: string | null;
+            } | undefined;
         };
         artisanId: string;
         walletAddress: string;

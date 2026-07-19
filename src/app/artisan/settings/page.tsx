@@ -15,7 +15,32 @@ export default function ArtisanSettingsPage() {
   const router = useRouter();
   const { user, logout, artisans } = useApp();
 
-  const currentArtisan = artisans.find(a => a.id === user?.id) || artisans[0];
+  const currentArtisan = artisans.find(a => 
+    a.id === user?.id || 
+    (a as any).userId === user?.id || 
+    a.id === user?.artisan?.id ||
+    (a as any).user?.id === user?.id || 
+    (a as any).user?.email === user?.email
+  ) || {
+    id: user?.artisan?.id || user?.id,
+    userId: user?.id,
+    name: user?.name,
+    craft: user?.artisan?.craft || user?.craft || 'Handloom Weaver',
+    experience: user?.artisan?.experience || user?.experience || 'Master Weaver',
+    region: user?.artisan?.region || user?.region || user?.district || 'Varanasi',
+    district: user?.district || 'Varanasi',
+    state: user?.state || 'Uttar Pradesh',
+    bio: user?.artisan?.bio || user?.bio || 'Handloom artisan dedicated to authentic Indian weaving heritage.',
+    giCertified: user?.artisan?.giCertified || false,
+    giNumber: user?.artisan?.giNumber || '',
+    verified: user?.artisan?.verified || true,
+    walletAddress: user?.artisan?.walletAddress || '0xPolygonArtisanWalletAddress',
+    verificationHash: user?.artisan?.verificationHash || '0xPolygonArtisanVerificationHash',
+    phone: user?.phone || '',
+    specialties: [],
+    followersCount: user?.artisan?.followersCount || 0,
+    user: user
+  };
 
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
