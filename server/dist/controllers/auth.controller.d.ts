@@ -6,6 +6,7 @@ export declare class AuthController {
     refreshToken(req: Request, res: Response, next: NextFunction): Promise<void>;
     logout(req: Request, res: Response, next: NextFunction): Promise<void>;
     getMe(req: Request, res: Response, next: NextFunction): Promise<void>;
+    updateProfile(req: Request, res: Response, next: NextFunction): Promise<void>;
 }
 export declare const authController: AuthController;
 //# sourceMappingURL=auth.controller.d.ts.map

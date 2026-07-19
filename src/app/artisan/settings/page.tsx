@@ -8,7 +8,7 @@ import {
   Package, ShoppingBag, BarChart3, TrendingUp, Settings, LogOut, 
   ShieldCheck, ArrowLeft, Check, User, Phone, Mail, Award, Key 
 } from 'lucide-react';
-import { useApp } from '@/context/AppContext';
+import { API_BASE, useApp } from '@/context/AppContext';
 import Badge from '@/components/ui/Badge';
 
 export default function ArtisanSettingsPage() {
@@ -46,7 +46,9 @@ export default function ArtisanSettingsPage() {
   const [email, setEmail] = useState(user?.email || '');
   const [phone, setPhone] = useState(currentArtisan?.phone || '');
   const [bio, setBio] = useState(currentArtisan?.bio || '');
+  const [avatar, setAvatar] = useState(user?.avatar || (currentArtisan as any)?.avatar || '');
   const [specialties, setSpecialties] = useState(currentArtisan?.specialties?.join(', ') || '');
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [updated, setUpdated] = useState(false);
 
   React.useEffect(() => {
@@ -59,10 +61,66 @@ export default function ArtisanSettingsPage() {
 
   if (!user) return null;
 
-  const handleUpdate = (e: React.FormEvent) => {
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingAvatar(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'ml_default');
+
+      const res = await fetch('https://api.cloudinary.com/v1_1/demo/image/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (data.secure_url) {
+        setAvatar(data.secure_url);
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => setAvatar(reader.result as string);
+        reader.readAsDataURL(file);
+      }
+    } catch (err) {
+      const reader = new FileReader();
+      reader.onloadend = () => setAvatar(reader.result as string);
+      reader.readAsDataURL(file);
+    } finally {
+      setUploadingAvatar(false);
+    }
+  };
+
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('ll_access_token') : null;
+      await fetch(`${API_BASE}/auth/profile`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ name, phone, bio, avatar }),
+      });
+
+      // Sync local user object
+      const storedUser = localStorage.getItem('ll_user');
+      if (storedUser) {
+        const parsed = JSON.parse(storedUser);
+        parsed.name = name;
+        parsed.phone = phone;
+        parsed.avatar = avatar;
+        if (parsed.artisan) parsed.artisan.bio = bio;
+        localStorage.setItem('ll_user', JSON.stringify(parsed));
+      }
+    } catch (err) {
+      console.error('Failed to update profile:', err);
+    }
     setUpdated(true);
-    setTimeout(() => setUpdated(false), 2000);
+    setTimeout(() => setUpdated(false), 2500);
   };
 
   return (
@@ -72,12 +130,16 @@ export default function ArtisanSettingsPage() {
       <aside className="w-full lg:w-64 bg-white border-r border-border p-6 flex flex-col justify-between shrink-0">
         <div className="space-y-6">
           <div className="flex items-center gap-3 pb-4 border-b border-border">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-secondary border border-border shrink-0">
-              <Image src="/assets/images/weaver-portrait.png" alt={user.name} fill className="object-cover" />
+            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-primary-light border border-primary/20 shrink-0 flex items-center justify-center">
+              {avatar || user.avatar || (currentArtisan as any)?.avatar ? (
+                <Image src={avatar || user.avatar || (currentArtisan as any)?.avatar} alt={user.name} fill className="object-cover" />
+              ) : (
+                <span className="font-bold text-xs text-primary">{user.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase()}</span>
+              )}
             </div>
             <div>
               <div className="flex items-center gap-1">
-                <p className="font-semibold text-sm text-foreground leading-tight">{user.name}</p>
+                <p className="font-semibold text-sm text-foreground leading-tight">{name}</p>
                 {currentArtisan?.verified && <ShieldCheck size={14} className="text-success" />}
               </div>
               <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mt-0.5">{currentArtisan?.craft}</p>
@@ -136,7 +198,34 @@ export default function ArtisanSettingsPage() {
                 </div>
               )}
 
-              <form onSubmit={handleUpdate} className="space-y-4">
+              <form onSubmit={handleUpdate} className="space-y-5">
+                {/* Profile Photo Upload */}
+                <div className="space-y-2 pb-4 border-b border-border">
+                  <label className="text-xs font-bold text-foreground uppercase tracking-wide block">Master Weaver Profile Photo</label>
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-primary-light border-2 border-primary/20 shrink-0 flex items-center justify-center shadow-xs">
+                      {avatar ? (
+                        <Image src={avatar} alt={name} fill className="object-cover" />
+                      ) : (
+                        <span className="font-bold text-base text-primary">{name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase()}</span>
+                      )}
+                    </div>
+                    <div className="space-y-1">
+                      <label className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-primary text-white text-xs font-semibold rounded cursor-pointer hover:bg-primary-hover transition-colors shadow-xs">
+                        <span>{uploadingAvatar ? 'Uploading Photo...' : 'Upload Weaver Photo'}</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleAvatarUpload}
+                          disabled={uploadingAvatar}
+                          className="hidden"
+                        />
+                      </label>
+                      <p className="text-[10px] text-muted-foreground">Upload your portrait photo (PNG, JPG, max 5MB). Saved to DB & rendered on your weaver profile.</p>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-foreground uppercase tracking-wide">Workshop Name</label>
                   <div className="relative">

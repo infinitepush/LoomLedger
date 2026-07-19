@@ -225,8 +225,12 @@ function ArtisanProductsContent() {
       <aside className="w-full lg:w-64 bg-white border-r border-border p-6 flex flex-col justify-between shrink-0">
         <div className="space-y-6">
           <div className="flex items-center gap-3 pb-4 border-b border-border">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-secondary border border-border shrink-0">
-              <Image src="/assets/images/weaver-portrait.png" alt={user.name} fill className="object-cover" />
+            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-primary-light border border-primary/20 shrink-0 flex items-center justify-center">
+              {user.avatar || (currentArtisan as any)?.avatar ? (
+                <Image src={user.avatar || (currentArtisan as any)?.avatar} alt={user.name} fill className="object-cover" />
+              ) : (
+                <span className="font-bold text-xs text-primary">{user.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase()}</span>
+              )}
             </div>
             <div>
               <div className="flex items-center gap-1">

@@ -194,6 +194,30 @@ export class AuthService {
     };
   }
 
+  async updateProfile(userId: string, input: { name?: string; phone?: string; avatar?: string; bio?: string; craft?: string }) {
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        ...(input.name && { name: input.name }),
+        ...(input.phone && { phone: input.phone }),
+        ...(input.avatar && { avatar: input.avatar }),
+      },
+      include: { artisan: true },
+    });
+
+    if (updatedUser.artisan && (input.bio || input.craft)) {
+      await prisma.artisan.update({
+        where: { id: updatedUser.artisan.id },
+        data: {
+          ...(input.bio && { bio: input.bio }),
+          ...(input.craft && { craft: input.craft }),
+        },
+      });
+    }
+
+    return this.getMe(userId);
+  }
+
   private async generateTokens(userId: string, email: string, role: JwtPayload['role']) {
     let artisanId: string | undefined;
     if (role === 'artisan') {

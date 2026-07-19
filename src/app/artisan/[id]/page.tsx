@@ -89,12 +89,18 @@ export default function ArtisanProfilePage() {
       <div className="bg-[#F5F3EF]/50 py-12 border-b border-border mb-10">
         <div className="container flex flex-col md:flex-row items-center md:items-start gap-8">
           <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary/20 shadow-md bg-secondary flex-shrink-0">
-            <Image
-              src="/assets/images/weaver-portrait.png"
-              alt={name}
-              fill
-              className="object-cover"
-            />
+            {artisan.user?.avatar || (artisan as any).avatar ? (
+              <Image
+                src={artisan.user?.avatar || (artisan as any).avatar}
+                alt={name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-primary-light text-primary flex items-center justify-center font-bold text-3xl font-serif">
+                {name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase()}
+              </div>
+            )}
           </div>
 
           <div className="text-center md:text-left space-y-4 flex-grow">

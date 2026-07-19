@@ -151,8 +151,12 @@ export default function ArtisansPage() {
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
                       {/* Avatar */}
-                      <div className="w-14 h-14 rounded-full bg-primary-light text-primary flex items-center justify-center font-bold text-lg border border-primary/10 shrink-0">
-                        {initial}
+                      <div className="w-14 h-14 rounded-full bg-primary-light text-primary flex items-center justify-center font-bold text-lg border border-primary/10 shrink-0 overflow-hidden relative">
+                        {artisan.user?.avatar || (artisan as any).avatar ? (
+                          <Image src={artisan.user?.avatar || (artisan as any).avatar} alt={artisan.user?.name || 'Weaver'} fill className="object-cover" />
+                        ) : (
+                          <span>{initial}</span>
+                        )}
                       </div>
 
                       <div className="space-y-1">

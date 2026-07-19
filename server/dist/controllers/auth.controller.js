@@ -59,6 +59,16 @@ class AuthController {
             next(error);
         }
     }
+    async updateProfile(req, res, next) {
+        try {
+            const userId = req.user?.userId;
+            const data = await auth_service_1.authService.updateProfile(userId, req.body);
+            (0, response_1.sendSuccess)(res, data, 'Profile updated successfully');
+        }
+        catch (error) {
+            next(error);
+        }
+    }
 }
 exports.AuthController = AuthController;
 exports.authController = new AuthController();

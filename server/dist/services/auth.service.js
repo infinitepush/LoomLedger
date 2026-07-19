@@ -183,6 +183,27 @@ class AuthService {
             } : undefined,
         };
     }
+    async updateProfile(userId, input) {
+        const updatedUser = await prisma_1.prisma.user.update({
+            where: { id: userId },
+            data: {
+                ...(input.name && { name: input.name }),
+                ...(input.phone && { phone: input.phone }),
+                ...(input.avatar && { avatar: input.avatar }),
+            },
+            include: { artisan: true },
+        });
+        if (updatedUser.artisan && (input.bio || input.craft)) {
+            await prisma_1.prisma.artisan.update({
+                where: { id: updatedUser.artisan.id },
+                data: {
+                    ...(input.bio && { bio: input.bio }),
+                    ...(input.craft && { craft: input.craft }),
+                },
+            });
+        }
+        return this.getMe(userId);
+    }
     async generateTokens(userId, email, role) {
         let artisanId;
         if (role === 'artisan') {
